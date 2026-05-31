@@ -20,7 +20,7 @@ _FIELDS_ORDER = ["name", "contact", "reason"]
 _EMAIL_RE = re.compile(r"[^@\s]+@[^@\s]+\.[^@\s]+")
 _PHONE_RE = re.compile(r"[\+\d][\d\s\-\(\)]{6,}")
 _NAME_BLACKLIST = re.compile(
-    r'\b(vreau|want|contact|george|reach|hello|hi|hey|call|meet|talk|schedule|discuss|colaborare|collaboration)\b',
+    r'\b(vreau|want|contact|reach|hello|hi|hey|call|meet|talk|schedule|discuss|colaborare|collaboration)\b',
     re.IGNORECASE
 )
 _RO_DETECT = re.compile(
