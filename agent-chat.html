@@ -281,7 +281,8 @@
     /* ── Iframe mode ─── */
     body.in-iframe nav{display:none!important;}
     body.in-iframe #desktop-bg{display:none!important;}
-    body.in-iframe #chat-panel{top:0!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;height:100%!important;border-radius:0!important;border:none!important;box-shadow:none!important;}
+    body.in-iframe{overflow:hidden!important;height:100%!important;}
+    body.in-iframe #chat-panel{top:0!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;height:100%!important;border-radius:0!important;border:none!important;box-shadow:none!important;overflow:hidden!important;}
   </style>
 </head>
 <body class="mesh-bg min-h-screen antialiased">
@@ -461,7 +462,9 @@
     }
     window.visualViewport.addEventListener('resize', _fixViewport);
     window.visualViewport.addEventListener('scroll', _fixViewport);
-    _fixViewport();
+    // Delay initial call so iframe has correct dimensions before measuring
+    requestAnimationFrame(_fixViewport);
+    window.addEventListener('load', _fixViewport);
   }
   </script>
   <script>
