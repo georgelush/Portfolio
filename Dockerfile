@@ -19,9 +19,13 @@ RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTr
 COPY . .
 
 # Download CV so the email agent can attach it (binary not stored in HF git)
-RUN mkdir -p images && \
-    wget -q -O images/RusuGeorgeCV.pdf \
-    "https://raw.githubusercontent.com/georgelush/Portfolio/main/images/RusuGeorgeCV.pdf" || true
+RUN python -c "\
+import urllib.request, os; \
+os.makedirs('images', exist_ok=True); \
+urllib.request.urlretrieve(\
+'https://raw.githubusercontent.com/georgelush/Portfolio/main/images/RusuGeorgeCV.pdf', \
+'images/RusuGeorgeCV.pdf'); \
+print('CV downloaded:', os.path.getsize('images/RusuGeorgeCV.pdf'), 'bytes')"
 
 EXPOSE 7860
 
