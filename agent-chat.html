@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lush AI — Rusu George</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      --c-orch:    #00ff88;
+      --c-rag:     #00aaff;
+      --c-email:   #ff6b35;
+      --c-cal:     #a855f7;
+      --c-cover:   #fbbf24;
+      --c-tg:      #22d3ee;
+    }
+    body { background:#0a0a0f; color:#e2e8f0; font-family:"Inter",sans-serif; }
+
+    .mesh-bg {
+      background-color:#0a0a0f;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 10% 0%,  rgba(99,102,241,.14) 0%,transparent 55%),
+        radial-gradient(ellipse 60% 40% at 90% 20%, rgba(0,255,136,.07)  0%,transparent 50%),
+        radial-gradient(ellipse 50% 40% at 50% 100%,rgba(139,92,246,.10) 0%,transparent 60%);
+    }
+    .glass {
+      background:rgba(17,17,24,.88);
+      border:1px solid rgba(99,102,241,.18);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+    .grad-text {
+      background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#0ea5e9 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .nav-link { color:#9ca3af; transition:color .2s; }
+    .nav-link:hover, .nav-link.active { color:#e2e8f0; }
+
+    /* ── Agent node cards ─────────────────────────── */
+    .agent-node {
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:14px;
+      background:rgba(17,17,24,.7);
+      transition: border-color .3s, box-shadow .3s, opacity .3s, transform .3s;
+      cursor:default;
+      user-select:none;
+    }
+    .agent-node.dimmed { opacity:.35; }
+
+    .agent-node.active-orch  { border-color:var(--c-orch); box-shadow:0 0 0 1px rgba(0,255,136,.4), 0 0 28px rgba(0,255,136,.5), 0 0 60px rgba(0,255,136,.15);   transform:scale(1.02); }
+    .agent-node.active-rag   { border-color:var(--c-rag);  box-shadow:0 0 0 1px rgba(0,170,255,.4), 0 0 28px rgba(0,170,255,.5), 0 0 60px rgba(0,170,255,.15);   transform:scale(1.02); }
+    .agent-node.active-email { border-color:var(--c-email);box-shadow:0 0 0 1px rgba(255,107,53,.4), 0 0 28px rgba(255,107,53,.5), 0 0 60px rgba(255,107,53,.15); transform:scale(1.02); }
+    .agent-node.active-cal   { border-color:var(--c-cal);  box-shadow:0 0 0 1px rgba(168,85,247,.4), 0 0 28px rgba(168,85,247,.5), 0 0 60px rgba(168,85,247,.15); transform:scale(1.02); }
+    .agent-node.active-cover { border-color:var(--c-cover);box-shadow:0 0 0 1px rgba(251,191,36,.4), 0 0 28px rgba(251,191,36,.5), 0 0 60px rgba(251,191,36,.15); transform:scale(1.02); }
+    .agent-node.active-tg    { border-color:var(--c-tg);   box-shadow:0 0 0 1px rgba(34,211,238,.4), 0 0 28px rgba(34,211,238,.5), 0 0 60px rgba(34,211,238,.15);  transform:scale(1.02); }
+
+    .status-dot {
+      width:7px; height:7px; border-radius:50%;
+      background:#374151; flex-shrink:0;
+      transition:background .3s;
+    }
+    .agent-node.active-orch  .status-dot { background:var(--c-orch); animation:pulse-dot 1.2s ease-in-out infinite; }
+    .agent-node.active-rag   .status-dot { background:var(--c-rag);  animation:pulse-dot 1.2s ease-in-out infinite; }
+    .agent-node.active-email .status-dot { background:var(--c-email);animation:pulse-dot 1.2s ease-in-out infinite; }
+    .agent-node.active-cal   .status-dot { background:var(--c-cal);  animation:pulse-dot 1.2s ease-in-out infinite; }
+    .agent-node.active-cover .status-dot { background:var(--c-cover);animation:pulse-dot 1.2s ease-in-out infinite; }
+    .agent-node.active-tg    .status-dot { background:var(--c-tg);   animation:pulse-dot 1.2s ease-in-out infinite; }
+
+    @keyframes pulse-dot {
+      0%,100% { transform:scale(1);   opacity:1; }
+      50%      { transform:scale(1.6); opacity:.6; }
+    }
+
+    /* ── SVG connection lines ─────────────────────── */
+    .orch-canvas {
+      position:absolute; inset:0; width:100%; height:100%;
+      pointer-events:none; overflow:visible;
+    }
+    .conn-line {
+      stroke:rgba(255,255,255,.06);
+      stroke-width:1;
+      stroke-dasharray:4 6;
+      fill:none;
+    }
+    .conn-line.flowing {
+      stroke-dasharray:10 6;
+      stroke-width:2.5;
+      animation:dashflow 1.6s linear infinite;
+    }
+    @keyframes dashflow { to { stroke-dashoffset:-32; } }
+
+    /* ── Activity log ─────────────────────────────── */
+    .log-entry { animation:fadeSlide .25s ease forwards; }
+    @keyframes fadeSlide {
+      from { opacity:0; transform:translateY(6px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ── Chat bubbles ─────────────────────────────── */
+    .bubble-user {
+      background:rgba(99,102,241,.15);
+      border:1px solid rgba(99,102,241,.25);
+      border-radius:16px 16px 4px 16px;
+      padding:.6rem 1rem;
+      max-width:78%;
+      align-self:flex-end;
+    }
+    .bubble-ai {
+      background:rgba(17,17,24,.9);
+      border:1px solid rgba(99,102,241,.12);
+      border-radius:16px 16px 16px 4px;
+      padding:.6rem 1rem;
+      max-width:82%;
+      align-self:flex-start;
+      white-space:pre-wrap;
+    }
+    .bubble-error {
+      background:rgba(239,68,68,.08);
+      border:1px solid rgba(239,68,68,.25);
+      border-radius:12px;
+      padding:.6rem 1rem;
+      max-width:82%;
+      align-self:flex-start;
+    }
+
+    /* ── Input ────────────────────────────────────── */
+    #user-input {
+      background:rgba(17,17,24,.85);
+      border:1px solid rgba(99,102,241,.22);
+      border-radius:10px;
+      color:#e2e8f0;
+      font-family:"JetBrains Mono",monospace;
+      font-size:.8rem;
+      padding:.65rem 1rem;
+      resize:none;
+      outline:none;
+      transition:border-color .2s, box-shadow .2s;
+      width:100%;
+    }
+    #user-input:focus {
+      border-color:rgba(99,102,241,.5);
+      box-shadow:0 0 0 3px rgba(99,102,241,.08);
+    }
+    #send-btn {
+      background:rgba(99,102,241,.15);
+      border:1px solid rgba(99,102,241,.35);
+      border-radius:10px;
+      color:#818cf8;
+      padding:.65rem 1.1rem;
+      cursor:pointer;
+      transition:all .2s;
+      flex-shrink:0;
+    }
+    #send-btn:hover:not(:disabled) {
+      background:rgba(99,102,241,.28);
+      border-color:rgba(99,102,241,.6);
+      color:#e2e8f0;
+    }
+    #send-btn:disabled { opacity:.4; cursor:not-allowed; }
+
+    /* ── Suggestions ──────────────────────────────── */
+    .suggestion {
+      background:rgba(17,17,24,.7);
+      border:1px solid rgba(99,102,241,.15);
+      border-radius:8px;
+      color:#6b7280;
+      font-size:.7rem;
+      padding:.35rem .75rem;
+      cursor:pointer;
+      font-family:"JetBrains Mono",monospace;
+      transition:all .2s;
+    }
+    .suggestion:hover {
+      border-color:rgba(99,102,241,.4);
+      color:#e2e8f0;
+      background:rgba(99,102,241,.08);
+    }
+
+    @keyframes fadeIn { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+    .fade-in { animation:fadeIn .7s ease forwards; }
+    #user-input { transition: opacity 0.4s ease; }
+
+    #iframe-close-btn:hover{filter:drop-shadow(0 0 10px rgba(99,102,241,1)) drop-shadow(0 0 20px rgba(139,92,246,.8))!important;transform:scale(1.1);}
+
+    /* ── Quick-action suggestion buttons ─────────── */
+    #quick-actions { display:flex; flex-wrap:wrap; gap:5px; padding:6px 10px 4px; border-bottom:1px solid rgba(30,30,46,.35); }
+    .qa-btn {
+      display:inline-flex; align-items:center; gap:4px;
+      font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:600;
+      text-transform:uppercase; letter-spacing:.05em; white-space:nowrap;
+      padding:5px 9px; border-radius:20px; cursor:pointer;
+      border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.04);
+      color:rgba(255,255,255,.45); transition:all .18s;
+    }
+    .qa-btn:hover { border-color:var(--qc); color:var(--qc); background:rgba(0,0,0,.15); text-shadow:0 0 8px var(--qc); }
+    .qa-dot { width:5px; height:5px; border-radius:50%; background:var(--qc); flex-shrink:0; opacity:.65; transition:opacity .18s, box-shadow .18s; }
+    .qa-btn:hover .qa-dot { opacity:1; box-shadow:0 0 5px 1px var(--qc); }
+
+    /* ── Budget bar ───────────────────────────────── */
+    #budget-fill { transition: width .6s ease, background-color .6s ease; }
+    .budget-cta-btn {
+      display:block; width:100%;
+      background:rgba(168,85,247,.15);
+      border:1px solid rgba(168,85,247,.35);
+      border-radius:10px; color:#c084fc;
+      font-family:'JetBrains Mono',monospace; font-size:.75rem;
+      padding:.6rem 1rem; cursor:pointer;
+      transition:all .2s; text-align:center; margin-top:.5rem;
+    }
+    .budget-cta-btn:hover { background:rgba(168,85,247,.28); border-color:rgba(168,85,247,.6); color:#e2e8f0; }
+
+    /* ── Agent strip ──────────────────────────────── */
+    #agent-strip {
+      display:flex; align-items:center; justify-content:space-around;
+      padding:5px 10px; border-bottom:1px solid rgba(30,30,46,.4);
+      flex-shrink:0; gap:2px;
+    }
+    .sn {
+      display:flex; align-items:center; gap:3px;
+      font-family:'JetBrains Mono',monospace; font-size:6.5px; font-weight:600;
+      text-transform:uppercase; letter-spacing:.05em; white-space:nowrap;
+      color:rgba(255,255,255,.18); transition:color .35s, text-shadow .35s;
+    }
+    .sn-dot {
+      width:5px; height:5px; border-radius:50%;
+      background:currentColor; flex-shrink:0;
+      transition:box-shadow .35s;
+    }
+    .sn.sn-active { color:var(--sc); text-shadow:0 0 10px var(--sc); }
+    .sn.sn-active .sn-dot { box-shadow:0 0 6px 1px var(--sc); animation:snPulse 1.4s ease-in-out infinite; }
+    .sn.sn-secondary { color:var(--sc); opacity:.45; }
+    .sn.sn-done { color:var(--sc); opacity:.5; text-shadow:none; }
+    .sn.sn-done .sn-dot { animation:none; box-shadow:none; }
+    @keyframes snPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.7);} }
+
+    /* ── Chat panel ──────────────────────────────── */
+    #chat-panel {
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      background: rgba(10,10,15,.97);
+      border: 1px solid rgba(99,102,241,.2);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      overflow: visible;
+      z-index: 40;
+    }
+    /* desktop: floating bottom-right */
+    @media (min-width:768px) {
+      #chat-panel {
+        bottom: 24px;
+        right: 24px;
+        width: 390px;
+        height: min(600px, calc(100vh - 88px));
+        border-radius: 16px;
+        box-shadow: 0 12px 56px rgba(0,0,0,.55), 0 0 0 1px rgba(99,102,241,.12);
+      }
+    }
+    /* mobile: full-screen below nav */
+    @media (max-width:767px) {
+      #chat-panel {
+        top: 56px;
+        left: 0; right: 0; bottom: 0;
+        border: none;
+        border-top: 1px solid rgba(30,30,46,.6);
+        border-radius: 0;
+      }
+    }
+
+    /* ── Scrollbar ────────────────────────────────── */
+    ::-webkit-scrollbar { width:4px; }
+    ::-webkit-scrollbar-track { background:transparent; }
+    ::-webkit-scrollbar-thumb { background:rgba(99,102,241,.3); border-radius:2px; }
+    /* ── Responsive nav ─── */
+    .nav-desktop-links,.nav-desktop-actions{display:none;}
+    @media(min-width:768px){.nav-desktop-links,.nav-desktop-actions{display:flex;}.nav-mobile-right{display:none!important;}#nav-mobile{display:none!important;}}
+    /* ── Iframe mode ─── */
+    body.in-iframe nav{display:none!important;}
+    body.in-iframe #desktop-bg{display:none!important;}
+    body.in-iframe #chat-panel{top:0!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;height:100%!important;border-radius:0!important;border:none!important;box-shadow:none!important;}
+  </style>
+</head>
+<body class="mesh-bg min-h-screen antialiased">
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-[#1e1e2e]/80 bg-[#0a0a0f]/80 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="font-mono text-sm font-bold grad-text tracking-tight">Rusu George</a>
+      <div class="nav-desktop-links items-center gap-6">
+        <a href="index.html"      class="nav-link font-mono text-xs tracking-widest uppercase">Home</a>
+        <a href="archive.html"    class="nav-link font-mono text-xs tracking-widest uppercase">Archive</a>
+        <a href="about.html"      class="nav-link font-mono text-xs tracking-widest uppercase">About</a>
+      </div>
+      <div class="nav-desktop-actions items-center gap-3">
+        <a href="https://www.linkedin.com/in/george-rusu-8661b5229/" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+        <a href="https://github.com/georgelush" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-4 h-4"></i></a>
+        <a href="images/RusuGeorgeCV.pdf" target="_blank" class="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-md border border-[#6366f1]/40 text-[#6366f1] hover:bg-[#6366f1]/10 transition-all"><i data-lucide="download" class="w-3 h-3"></i> CV</a>
+      </div>
+      <div class="nav-mobile-right flex items-center gap-2">
+        <a href="images/RusuGeorgeCV.pdf" target="_blank" class="flex items-center gap-1.5 text-xs font-mono px-2.5 py-1.5 rounded-md border border-[#6366f1]/40 text-[#6366f1] hover:bg-[#6366f1]/10 transition-all"><i data-lucide="download" class="w-3 h-3"></i> CV</a>
+        <button id="nav-toggle" aria-label="Toggle menu" class="p-2 text-[#9ca3af] hover:text-[#e2e8f0] transition-colors">
+          <span id="nav-icon-open"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span>
+          <span id="nav-icon-close" style="display:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+        </button>
+      </div>
+    </div>
+    <div id="nav-mobile" style="display:none;border-top:1px solid rgba(30,30,46,.6);background:rgba(10,10,15,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col">
+        <a href="index.html"      class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">Home</a>
+        <a href="archive.html"    class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">Archive</a>
+        <a href="about.html"      class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">About</a>
+        <div class="flex items-center gap-5 pt-4">
+          <a href="https://www.linkedin.com/in/george-rusu-8661b5229/" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+          <a href="https://github.com/georgelush" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hidden orchestration nodes (JS compatibility) -->
+  <div style="display:none;" aria-hidden="true" id="orch-panel">
+    <svg id="orch-svg"></svg>
+    <div id="node-orchestrator">
+      <div class="status-dot" id="dot-orchestrator"></div>
+      <span id="badge-orchestrator">IDLE</span>
+      <p id="status-orchestrator">Waiting for input…</p>
+    </div>
+    <div id="node-rag" data-agent="rag" data-color="#00aaff">
+      <div class="status-dot" id="dot-rag"></div>
+      <p id="status-rag">ChromaDB · MiniLM</p>
+    </div>
+    <div id="node-email" data-agent="email" data-color="#ff6b35">
+      <div class="status-dot" id="dot-email"></div>
+      <p id="status-email">Gmail API · OAuth2</p>
+    </div>
+    <div id="node-calendar" data-agent="calendar" data-color="#a855f7">
+      <div class="status-dot" id="dot-calendar"></div>
+      <p id="status-calendar">George approves · Meet link</p>
+    </div>
+    <div id="node-job_match" data-agent="job_match" data-color="#fbbf24">
+      <div class="status-dot" id="dot-job_match"></div>
+      <p id="status-job_match">URL · paste JD · score</p>
+    </div>
+    <div id="node-telegram" data-agent="telegram" data-color="#22d3ee">
+      <div class="status-dot" id="dot-telegram"></div>
+      <p id="status-telegram">leave contact · George reach out</p>
+    </div>
+    <div id="event-log"></div>
+    <button id="clear-log"></button>
+    <div id="cal-context"><span id="cal-field-label"></span></div>
+    <div id="budget-wrap"><span id="budget-label"></span><div id="budget-fill"></div></div>
+  </div>
+
+  <!-- Desktop background content (hidden on mobile) -->
+  <div id="desktop-bg" class="hidden md:block pt-28 px-10">
+    <div class="max-w-lg">
+      <div class="inline-flex items-center gap-2 mb-5 px-3 py-1.5 rounded-full border border-[#00ff88]/20 bg-[#00ff88]/5 text-[#00ff88] text-xs font-mono">
+        <span style="width:6px;height:6px;border-radius:50%;background:#00ff88;display:inline-block;animation:pulse-dot 1.5s ease-in-out infinite;"></span>
+        Live · Multi-Agent System
+      </div>
+      <h1 class="font-mono text-4xl font-bold text-[#e2e8f0] mb-3">Lush <span class="grad-text">AI</span></h1>
+      <p class="text-[#6b7280] text-sm leading-relaxed mb-6 max-w-sm">
+        Ask anything about George, check if he fits your role, or book a call — a LangGraph orchestrator routes your request to the right specialist agent in real time.
+      </p>
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center gap-2 font-mono text-xs text-[#6b7280]"><span style="color:#00ff88;">⚡</span> Orchestrator — LangGraph · llama-3.1-8b</div>
+        <div class="flex items-center gap-2 font-mono text-xs text-[#6b7280]"><span style="color:#00aaff;">◈</span> RAG — ChromaDB · MiniLM</div>
+        <div class="flex items-center gap-2 font-mono text-xs text-[#6b7280]"><span style="color:#a855f7;">◈</span> Calendar — Google Meet · HITL approve</div>
+        <div class="flex items-center gap-2 font-mono text-xs text-[#6b7280]"><span style="color:#ff6b35;">◈</span> Email — Gmail API · OAuth2</div>
+        <div class="flex items-center gap-2 font-mono text-xs text-[#6b7280]"><span style="color:#fbbf24;">◈</span> Job Match — JD analysis · fit score</div>
+        <div class="flex items-center gap-2 font-mono text-xs text-[#6b7280]"><span style="color:#22d3ee;">◈</span> Telegram — direct message George</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat panel (floating on desktop, full-screen on mobile) -->
+  <div id="chat-panel">
+
+    <!-- Panel header -->
+    <div style="padding:12px 14px 10px;border-bottom:1px solid rgba(99,102,241,.1);display:flex;align-items:center;gap:8px;flex-shrink:0;">
+      <span style="width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:inline-block;animation:pulse-dot 2s ease-in-out infinite;box-shadow:0 0 6px rgba(99,102,241,.7);flex-shrink:0;"></span>
+      <span class="font-mono" style="font-size:11px;font-weight:700;color:#e2e8f0;">Lush AI</span>
+      <span id="header-msg-count" class="font-mono" style="font-size:9px;color:#a78bfa;margin-left:auto;">20 / 20</span>
+      <span class="font-mono" style="font-size:9px;color:#6b7280;">· LangGraph · Groq</span>
+      <button id="iframe-close-btn" onclick="window.parent.postMessage('close-chat','*')" aria-label="Close" style="display:flex;margin-left:8px;width:28px;height:28px;border-radius:50%;border:none;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;cursor:pointer;flex-shrink:0;align-items:center;justify-content:center;filter:drop-shadow(0 0 6px rgba(99,102,241,.9)) drop-shadow(0 0 12px rgba(139,92,246,.5));transition:filter .2s,transform .2s;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <!-- Messages -->
+    <div id="chat-messages" class="flex flex-col gap-3" style="flex:1;overflow-y:auto;padding:14px 14px 10px;">
+      <div class="bubble-ai font-mono text-xs text-[#e2e8f0]">
+        Hey! I'm Lush AI, George's assistant. What can I help you with?
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="border-top:1px solid rgba(30,30,46,.6);">
+
+      <!-- Quick-action buttons (persistent) -->
+      <div id="quick-actions">
+        <button class="qa-btn" style="--qc:#00aaff" data-msg="Tell me about George"><span class="qa-dot"></span>About George</button>
+        <button class="qa-btn" style="--qc:#a855f7" data-msg="I'd like to book a meeting with George"><span class="qa-dot"></span>Book a call</button>
+        <button class="qa-btn" style="--qc:#ff6b35" data-msg="Can you send me George's CV?"><span class="qa-dot"></span>Get his CV</button>
+        <button class="qa-btn" style="--qc:#fbbf24" data-msg="I have a job description to analyze"><span class="qa-dot"></span>Score JD fit</button>
+      </div>
+
+      <!-- Agent status strip -->
+      <div id="agent-strip">
+        <span id="sn-orch"     class="sn" style="--sc:#00ff88"><span class="sn-dot"></span>ORCH</span>
+        <span id="sn-rag"      class="sn" style="--sc:#00aaff"><span class="sn-dot"></span>Memory</span>
+        <span id="sn-email"    class="sn" style="--sc:#ff6b35"><span class="sn-dot"></span>Email</span>
+        <span id="sn-calendar" class="sn" style="--sc:#a855f7"><span class="sn-dot"></span>Calendar</span>
+        <span id="sn-job_match"class="sn" style="--sc:#fbbf24"><span class="sn-dot"></span>Analyzer</span>
+        <span id="sn-telegram" class="sn" style="--sc:#22d3ee"><span class="sn-dot"></span>Notify</span>
+      </div>
+
+      <!-- Input row -->
+      <div id="input-row" style="padding:8px 14px 12px;display:flex;gap:8px;align-items:flex-end;">
+        <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+          <textarea
+            id="user-input"
+            rows="1"
+            placeholder="Ask me anything about George..."
+            style="min-height:38px;max-height:110px;overflow-y:auto;"
+          ></textarea>
+          <div id="char-counter" class="hidden font-mono text-right" style="font-size:9px;color:#6b7280;">0 / 7000</div>
+        </div>
+        <button id="send-btn" aria-label="Send">
+          <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script>
+  if (window.self !== window.top) {
+    document.body.classList.add('in-iframe');
+  } else {
+    window.location.replace('index.html');
+  }
+  </script>
+  <script>
+  // Fix mobile keyboard pushing panel content off-screen
+  if (window.visualViewport && window.self !== window.top) {
+    const _vvPanel = document.getElementById('chat-panel');
+    function _fixViewport() {
+      if (_vvPanel) {
+        _vvPanel.style.height = window.visualViewport.height + 'px';
+        _vvPanel.style.top    = window.visualViewport.offsetTop + 'px';
+        // Keep messages scrolled to bottom so latest stays visible
+        const msgs = document.getElementById('chat-messages');
+        if (msgs) msgs.scrollTop = msgs.scrollHeight;
+      }
+    }
+    window.visualViewport.addEventListener('resize', _fixViewport);
+    window.visualViewport.addEventListener('scroll', _fixViewport);
+    _fixViewport();
+  }
+  </script>
+  <script>
+  (() => {
+    // ── Config ──────────────────────────────────────────────────────────────
+    const isLocal =
+      location.hostname === 'localhost' ||
+      location.hostname === '127.0.0.1' ||
+      location.hostname === '';
+    const API_BASE = isLocal
+      ? 'http://localhost:7860'
+      : 'https://630x-lushai.hf.space';
+
+    // Agent colour map
+    const AGENT_COLOR = {
+      orchestrator: '#00ff88',
+      rag:          '#00aaff',
+      email:        '#ff6b35',
+      calendar:     '#a855f7',
+      job_match: '#fbbf24',
+      telegram:     '#22d3ee',
+      off_topic:    '#6b7280',
+    };
+    const AGENT_CLASS = {
+      orchestrator: 'active-orch',
+      rag:          'active-rag',
+      email:        'active-email',
+      calendar:     'active-cal',
+      job_match: 'active-cover',
+      telegram:     'active-tg',
+    };
+    const EVENT_LABEL = {
+      orchestrator_thinking:   '⚡ thinking',
+      agent_start:             '▶ start',
+      agent_working:           '⟳ working',
+      agent_done:              '✓ done',
+      orchestrator_synthesizing:'⚡ synthesising',
+      final_response:          '✦ deliver',
+      error:                   '✕ error',
+    };
+
+    // ── State ────────────────────────────────────────────────────────────────
+    const SESSION_ID = crypto.randomUUID();
+    const MAX_MESSAGES = 20;
+    const MAX_CONTINUATION = 8;
+    const MAX_CHARS = 7000;
+    let messageCount = 0;
+    let continuationCount = 0;
+    let calendarContinuation = false;
+    let calendarCollecting = false;   // true while calendar agent is mid-collection
+    let _gotCalendarCollecting = false;  // tracks if current turn emitted calendar_collecting
+    let telegramCollecting = false;   // true while telegram agent is collecting contact details
+    let _gotTelegramCollecting = false;
+    let busy = false;
+    let activeAgent = null;
+    let svgLines = {};   // agent → SVG <line> element
+    let agentBubble = null;  // live agent progress bubble in chat
+
+    const AGENT_LABEL = {
+      rag:          'RAG Agent',
+      email:        'Email Agent',
+      calendar:     'Calendar Agent',
+      job_match: 'Job Match Analyzer',
+      telegram:     'Telegram Agent',
+    };
+
+    // ── DOM refs ─────────────────────────────────────────────────────────────
+    const chatMessages  = document.getElementById('chat-messages');
+    const eventLog      = document.getElementById('event-log');
+    const userInput     = document.getElementById('user-input');
+    const sendBtn       = document.getElementById('send-btn');
+    const orchPanel     = document.getElementById('orch-panel');
+    const orchSvg       = document.getElementById('orch-svg');
+    const budgetFill    = document.getElementById('budget-fill');
+    const budgetLabel   = document.getElementById('budget-label');
+    const calContext    = document.getElementById('cal-context');
+    const charCounter   = document.getElementById('char-counter');
+    const calFieldLabel = document.getElementById('cal-field-label');
+
+    // ── Agent strip controls ─────────────────────────────────────────────────
+    const SN_IDS = ['sn-orch','sn-rag','sn-email','sn-calendar','sn-job_match','sn-telegram'];
+    const SN_MAP = {
+      orchestrator: 'sn-orch',
+      rag:          'sn-rag',
+      email:        'sn-email',
+      calendar:     'sn-calendar',
+      job_match:    'sn-job_match',
+      telegram:     'sn-telegram',
+    };
+    function _snReset() {
+      SN_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.className = 'sn';
+      });
+    }
+    function showFlowBar(agentId) {
+      _snReset();
+      // ORCH lights up as dispatcher
+      const orchEl = document.getElementById('sn-orch');
+      if (orchEl) orchEl.classList.add('sn-active');
+      // Target agent lights up
+      const snId = SN_MAP[agentId];
+      if (snId && snId !== 'sn-orch') {
+        const el = document.getElementById(snId);
+        if (el) el.classList.add('sn-active');
+      }
+      // Email / Calendar also trigger Telegram notification
+      if (agentId === 'email' || agentId === 'calendar') {
+        const tgEl = document.getElementById('sn-telegram');
+        if (tgEl) tgEl.classList.add('sn-secondary');
+      }
+    }
+    function completeFlowBar() {
+      // Swap active → done (keeps color, stops animation)
+      SN_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (el.classList.contains('sn-active') || el.classList.contains('sn-secondary')) {
+          el.classList.remove('sn-active','sn-secondary');
+          el.classList.add('sn-done');
+        }
+      });
+    }
+    function hideFlowBar() { _snReset(); }
+
+    // ── SVG connections ──────────────────────────────────────────────────────
+    function buildConnections() {
+      orchSvg.innerHTML = '';
+      svgLines = {};
+      const orchNode  = document.getElementById('node-orchestrator');
+      const agentIds  = ['rag', 'email', 'calendar', 'job_match', 'telegram'];
+      const svgBB     = orchSvg.getBoundingClientRect();
+      const orchBB    = orchNode.getBoundingClientRect();
+
+      const ox = orchBB.left - svgBB.left + orchBB.width  / 2;
+      const oy = orchBB.top  - svgBB.top  + orchBB.height;
+
+      agentIds.forEach(id => {
+        const el = document.getElementById('node-' + id);
+        if (!el) return;
+        const eBB = el.getBoundingClientRect();
+        const ex = eBB.left - svgBB.left + eBB.width  / 2;
+        const ey = eBB.top  - svgBB.top;
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', ox); line.setAttribute('y1', oy);
+        line.setAttribute('x2', ex); line.setAttribute('y2', ey);
+        line.classList.add('conn-line');
+        orchSvg.appendChild(line);
+        svgLines[id] = line;
+      });
+    }
+
+    function activateLine(agentId) {
+      Object.entries(svgLines).forEach(([id, line]) => {
+        line.classList.remove('flowing');
+        line.style.stroke = 'rgba(255,255,255,.06)';
+        if (id === agentId) {
+          line.classList.add('flowing');
+          line.style.stroke = AGENT_COLOR[agentId] || '#6366f1';
+        }
+      });
+    }
+
+    function clearLines() {
+      Object.values(svgLines).forEach(line => {
+        line.classList.remove('flowing');
+        line.style.stroke = 'rgba(255,255,255,.06)';
+      });
+    }
+
+    // ── Orchestration panel helpers ──────────────────────────────────────────
+    function resetAllNodes() {
+      // Orchestrator back to idle
+      const orchEl = document.getElementById('node-orchestrator');
+      Object.values(AGENT_CLASS).forEach(c => orchEl.classList.remove(c));
+      orchEl.classList.add('active-orch');
+      document.getElementById('badge-orchestrator').textContent = 'IDLE';
+      document.getElementById('status-orchestrator').textContent = 'Waiting for input…';
+
+      // Agents dimmed
+      ['rag','email','calendar','job_match','telegram'].forEach(id => {
+        const el = document.getElementById('node-' + id);
+        if (!el) return;
+        el.classList.remove(...Object.values(AGENT_CLASS));
+        el.classList.add('dimmed');
+        document.getElementById('status-' + id).textContent = el.dataset.defaultStatus || '—';
+      });
+      clearLines();
+      completeFlowBar();
+      activeAgent = null;
+    }
+
+    function keepCalendarActive() {
+      const orchEl = document.getElementById('node-orchestrator');
+      Object.values(AGENT_CLASS).forEach(c => orchEl.classList.remove(c));
+      orchEl.classList.add('active-orch');
+      document.getElementById('badge-orchestrator').textContent = 'IDLE';
+      document.getElementById('status-orchestrator').textContent = 'Waiting for your response…';
+      ['rag','email','job_match','telegram'].forEach(id => {
+        const el = document.getElementById('node-' + id);
+        if (!el) return;
+        el.classList.remove(...Object.values(AGENT_CLASS));
+        el.classList.add('dimmed');
+      });
+      clearLines();
+      completeFlowBar();
+      // Keep calendar strip node glowing — still in active collection
+      const calSn = document.getElementById('sn-calendar');
+      if (calSn) { calSn.classList.remove('sn-done'); calSn.classList.add('sn-active'); }
+      activeAgent = null;
+    }
+
+    function keepTelegramActive() {
+      const orchEl = document.getElementById('node-orchestrator');
+      Object.values(AGENT_CLASS).forEach(c => orchEl.classList.remove(c));
+      orchEl.classList.add('active-orch');
+      document.getElementById('badge-orchestrator').textContent = 'IDLE';
+      document.getElementById('status-orchestrator').textContent = 'Waiting for your response…';
+      ['rag','email','job_match','calendar'].forEach(id => {
+        const el = document.getElementById('node-' + id);
+        if (!el) return;
+        el.classList.remove(...Object.values(AGENT_CLASS));
+        el.classList.add('dimmed');
+      });
+      clearLines();
+      completeFlowBar();
+      // Keep telegram strip node glowing — still collecting contact details
+      const tgSn = document.getElementById('sn-telegram');
+      if (tgSn) { tgSn.classList.remove('sn-done'); tgSn.classList.add('sn-active'); }
+      activeAgent = null;
+    }
+
+    function setOrchState(badge, status) {
+      document.getElementById('badge-orchestrator').textContent = badge;
+      document.getElementById('status-orchestrator').textContent = status;
+    }
+
+    function activateAgent(agentId, status) {
+      // Dim all, un-dim target
+      ['rag','email','calendar','job_match','telegram'].forEach(id => {
+        const el = document.getElementById('node-' + id);
+        if (!el) return;
+        el.classList.remove(...Object.values(AGENT_CLASS));
+        if (id === agentId) {
+          el.classList.remove('dimmed');
+          el.classList.add(AGENT_CLASS[agentId]);
+        } else {
+          el.classList.add('dimmed');
+        }
+      });
+      if (status) document.getElementById('status-' + agentId).textContent = status;
+      activateLine(agentId);
+      activeAgent = agentId;
+      showFlowBar(agentId);
+
+      // Dim orchestrator while agent is working
+      const orchEl = document.getElementById('node-orchestrator');
+      Object.values(AGENT_CLASS).forEach(c => orchEl.classList.remove(c));
+      document.getElementById('badge-orchestrator').textContent = 'DELEGATED';
+    }
+
+    function updateAgentStatus(agentId, text) {
+      const el = document.getElementById('status-' + agentId);
+      if (el) el.textContent = text.length > 60 ? text.slice(0, 57) + '…' : text;
+    }
+
+    // ── Event log ────────────────────────────────────────────────────────────
+    function logEvent(type, agent, text) {
+      const color = AGENT_COLOR[agent] || '#6366f1';
+      const label = EVENT_LABEL[type] || type;
+      const badge = agent && agent !== 'orchestrator'
+        ? `<span style="color:${color};font-family:'JetBrains Mono',monospace;font-size:8px;opacity:.65;flex-shrink:0;margin-top:2px;">[${agent.toUpperCase()}]</span>`
+        : '';
+
+      const entry = document.createElement('div');
+      entry.className = 'log-entry flex gap-2 items-start';
+      entry.innerHTML = `
+        <span style="color:${color};font-family:'JetBrains Mono',monospace;font-size:9px;flex-shrink:0;margin-top:2px;">${label}</span>
+        ${badge}
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9ca3af;line-height:1.5;word-break:break-word;">${escHtml(text)}</span>
+      `;
+      // Remove placeholder
+      const placeholder = eventLog.querySelector('p');
+      if (placeholder) placeholder.remove();
+
+      eventLog.appendChild(entry);
+      eventLog.scrollTop = eventLog.scrollHeight;
+
+      // Keep max 30 entries
+      while (eventLog.children.length > 30) eventLog.removeChild(eventLog.firstChild);
+    }
+
+    // ── Chat helpers ─────────────────────────────────────────────────────────
+    function addMessage(role, text) {
+      const div = document.createElement('div');
+      if (role === 'user') {
+        div.className = 'bubble-user font-mono text-xs text-[#e2e8f0]';
+        div.textContent = text;
+      } else if (role === 'error') {
+        div.className = 'bubble-error font-mono text-xs text-red-400';
+        div.textContent = '⚠ ' + text;
+      } else {
+        div.className = 'bubble-ai font-mono text-xs text-[#e2e8f0]';
+        div.textContent = text;
+      }
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function escHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function showAgentBubble(agent, statusText) {
+      const color = AGENT_COLOR[agent] || '#6366f1';
+      const label = AGENT_LABEL[agent] || agent;
+      if (!agentBubble) {
+        agentBubble = document.createElement('div');
+        agentBubble.className = 'bubble-ai font-mono text-xs';
+        agentBubble.style.borderLeft = `2px solid ${color}`;
+        agentBubble.style.paddingLeft = '10px';
+        chatMessages.appendChild(agentBubble);
+      }
+      agentBubble.innerHTML =
+        `<span style="color:${color};font-weight:600;">${escHtml(label)}</span>` +
+        `<br><span style="color:#9ca3af;">${escHtml(statusText)}</span>` +
+        `<span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:${color};margin-left:6px;animation:pulse-dot 1.2s ease-in-out infinite;vertical-align:middle;"></span>`;
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function clearAgentBubble() {
+      if (agentBubble) {
+        agentBubble.remove();
+        agentBubble = null;
+      }
+    }
+
+    // ── Calendar context helpers ──────────────────────────────────────────────
+    const _CAL_FIELDS = {
+      visitor_name:   { label: 'your name',         placeholder: 'Your full name...' },
+      visitor_email:  { label: 'your email address', placeholder: 'your@email.com' },
+      preferred_date: { label: 'preferred date',     placeholder: 'YYYY-MM-DD  (e.g. 2026-06-20)' },
+      preferred_time: { label: 'preferred time',     placeholder: 'HH:MM  (e.g. 14:00)' },
+      meeting_topic:  { label: 'meeting topic',      placeholder: 'What would you like to discuss?' },
+    };
+
+    function _detectCalField(text) {
+      const t = text.toLowerCase();
+      if (/\bname\b/.test(t) && !/email/.test(t))  return 'visitor_name';
+      if (/email/.test(t))                           return 'visitor_email';
+      if (/date|yyyy/.test(t))                       return 'preferred_date';
+      if (/time|hh:mm/.test(t))                      return 'preferred_time';
+      if (/topic|discuss|meeting about/.test(t))     return 'meeting_topic';
+      return null;
+    }
+
+    function setCalendarContext(responseText) {
+      const field = _detectCalField(responseText || '');
+      const hint  = field ? _CAL_FIELDS[field] : null;
+      calFieldLabel.textContent  = hint ? hint.label : 'meeting details';
+      userInput.placeholder      = hint ? hint.placeholder : 'Type your answer…';
+      calContext.classList.remove('hidden');
+    }
+
+    function hideCalendarContext() {
+      calContext.classList.add('hidden');
+      userInput.placeholder = 'Ask me anything about George...';
+    }
+
+    // ── Budget helpers ────────────────────────────────────────────────────────
+    const headerMsgCount = document.getElementById('header-msg-count');
+    function updateBudget() {
+      const remaining = MAX_MESSAGES - messageCount;
+      const pct = Math.max(0, (remaining / MAX_MESSAGES) * 100);
+      budgetFill.style.width = pct + '%';
+
+      let color;
+      if (remaining >= 10)      color = '#00ff88';
+      else if (remaining >= 5)  color = '#fbbf24';
+      else if (remaining >= 2)  color = '#ff6b35';
+      else                      color = '#ef4444';
+
+      budgetFill.style.background  = color;
+      budgetLabel.style.color      = color;
+      budgetLabel.textContent      = remaining > 0
+        ? `${remaining} / ${MAX_MESSAGES} interactions`
+        : 'Limit reached';
+
+      if (headerMsgCount) {
+        headerMsgCount.textContent = remaining > 0 ? `${remaining} / ${MAX_MESSAGES}` : '0 / 20';
+        headerMsgCount.style.color = color;
+      }
+    }
+
+    function showBudgetExhausted() {
+      const div = document.createElement('div');
+      div.className = 'bubble-ai font-mono text-xs text-[#e2e8f0]';
+      div.style.borderLeft = '2px solid #a855f7';
+      div.style.paddingLeft = '10px';
+      div.innerHTML =
+        `<span style="color:#a855f7;font-weight:600;">⏱ Session limit reached</span><br>` +
+        `<span style="color:#9ca3af;">You've used all ${MAX_MESSAGES} interactions. Enjoyed the experience?</span>` +
+        `<button class="budget-cta-btn" id="cta-book-btn">📅 Book a call with George</button>` +
+        `<div style="display:flex;gap:8px;margin-top:6px;">` +
+          `<a href="images/RusuGeorgeCV.pdf" target="_blank" ` +
+             `style="flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .5rem;` +
+                    `border-radius:8px;border:1px solid rgba(99,102,241,.3);color:#818cf8;text-decoration:none;" ` +
+             `onmouseover="this.style.background='rgba(99,102,241,.1)'" onmouseout="this.style.background='none'">📄 Download CV</a>` +
+          `<a href="mailto:georgel1988@gmail.com" ` +
+             `style="flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .5rem;` +
+                    `border-radius:8px;border:1px solid rgba(99,102,241,.3);color:#818cf8;text-decoration:none;" ` +
+             `onmouseover="this.style.background='rgba(99,102,241,.1)'" onmouseout="this.style.background='none'">✉ Email George</a>` +
+        `</div>`;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      // Disable input row
+      userInput.disabled = true;
+      sendBtn.disabled   = true;
+      userInput.placeholder = 'Session limit reached — book a call to continue…';
+
+      // Wire CTA button — bypasses budget and enables full calendar flow
+      setTimeout(() => {
+        const btn = document.getElementById('cta-book-btn');
+        if (btn) btn.addEventListener('click', () => {
+          calendarContinuation = true;
+          userInput.disabled   = false;
+          sendBtn.disabled     = false;
+          setCalendarContext('');  // show banner, generic placeholder
+          sendMessage("I'd like to schedule a meeting with George", true);
+        });
+      }, 50);
+    }
+
+    function showFinalBlock() {
+      const div = document.createElement('div');
+      div.className = 'bubble-ai font-mono text-xs text-[#e2e8f0]';
+      div.style.borderLeft = '2px solid #00ff88';
+      div.style.paddingLeft = '10px';
+      div.innerHTML =
+        `<span style="color:#00ff88;font-weight:600;">✓ All done!</span><br>` +
+        `<span style="color:#9ca3af;">Thanks for trying the full system! Reach out directly:</span>` +
+        `<div style="display:flex;gap:8px;margin-top:6px;">` +
+          `<a href="mailto:georgel1988@gmail.com" ` +
+             `style="flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .5rem;` +
+                    `border-radius:8px;border:1px solid rgba(0,255,136,.25);color:#00ff88;text-decoration:none;" ` +
+             `onmouseover="this.style.background='rgba(0,255,136,.08)'" onmouseout="this.style.background='none'">✉ georgel1988@gmail.com</a>` +
+          `<a href="images/RusuGeorgeCV.pdf" target="_blank" ` +
+             `style="flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .5rem;` +
+                    `border-radius:8px;border:1px solid rgba(99,102,241,.3);color:#818cf8;text-decoration:none;" ` +
+             `onmouseover="this.style.background='rgba(99,102,241,.1)'" onmouseout="this.style.background='none'">📄 Download CV</a>` +
+        `</div>`;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      calContext.classList.add('hidden');
+      userInput.disabled   = true;
+      sendBtn.disabled     = true;
+      userInput.placeholder = 'Demo complete — reach out directly!';
+    }
+
+    // ── SSE stream handler ────────────────────────────────────────────────────
+    function handleEvent(data) {
+      const { type, agent, text } = data;
+      const logText = type === 'final_response' ? 'Message delivered to chat.' : text;
+      logEvent(type, agent, logText);
+
+      switch (type) {
+        case 'orchestrator_thinking':
+          setOrchState('THINKING', text);
+          // Restore orch glow
+          const orchEl = document.getElementById('node-orchestrator');
+          Object.values(AGENT_CLASS).forEach(c => orchEl.classList.remove(c));
+          orchEl.classList.add('active-orch');
+          clearLines();
+          break;
+
+        case 'agent_start':
+          activateAgent(agent, text);
+          showAgentBubble(agent, text);
+          break;
+
+        case 'agent_working':
+          updateAgentStatus(agent, text);
+          showAgentBubble(agent, text);
+          break;
+
+        case 'agent_done':
+          updateAgentStatus(agent, text);
+          clearAgentBubble();
+          break;
+
+        case 'orchestrator_synthesizing':
+          setOrchState('SYNTHESISING', text);
+          const oEl = document.getElementById('node-orchestrator');
+          Object.values(AGENT_CLASS).forEach(c => oEl.classList.remove(c));
+          oEl.classList.add('active-orch');
+          clearLines();
+          break;
+
+        case 'calendar_collecting':
+          calendarCollecting = true;
+          _gotCalendarCollecting = true;
+          break;
+
+        case 'telegram_collecting':
+          telegramCollecting = true;
+          _gotTelegramCollecting = true;
+          break;
+
+        case 'calendar_limit':
+          calendarCollecting = false;
+          calendarContinuation = false;
+          hideCalendarContext();
+          messageCount = MAX_MESSAGES;
+          updateBudget();
+          break;
+
+        case 'telegram_limit':
+          telegramCollecting = false;
+          messageCount = MAX_MESSAGES;
+          updateBudget();
+          break;
+
+        case 'final_response':
+          clearAgentBubble();
+          addMessage('ai', text);
+          if (_gotCalendarCollecting) {
+            keepCalendarActive();
+          } else if (_gotTelegramCollecting) {
+            keepTelegramActive();
+          } else {
+            calendarCollecting = false;
+            telegramCollecting = false;
+            resetAllNodes();
+          }
+          _gotCalendarCollecting = false;
+          _gotTelegramCollecting = false;
+          if (calendarContinuation && continuationCount >= MAX_CONTINUATION) {
+            hideCalendarContext();
+            showFinalBlock();
+          } else if (messageCount >= MAX_MESSAGES && !calendarContinuation && !telegramCollecting) {
+            showBudgetExhausted();
+          } else {
+            if (calendarContinuation) setCalendarContext(text);
+            setInputEnabled(true);
+          }
+          break;
+
+        case 'error':
+          clearAgentBubble();
+          addMessage('error', text);
+          resetAllNodes();
+          if (calendarContinuation && continuationCount >= MAX_CONTINUATION) {
+            showFinalBlock();
+          } else if (messageCount >= MAX_MESSAGES && !calendarContinuation) {
+            showBudgetExhausted();
+          } else {
+            setInputEnabled(true);
+          }
+          break;
+      }
+    }
+
+    // ── Send message ──────────────────────────────────────────────────────────
+    async function sendMessage(message, force = false) {
+      if (!message.trim() || busy) return;
+      if (message.length > MAX_CHARS) {
+        addMessage('ai', `⚠️ Message too long (${message.length.toLocaleString()} / ${MAX_CHARS.toLocaleString()} characters). Please paste a shorter version — for a job description, just the requirements and responsibilities section is enough.`);
+        return;
+      }
+      if (!force && messageCount >= MAX_MESSAGES) return;
+      if (calendarContinuation && continuationCount >= MAX_CONTINUATION) return;
+
+      // Gate: during calendar continuation block off-topic questions
+      if (calendarContinuation && !force) {
+        const _OFF_TOPIC = /^(what|who|how|tell me|can you|do you|where|why|which|explain)\b/i;
+        if (_OFF_TOPIC.test(message.trim()) && message.trim().endsWith('?')) {
+          const field = calFieldLabel.textContent;
+          addMessage('ai', `📅 Please answer the Calendar Agent's question (${field}) to complete your booking.`);
+          return;
+        }
+      }
+
+      hideFlowBar();
+      _gotCalendarCollecting = false;
+      _gotTelegramCollecting = false;
+
+      if (calendarContinuation) {
+        continuationCount++;
+      } else if (!calendarCollecting && !telegramCollecting) {
+        messageCount++;
+        updateBudget();
+      }
+      // calendarCollecting / telegramCollecting = true → don't consume budget
+
+      busy = true;
+      setInputEnabled(false);
+      addMessage('user', message);
+      setOrchState('RECEIVING', message.length > 50 ? message.slice(0,47)+'…' : message);
+
+      try {
+        const resp = await fetch(`${API_BASE}/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message, session_id: SESSION_ID }),
+        });
+
+        if (!resp.ok) {
+          if (resp.status === 400) {
+            const body = await resp.text();
+            addMessage('ai', `⚠️ ${body}`);
+            busy = false;
+            setInputEnabled(true);
+            return;
+          }
+          throw new Error(`Server responded ${resp.status}`);
+        }
+
+        const reader  = resp.body.getReader();
+        const decoder = new TextDecoder();
+        let buf = '';
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buf += decoder.decode(value, { stream: true });
+          const parts = buf.split(/\r?\n\r?\n/);
+          buf = parts.pop() || '';
+          for (const part of parts) {
+            for (const line of part.split(/\r?\n/)) {
+              if (line.startsWith('data: ')) {
+                const raw = line.slice(6).trim();
+                if (raw && raw !== '[DONE]') {
+                  try { handleEvent(JSON.parse(raw)); } catch {}
+                }
+              }
+            }
+          }
+        }
+      } catch (err) {
+        addMessage('error', `Connection error: ${err.message}. Is the backend running?`);
+        resetAllNodes();
+      } finally {
+        busy = false;
+        const contDone = calendarContinuation && continuationCount >= MAX_CONTINUATION;
+        const mainDone = !calendarContinuation && messageCount >= MAX_MESSAGES;
+        if (!contDone && !mainDone) {
+          setInputEnabled(true);
+        }
+      }
+    }
+
+    function setInputEnabled(on) {
+      userInput.disabled  = !on;
+      sendBtn.disabled    = !on;
+      if (on) userInput.focus();
+    }
+
+    // ── UI wiring ─────────────────────────────────────────────────────────────
+    sendBtn.addEventListener('click', () => {
+      const msg = userInput.value.trim();
+      if (!msg) return;
+      userInput.value = '';
+      userInput.style.height = 'auto';
+      sendMessage(msg);
+    });
+
+    // Quick-action suggestion buttons
+    document.querySelectorAll('.qa-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const msg = btn.dataset.msg;
+        if (msg) sendMessage(msg);
+      });
+    });
+
+    userInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        if (userInput.value.length > MAX_CHARS) {
+          addMessage('ai', `⚠️ Message too long (${userInput.value.length.toLocaleString()} / ${MAX_CHARS.toLocaleString()} characters). Please paste a shorter version — for a job description, just the requirements and responsibilities section is enough.`);
+          return;
+        }
+        sendBtn.click();
+      }
+    });
+
+    // Auto-resize textarea + char counter
+    userInput.addEventListener('input', () => {
+      userInput.style.height = 'auto';
+      userInput.style.height = Math.min(userInput.scrollHeight, 120) + 'px';
+
+      const len = userInput.value.length;
+      if (len > 0) {
+        charCounter.classList.remove('hidden');
+        charCounter.textContent = `${len} / ${MAX_CHARS}`;
+        const overLimit = len > MAX_CHARS;
+        charCounter.style.color = overLimit ? '#ef4444' : len > MAX_CHARS * 0.85 ? '#f59e0b' : '#6b7280';
+        sendBtn.disabled = overLimit;
+        sendBtn.style.opacity = overLimit ? '0.35' : '';
+      } else {
+        charCounter.classList.add('hidden');
+        sendBtn.disabled = false;
+        sendBtn.style.opacity = '';
+      }
+    });
+
+    // Clear log
+    document.getElementById('clear-log').addEventListener('click', () => {
+      eventLog.innerHTML = '<p class="font-mono text-[10px] text-[#6b7280]/50 text-center mt-4">Events will appear here in real time…</p>';
+    });
+
+    // ── Init ──────────────────────────────────────────────────────────────────
+    lucide.createIcons();
+
+    // ── Rotating placeholder ──────────────────────────────────────────────────
+    const _placeholders = [
+      'Ask me anything about George...',
+      'Paste a JD or drop a job URL...',
+      'Want George\'s CV? Just ask.',
+      'Book a call with George...',
+      'Drop a LinkedIn job URL...',
+      'Ask about George\'s projects...',
+    ];
+    let _phIdx = 0;
+    let _phTimer = null;
+
+    function _rotatePlaceholder() {
+      if (userInput.value.trim() || document.activeElement === userInput) return;
+      userInput.style.opacity = '0';
+      setTimeout(() => {
+        _phIdx = (_phIdx + 1) % _placeholders.length;
+        userInput.placeholder = _placeholders[_phIdx];
+        userInput.style.opacity = '1';
+      }, 400);
+    }
+
+    function _startRotation() {
+      if (_phTimer) return;
+      _phTimer = setInterval(_rotatePlaceholder, 4000);
+    }
+
+    function _stopRotation() {
+      clearInterval(_phTimer);
+      _phTimer = null;
+      userInput.style.opacity = '1';
+    }
+
+    userInput.addEventListener('focus', _stopRotation);
+    userInput.addEventListener('blur', () => {
+      if (!userInput.value.trim()) _startRotation();
+    });
+    userInput.addEventListener('input', () => {
+      if (userInput.value.trim()) { _stopRotation(); }
+      else if (document.activeElement !== userInput) { _startRotation(); }
+    });
+
+    _startRotation();
+
+    // Store default status text for reset
+    ['rag','email','calendar','job_match','telegram'].forEach(id => {
+      const el = document.getElementById('node-' + id);
+      if (el) el.dataset.defaultStatus = document.getElementById('status-' + id)?.textContent || '—';
+    });
+
+    // Build SVG connections after layout settles
+    setTimeout(buildConnections, 200);
+    window.addEventListener('resize', buildConnections);
+
+  })();
+  </script>
+  <script>
+  (function(){
+    var btn=document.getElementById('nav-toggle');
+    var menu=document.getElementById('nav-mobile');
+    var iconOpen=document.getElementById('nav-icon-open');
+    var iconClose=document.getElementById('nav-icon-close');
+    if(!btn||!menu)return;
+    btn.addEventListener('click',function(){
+      var open=menu.style.display==='block';
+      menu.style.display=open?'none':'block';
+      iconOpen.style.display=open?'':'none';
+      iconClose.style.display=open?'none':'';
+    });
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){
+        menu.style.display='none';
+        iconOpen.style.display='';
+        iconClose.style.display='none';
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

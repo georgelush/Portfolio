@@ -1,0 +1,18 @@
+.env
+.venv/
+client_secret.json
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+docker-compose.yml
+# Static site assets — served from GitHub Pages, not needed on HF Spaces
+*.html
+images/
+assets/

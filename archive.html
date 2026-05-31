@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archive - Rusu George</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    body{background-color:#0a0a0f;color:#e2e8f0;font-family:"Inter",sans-serif;}
+    .mesh-bg{background-color:#0a0a0f;background-image:radial-gradient(ellipse 80% 60% at 10% -10%,rgba(99,102,241,.12) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 90% 80%,rgba(139,92,246,.10) 0%,transparent 60%);}
+    .glass{background:rgba(17,17,24,.85);border:1px solid rgba(99,102,241,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:border-color .25s,box-shadow .25s;}
+    .glass:hover{border-color:rgba(99,102,241,.4);box-shadow:0 0 24px 2px rgba(99,102,241,.12);}
+    .glass-sky{background:rgba(17,17,24,.85);border:1px solid rgba(14,165,233,.2);backdrop-filter:blur(10px);transition:border-color .25s,box-shadow .25s;}
+    .glass-sky:hover{border-color:rgba(14,165,233,.45);box-shadow:0 0 24px 2px rgba(14,165,233,.12);}
+    .glass-vio{background:rgba(17,17,24,.85);border:1px solid rgba(139,92,246,.2);backdrop-filter:blur(10px);transition:border-color .25s,box-shadow .25s;}
+    .glass-vio:hover{border-color:rgba(139,92,246,.45);box-shadow:0 0 24px 2px rgba(139,92,246,.12);}
+    .grad-text{background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#0ea5e9 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .nav-link{color:#9ca3af;transition:color .2s;}
+    .nav-link:hover,.nav-link.active{color:#e2e8f0;}
+    .section-divider{border-top:1px solid rgba(99,102,241,.15);position:relative;}
+    .section-divider::before{content:"";position:absolute;top:-1px;left:0;width:80px;height:1px;background:linear-gradient(90deg,#6366f1,transparent);}
+    .tag{background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.2);color:#818cf8;font-size:.65rem;padding:.2rem .6rem;border-radius:9999px;font-family:"JetBrains Mono",monospace;}
+    .tag-sky{background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.2);color:#38bdf8;}
+    .tag-vio{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);color:#a78bfa;}
+    .tag-green{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);color:#34d399;}
+    .video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:.75rem;}
+    .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:.75rem;}
+    @keyframes fadeIn{0%{opacity:0;transform:translateY(12px);}100%{opacity:1;transform:translateY(0);}}
+
+    /* === FOUNDATION BUILD ANIMATION === */
+    .build-letter{
+      display:inline-block;
+      opacity:0;
+      animation:letter-build 0.28s cubic-bezier(.22,1.3,.36,1) forwards;
+    }
+    @keyframes letter-build{
+      0%{opacity:0;transform:translateY(10px) scaleY(0.4);filter:blur(1px);}
+      55%{opacity:1;transform:translateY(-3px) scaleY(1.1);filter:blur(0);}
+      100%{opacity:1;transform:translateY(0) scaleY(1);}
+    }
+    @keyframes badge-glow{0%,100%{box-shadow:0 0 6px rgba(0,255,136,.2);}50%{box-shadow:0 0 18px rgba(0,255,136,.5),0 0 32px rgba(0,255,136,.15);}}
+    /* ── Responsive nav ─── */
+    .nav-desktop-links,.nav-desktop-actions{display:none;}
+    @media(min-width:768px){.nav-desktop-links,.nav-desktop-actions{display:flex;}.nav-mobile-right{display:none!important;}#nav-mobile{display:none!important;}}
+  </style>
+</head>
+<body class="mesh-bg min-h-screen antialiased">
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-[#1e1e2e]/80 bg-[#0a0a0f]/80 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="font-mono text-sm font-bold grad-text tracking-tight">Rusu George</a>
+      <div class="nav-desktop-links items-center gap-6">
+        <a href="index.html"      class="nav-link font-mono text-xs tracking-widest uppercase">Home</a>
+        <a href="archive.html"    class="nav-link active font-mono text-xs tracking-widest uppercase">Archive</a>
+        <a href="about.html"      class="nav-link font-mono text-xs tracking-widest uppercase">About</a>
+      </div>
+      <div class="nav-desktop-actions items-center gap-3">
+        <a href="https://www.linkedin.com/in/george-rusu-8661b5229/" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+        <a href="https://github.com/georgelush" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-4 h-4"></i></a>
+        <a href="images/RusuGeorgeCV.pdf" target="_blank" class="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-md border border-[#6366f1]/40 text-[#6366f1] hover:bg-[#6366f1]/10 transition-all"><i data-lucide="download" class="w-3 h-3"></i> CV</a>
+      </div>
+      <div class="nav-mobile-right flex items-center gap-2">
+        <a href="images/RusuGeorgeCV.pdf" target="_blank" class="flex items-center gap-1.5 text-xs font-mono px-2.5 py-1.5 rounded-md border border-[#6366f1]/40 text-[#6366f1] hover:bg-[#6366f1]/10 transition-all"><i data-lucide="download" class="w-3 h-3"></i> CV</a>
+        <button id="nav-toggle" aria-label="Toggle menu" class="p-2 text-[#9ca3af] hover:text-[#e2e8f0] transition-colors">
+          <span id="nav-icon-open"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span>
+          <span id="nav-icon-close" style="display:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+        </button>
+      </div>
+    </div>
+    <div id="nav-mobile" style="display:none;border-top:1px solid rgba(30,30,46,.6);background:rgba(10,10,15,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col">
+        <a href="index.html"      class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">Home</a>
+        <a href="archive.html"    class="nav-link active font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">Archive</a>
+        <a href="about.html"      class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">About</a>
+        <div class="flex items-center gap-5 pt-4">
+          <a href="https://www.linkedin.com/in/george-rusu-8661b5229/" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+          <a href="https://github.com/georgelush" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <section class="pt-32 pb-16 px-6" style="animation:fadeIn .8s ease forwards;">
+    <div class="max-w-6xl mx-auto">
+      <div id="foundation-badge" class="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full border border-[#6b7280]/20 bg-[#6b7280]/5 text-[#6b7280] text-xs font-mono">
+        <i data-lucide="archive" class="w-3.5 h-3.5"></i><span id="badge-text">Technical Foundations &amp; Legacy Projects</span>
+      </div>
+      <h1 class="font-mono text-4xl md:text-5xl font-bold text-[#e2e8f0] mb-4">The Foundation</h1>
+      <p class="text-[#6b7280] text-sm max-w-2xl leading-relaxed">
+        Every system I build on today was assembled here. Security engineering, RPA automation, game systems in C++.
+        These projects represent the logical and technical base that led to my transition into Agentic AI.
+      </p>
+    </div>
+  </section>
+
+  <!-- SEC 1: CYBERSECURITY & NETWORK SECURITY -->
+  <section class="py-16 px-6 section-divider">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="w-8 h-8 rounded-lg bg-[#0ea5e9]/10 border border-[#0ea5e9]/25 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="shield" class="w-4 h-4 text-[#0ea5e9]"></i>
+        </div>
+        <div>
+          <p class="font-mono text-xs text-[#0ea5e9] tracking-widest uppercase">01</p>
+          <h2 class="font-mono text-xl font-bold text-[#e2e8f0]">Cybersecurity &amp; Network Security</h2>
+        </div>
+      </div>
+      <p class="text-[#6b7280] text-xs font-mono mb-8 max-w-xl">
+        // Reframed as: Systems reliability, network logic, and automated defense. The adversarial mindset trained here directly informs secure AI system design.
+      </p>
+
+      <!-- Attack & Defense Lab -->
+      <div class="glass-sky rounded-2xl p-6 mb-6">
+        <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+          <div>
+            <span class="tag tag-sky mb-2 inline-block">January 2026</span>
+            <h3 class="font-mono text-lg font-bold text-[#e2e8f0]">Attack &amp; Defense Lab</h3>
+            <p class="text-[#6b7280] text-sm mt-1 max-w-2xl">
+              End-to-end lab demonstrating Red Team attack vectors and Blue Team defense. Focused on mitigating DoS, MITM,
+              and Brute Force attacks through Linux kernel hardening and automated defense systems.
+            </p>
+          </div>
+          <a href="https://yellow-guppy-09c.notion.site/Project-SecuritateIT-Local-2d328470025f80a88fc3e41c801c75d1?source=copy_link"
+             target="_blank"
+             class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0ea5e9]/10 border border-[#0ea5e9]/30 text-[#0ea5e9] text-xs font-mono hover:bg-[#0ea5e9]/20 transition-all flex-shrink-0">
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Full Docs on Notion
+          </a>
+        </div>
+        <div class="video-wrap mb-5">
+          <iframe src="https://www.youtube.com/embed/V7Vh5jd1HwI?si=SyKnzLJRPGd1FHUD"
+            title="Attack and Defense Lab" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+          <div class="bg-[#0a0a0f]/60 rounded-xl p-4 border border-[#1e1e2e]">
+            <p class="font-mono text-xs font-bold text-[#e2e8f0] mb-1">DoS Mitigation</p>
+            <p class="text-xs text-[#6b7280]">SYN Flood + Slowloris via iptables, TCP SYN Cookies, mod_reqtimeout</p>
+          </div>
+          <div class="bg-[#0a0a0f]/60 rounded-xl p-4 border border-[#1e1e2e]">
+            <p class="font-mono text-xs font-bold text-[#e2e8f0] mb-1">MITM Defense</p>
+            <p class="text-xs text-[#6b7280]">ARP Spoofing simulation with Bettercap, static ARP binding</p>
+          </div>
+          <div class="bg-[#0a0a0f]/60 rounded-xl p-4 border border-[#1e1e2e]">
+            <p class="font-mono text-xs font-bold text-[#e2e8f0] mb-1">Brute Force Prevention</p>
+            <p class="text-xs text-[#6b7280]">Fail2Ban protecting WordPress against automated Hydra attacks</p>
+          </div>
+          <div class="bg-[#0a0a0f]/60 rounded-xl p-4 border border-[#1e1e2e]">
+            <p class="font-mono text-xs font-bold text-[#e2e8f0] mb-1">Kernel Hardening</p>
+            <p class="text-xs text-[#6b7280]">sysctl.conf tuning for network stack resilience</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TryHackMe Lab Diary -->
+      <div class="glass rounded-2xl p-6 mb-6">
+        <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+          <div>
+            <span class="tag mb-2 inline-block">2025 &mdash; 2026</span>
+            <h3 class="font-mono text-lg font-bold text-[#e2e8f0]">TryHackMe Lab Diary</h3>
+            <p class="text-[#6b7280] text-sm mt-1 max-w-2xl">
+              Documented hands-on TryHackMe experience. Notion workspace with detailed write-ups,
+              custom exploit commands, and step-by-step methodology for every room completed. Reached <span class="text-[#e2e8f0]">top 3%</span> on the platform.
+            </p>
+          </div>
+          <a href="https://yellow-guppy-09c.notion.site/TryHackMe-30128470025f8039a5d1cb8e07188561?source=copy_link"
+             target="_blank"
+             class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#6366f1]/10 border border-[#6366f1]/30 text-[#6366f1] text-xs font-mono hover:bg-[#6366f1]/20 transition-all flex-shrink-0">
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Browse Field Notes
+          </a>
+        </div>
+        <!-- THM Badge -->
+        <div class="mt-4 p-4 bg-[#0a0a0f]/60 rounded-xl border border-[#1e1e2e] inline-block">
+          <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4579644"
+            scrolling="no" style="border:none;background:transparent;width:200px;height:auto;display:block;"></iframe>
+        </div>
+      </div>
+
+      <!-- Cyber Security: The Foundation -->
+      <div class="glass rounded-2xl p-6">
+        <span class="tag mb-3 inline-block">October 2025</span>
+        <h3 class="font-mono text-base font-bold text-[#e2e8f0] mb-2">Cyber Security: The Foundation</h3>
+        <p class="text-[#6b7280] text-sm">
+          The beginning of a structured journey into cybersecurity. Focus on networking fundamentals,
+          Linux system administration, and building the analytical mindset required for professional security engineering.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEC 2: RPA & PROCESS AUTOMATION -->
+  <section class="py-16 px-6 section-divider">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="w-8 h-8 rounded-lg bg-[#8b5cf6]/10 border border-[#8b5cf6]/25 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="cpu" class="w-4 h-4 text-[#8b5cf6]"></i>
+        </div>
+        <div>
+          <p class="font-mono text-xs text-[#8b5cf6] tracking-widest uppercase">02</p>
+          <h2 class="font-mono text-xl font-bold text-[#e2e8f0]">RPA &amp; Process Automation</h2>
+        </div>
+      </div>
+      <p class="text-[#6b7280] text-xs font-mono mb-8 max-w-xl">
+        // Reframed as: Workflow logic, automated decision trees, and system integration. The precursor to agentic orchestration.
+      </p>
+
+      <!-- UiPath + Twilio -->
+      <div class="glass-vio rounded-2xl p-6">
+        <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+          <div>
+            <span class="tag tag-vio mb-2 inline-block">August 2025</span>
+            <h3 class="font-mono text-lg font-bold text-[#e2e8f0]">UiPath &amp; Twilio  Incident Management Automation</h3>
+            <p class="text-[#6b7280] text-sm mt-1 max-w-2xl">
+              Automated incident management combining UiPath workflow robots with Twilio communication APIs.
+              The system classifies incidents (P1/P5), routes alerts, places automated calls, and generates reports 
+              all without human intervention. A direct conceptual precursor to agentic AI workflows.
+            </p>
+          </div>
+        </div>
+        <div class="video-wrap mb-5">
+          <iframe src="https://www.youtube.com/embed/gAa_e0SteGc?si=ee7_SJ5gwCnjYxib"
+            title="UiPath and Twilio Incident Management" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-2">
+          <div class="bg-[#0a0a0f]/60 rounded-xl p-3 border border-[#1e1e2e]"><p class="font-mono text-xs font-bold text-[#e2e8f0] mb-1">Process Automation</p><p class="text-xs text-[#6b7280]">Full incident lifecycle automated by UiPath robots</p></div>
+          <div class="bg-[#0a0a0f]/60 rounded-xl p-3 border border-[#1e1e2e]"><p class="font-mono text-xs font-bold text-[#e2e8f0] mb-1">Priority Classification</p><p class="text-xs text-[#6b7280]">P1/P2 critical vs P3/P5 minor  criteria-based logic</p></div>
+          <div class="bg-[#0a0a0f]/60 rounded-xl p-3 border border-[#1e1e2e]"><p class="font-mono text-xs font-bold text-[#e2e8f0] mb-1">Monitoring &amp; Reporting</p><p class="text-xs text-[#6b7280]">Continuous status monitoring with automated report generation</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEC 3: GAME DEV & C++ SYSTEMS -->
+  <section class="py-16 px-6 section-divider">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="w-8 h-8 rounded-lg bg-[#6366f1]/10 border border-[#6366f1]/25 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="code-2" class="w-4 h-4 text-[#6366f1]"></i>
+        </div>
+        <div>
+          <p class="font-mono text-xs text-[#6366f1] tracking-widest uppercase">03</p>
+          <h2 class="font-mono text-xl font-bold text-[#e2e8f0]">Game Development &amp; C++ Systems</h2>
+        </div>
+      </div>
+      <p class="text-[#6b7280] text-xs font-mono mb-8 max-w-xl">
+        // Reframed as: Low-level systems programming, state machine design, and real-time logic  core engineering skills applicable to any complex system.
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+
+        <!-- Unleashed Power -->
+        <div class="glass rounded-2xl p-6">
+          <span class="tag mb-2 inline-block">December 2022</span>
+          <h3 class="font-mono text-base font-bold text-[#e2e8f0] mb-1">Unleashed Power <span class="text-[#6b7280] font-normal text-xs">(Prototype)</span></h3>
+          <p class="text-[#6b7280] text-xs mb-3">Unreal Engine 5.1 &middot; C++ from scratch</p>
+          <p class="text-[#6b7280] text-sm mb-4">Action RPG prototype built entirely in C++. Kinematic animation system, directional hit reactions, Niagara particle effects, enemy AI with Motion Warping.</p>
+          <div class="video-wrap mb-4">
+            <iframe src="https://www.youtube.com/embed/iU8HoxXL7j0" title="Unleashed Power" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <a href="https://github.com/georgelush/UnleashedPowerGit/tree/main/Source/Slash" target="_blank" class="flex items-center gap-1.5 text-xs font-mono text-[#6b7280] hover:text-[#e2e8f0] transition-colors border border-[#1e1e2e] px-3 py-1.5 rounded-lg hover:border-[#6366f1]/40">
+              <i data-lucide="github" class="w-3.5 h-3.5"></i> Source Code
+            </a>
+            <a href="https://www.youtube.com/embed/PdSt6kjzb4Y" target="_blank" class="flex items-center gap-1.5 text-xs font-mono text-[#6b7280] hover:text-[#e2e8f0] transition-colors border border-[#1e1e2e] px-3 py-1.5 rounded-lg hover:border-[#6366f1]/40">
+              <i data-lucide="play-circle" class="w-3.5 h-3.5"></i> Hit Reaction Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- Save Your Soul -->
+        <div class="glass rounded-2xl p-6">
+          <span class="tag mb-2 inline-block">October 2022</span>
+          <h3 class="font-mono text-base font-bold text-[#e2e8f0] mb-1">Save Your Soul <span class="text-[#6b7280] font-normal text-xs">(Prototype)</span></h3>
+          <p class="text-[#6b7280] text-xs mb-3">Unreal Engine 5.1 &middot; C++ + Blueprint hybrid</p>
+          <p class="text-[#6b7280] text-sm mb-4">Puzzle-exploration game with physics-based interaction, moving platforms, UI/HUD systems, and Blueprint-C++ integration.</p>
+          <div class="video-wrap mb-4">
+            <iframe src="https://www.youtube.com/embed/4_8vwYEoizk" title="Save Your Soul" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <a href="https://github.com/georgelush/SaveYourSoulGit/tree/main/Source/SaveYourSoul" target="_blank" class="flex items-center gap-1.5 text-xs font-mono text-[#6b7280] hover:text-[#e2e8f0] transition-colors border border-[#1e1e2e] px-3 py-1.5 rounded-lg hover:border-[#6366f1]/40 inline-flex">
+            <i data-lucide="github" class="w-3.5 h-3.5"></i> Source Code
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Multiplayer Shooter -->
+      <div class="glass rounded-2xl p-6 mb-6">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#6366f1]/10 border border-[#6366f1]/25 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="crosshair" class="w-5 h-5 text-[#6366f1]"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="font-mono text-base font-bold text-[#e2e8f0]">Multiplayer Shooter</h3>
+              <span class="tag tag-sky text-[.65rem] px-2 py-0.5">Paused</span>
+            </div>
+            <p class="text-[#6b7280] text-sm">Fast-paced competitive multiplayer shooter in Unreal Engine 5 using C++. Development paused as focus shifted to AI Engineering.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- C++ Mini Projects -->
+      <div class="glass rounded-2xl p-6">
+        <div class="flex items-center gap-2 mb-5">
+          <i data-lucide="terminal" class="w-4 h-4 text-[#6366f1]"></i>
+          <h3 class="font-mono text-base font-bold text-[#e2e8f0]">C++ Mini-Projects &mdash; Logic &amp; Algorithms</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <p class="font-mono text-xs text-[#6b7280] mb-2">Minesweeper</p>
+            <div class="video-wrap">
+              <iframe src="https://www.loom.com/embed/2305dd7d3acd43d9b53a468dc4c0339b" title="Minesweeper" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div>
+            <p class="font-mono text-xs text-[#6b7280] mb-2">Snake</p>
+            <div class="video-wrap">
+              <iframe src="https://www.loom.com/embed/f352d4a6c4f048838e73a9cbf22dd5a2" title="Snake" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div>
+            <p class="font-mono text-xs text-[#6b7280] mb-2">Tic Tac Toe</p>
+            <div class="video-wrap">
+              <iframe src="https://www.loom.com/embed/d83227987a1446d8a1d38fb8d507c1fe" title="Tic Tac Toe" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div>
+            <p class="font-mono text-xs text-[#6b7280] mb-2">HangMan</p>
+            <div class="video-wrap">
+              <iframe src="https://www.loom.com/embed/fcfe5ae24cfd43f4bd616ca8eb964696" title="HangMan" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 pt-4 border-t border-[#1e1e2e]">
+          <a href="https://www.youtube.com/watch?v=PdSt6kjzb4Y&list=PLxyEbfTtE8ZgOSxbTvNbtyfPR5mO7NYbu&index=2" target="_blank"
+             class="inline-flex items-center gap-2 text-xs font-mono text-[#6b7280] hover:text-[#e2e8f0] transition-colors">
+            <i data-lucide="youtube" class="w-3.5 h-3.5"></i> More on YouTube Channel
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-[#1e1e2e]/60 py-10 px-6 mt-8">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <p class="font-mono text-sm font-bold grad-text">Rusu George</p>
+        <p class="text-xs text-[#6b7280] mt-1 font-mono">AI Agentic Automation Engineer</p>
+      </div>
+      <div class="flex items-center gap-5">
+        <a href="https://www.linkedin.com/in/george-rusu-8661b5229/" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+        <a href="https://github.com/georgelush" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
+        <a href="mailto:georgel1988@gmail.com" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors"><i data-lucide="mail" class="w-4 h-4"></i></a>
+      </div>
+      <p class="font-mono text-xs text-[#6b7280]/50">&copy; 2026 &middot; Never stop building.</p>
+    </div>
+  </footer>
+
+  <script>lucide.createIcons();</script>
+  <script>
+  (function(){
+    var btn=document.getElementById('nav-toggle');
+    var menu=document.getElementById('nav-mobile');
+    var iconOpen=document.getElementById('nav-icon-open');
+    var iconClose=document.getElementById('nav-icon-close');
+    if(!btn||!menu)return;
+    btn.addEventListener('click',function(){
+      var open=menu.style.display==='block';
+      menu.style.display=open?'none':'block';
+      iconOpen.style.display=open?'':'none';
+      iconClose.style.display=open?'none':'';
+    });
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){
+        menu.style.display='none';
+        iconOpen.style.display='';
+        iconClose.style.display='none';
+      });
+    });
+  })();
+  </script>
+  <script>
+    (function(){
+      var el = document.getElementById('badge-text');
+      if(!el) return;
+      var text = el.textContent;
+      var LETTER_DELAY = 104;  // ms between each letter
+      var LETTER_DUR   = 560;  // ms animation duration per letter
+      var PAUSE        = 3200; // ms pause after fully built
+      function build(){
+        el.innerHTML = '';
+        var chars = text.split('');
+        chars.forEach(function(ch, i){
+          var s = document.createElement('span');
+          s.className = 'build-letter';
+          s.style.animationDelay = (i * LETTER_DELAY) + 'ms';
+          s.textContent = ch;
+          el.appendChild(s);
+        });
+        var total = chars.length * LETTER_DELAY + LETTER_DUR + PAUSE;
+        setTimeout(build, total);
+      }
+      build();
+    })();
+  </script>
+
+  <!-- ── AI Chat FAB widget ─────────────────────────────────────────── -->
+  <style>
+    #ai-fab-btn{position:fixed;bottom:24px;right:24px;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);border:none;cursor:pointer;z-index:9000;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(99,102,241,.5),0 0 0 1px rgba(99,102,241,.25);transition:transform .2s,box-shadow .2s;}
+    #ai-fab-btn:hover{transform:scale(1.06);box-shadow:0 6px 32px rgba(99,102,241,.65),0 0 0 1px rgba(99,102,241,.4);}
+    #ai-fab-dot{position:absolute;top:9px;right:9px;width:10px;height:10px;border-radius:50%;background:#00ff88;border:2px solid #0a0a0f;animation:ai-pulse 2s ease-in-out infinite;pointer-events:none;}
+    @keyframes ai-pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,255,136,.5);}50%{box-shadow:0 0 0 5px rgba(0,255,136,0);}}
+    #ai-fab-icon-chat,#ai-fab-icon-close{pointer-events:none;}
+    #ai-fab-icon-close{display:none;}
+    #ai-fab-btn.is-open #ai-fab-icon-chat{display:none;}
+    #ai-fab-btn.is-open #ai-fab-icon-close{display:block;}
+    #ai-fab-btn.is-open #ai-fab-dot{display:none;}
+    #ai-chat-panel{position:fixed;z-index:8999;display:none;background:#0a0a0f;border:1px solid rgba(99,102,241,.2);box-shadow:0 16px 64px rgba(0,0,0,.65);overflow:hidden;}
+    #ai-chat-panel.open{display:block;}
+    @media(min-width:768px){#ai-chat-panel{bottom:88px;right:24px;width:500px;height:min(760px,calc(100vh - 88px));border-radius:16px;}}
+    #ai-fab-btn.is-open{display:none!important;}
+    @media(max-width:767px){#ai-chat-panel{top:0;left:0;right:0;bottom:0;border:none;border-radius:0;}#ai-fab-btn{bottom:16px;right:16px;}}
+    #ai-chat-panel iframe{width:100%;height:100%;border:none;display:block;}
+    #ai-fab-bubble{position:fixed;bottom:88px;right:24px;max-width:210px;min-width:130px;background:rgba(10,10,20,0.92);border:1px solid rgba(99,102,241,0.45);border-radius:14px 14px 4px 14px;padding:10px 14px 10px 13px;backdrop-filter:blur(12px);box-shadow:0 0 0 1px rgba(99,102,241,0.1),0 8px 32px rgba(0,0,0,0.6);z-index:8998;opacity:0;transform:translateY(6px) scale(0.97);pointer-events:none;animation:fab-bubble-glow 3s ease-in-out infinite;}
+    @keyframes fab-bubble-glow{0%,100%{box-shadow:0 0 0 1px rgba(99,102,241,0.1),0 8px 32px rgba(0,0,0,0.6),0 0 14px rgba(99,102,241,0.05);}50%{box-shadow:0 0 0 1px rgba(99,102,241,0.28),0 8px 32px rgba(0,0,0,0.6),0 0 26px rgba(139,92,246,0.16);}}
+    #ai-fab-bubble::after{content:'';position:absolute;bottom:-7px;right:18px;width:12px;height:12px;background:rgba(10,10,20,0.92);border-right:1px solid rgba(99,102,241,0.45);border-bottom:1px solid rgba(99,102,241,0.45);transform:rotate(45deg);border-radius:0 0 3px 0;}
+    #ai-fab-bubble-name{font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;background:linear-gradient(90deg,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:5px;}
+    #ai-fab-bubble-text{font-size:13px;line-height:1.5;color:#c4c9d4;min-height:20px;font-family:'Inter','Segoe UI',sans-serif;}
+    #ai-fab-bubble-cursor{display:inline-block;width:2px;height:12px;background:rgba(99,102,241,0.8);margin-left:2px;vertical-align:middle;border-radius:1px;animation:fab-cur-blink 0.75s step-end infinite;}
+    @keyframes fab-cur-blink{0%,100%{opacity:1;}50%{opacity:0;}}
+    @media(max-width:767px){#ai-fab-bubble{bottom:82px;right:16px;max-width:190px;}}
+  </style>
+  <div id="ai-fab-bubble">
+    <div id="ai-fab-bubble-name">Lush AI</div>
+    <div id="ai-fab-bubble-text"><span id="ai-fab-bubble-cursor"></span></div>
+  </div>
+  <button id="ai-fab-btn" aria-label="Open AI Assistant">
+    <span id="ai-fab-dot"></span>
+    <span id="ai-fab-icon-chat"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+    <span id="ai-fab-icon-close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+  </button>
+
+  <div id="ai-chat-panel">
+    <iframe id="ai-chat-iframe" src="" title="AI Assistant"></iframe>
+  </div>
+  <script>
+  (function(){
+    var fab=document.getElementById('ai-fab-btn');
+    var panel=document.getElementById('ai-chat-panel');
+    var iframe=document.getElementById('ai-chat-iframe');
+    var loaded=false;
+    var _scrollY=0;
+    function _fabHide(){fab.style.setProperty('display','none','important');}
+    function _fabShow(){fab.style.removeProperty('display');}
+    function _lockScroll(){_scrollY=window.scrollY;document.body.style.cssText+='position:fixed;top:-'+_scrollY+'px;left:0;right:0;overflow:hidden;';}
+    function _unlockScroll(){document.body.style.position='';document.body.style.top='';document.body.style.left='';document.body.style.right='';document.body.style.overflow='';window.scrollTo(0,_scrollY);}
+    function _doClose(){panel.classList.remove('open');fab.classList.remove('is-open');_fabShow();if(window.innerWidth<=767)_unlockScroll();}
+    window.addEventListener('message',function(e){if(e.data==='close-chat')_doClose();});
+    fab.addEventListener('click',function(){
+      var open=panel.classList.contains('open');
+      if(open){_doClose();}
+      else{if(!loaded){iframe.src='agent-chat.html';loaded=true;}panel.classList.add('open');fab.classList.add('is-open');_fabHide();if(window.innerWidth<=767)_lockScroll();}
+    });
+  })();
+  (function(){
+    var bubble=document.getElementById('ai-fab-bubble');
+    var textEl=document.getElementById('ai-fab-bubble-text');
+    var cursor=document.getElementById('ai-fab-bubble-cursor');
+    var fab=document.getElementById('ai-fab-btn');
+    var panel=document.getElementById('ai-chat-panel');
+    var stopped=false;
+    var msgIndex=0;
+    var messages=["Hi, I'm Lush!","How can I help you?","Ask me anything.","Let's build something great."];
+    var TYPING_SPEED=52,WORD_PAUSE=110,HOLD=6000,GAP=3000;
+    function setText(str){textEl.textContent=str;textEl.appendChild(cursor);}
+    function showBubble(){bubble.style.transition='opacity 0.35s ease,transform 0.35s ease';bubble.style.opacity='1';bubble.style.transform='translateY(0) scale(1)';}
+    function hideBubble(cb){bubble.style.transition='opacity 0.4s ease,transform 0.4s ease';bubble.style.opacity='0';bubble.style.transform='translateY(6px) scale(0.97)';setTimeout(cb,420);}
+    function typeMessage(msg,onDone){
+      var i=0;setText('');
+      function step(){if(stopped)return;if(i<=msg.length){setText(msg.slice(0,i));var d=TYPING_SPEED;if(i>0&&msg[i-1]===' ')d+=WORD_PAUSE;i++;setTimeout(step,d);}else{onDone();}}
+      step();
+    }
+    function runCycle(){
+      if(stopped)return;
+      if(panel.classList.contains('open'))return;
+      showBubble();
+      typeMessage(messages[msgIndex],function(){
+        if(stopped)return;
+        setTimeout(function(){
+          if(stopped)return;
+          hideBubble(function(){
+            if(stopped)return;
+            setText('');
+            msgIndex=(msgIndex+1)%messages.length;
+            setTimeout(runCycle,GAP);
+          });
+        },HOLD);
+      });
+    }
+    fab.addEventListener('click',function(){stopped=true;bubble.style.transition='opacity 0.25s ease';bubble.style.opacity='0';});
+    setTimeout(runCycle,1200);
+  })();
+  </script>
+</body>
+</html>

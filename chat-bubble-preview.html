@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Bubble Preview</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{background:#0a0a0f;font-family:'Inter','Segoe UI',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;color:#e2e8f0;}
+    .scene{position:relative;width:320px;height:220px;display:flex;align-items:flex-end;justify-content:flex-end;}
+    #fab-bubble{position:absolute;bottom:68px;right:0;max-width:220px;min-width:140px;background:rgba(10,10,20,0.92);border:1px solid rgba(99,102,241,0.45);border-radius:14px 14px 4px 14px;padding:10px 14px 10px 13px;backdrop-filter:blur(12px);box-shadow:0 0 0 1px rgba(99,102,241,0.1),0 8px 32px rgba(0,0,0,0.6);opacity:0;transform:translateY(6px) scale(0.97);animation:bubble-glow 3s ease-in-out infinite;}
+    @keyframes bubble-glow{0%,100%{box-shadow:0 0 0 1px rgba(99,102,241,0.1),0 8px 32px rgba(0,0,0,0.6),0 0 14px rgba(99,102,241,0.05);}50%{box-shadow:0 0 0 1px rgba(99,102,241,0.28),0 8px 32px rgba(0,0,0,0.6),0 0 26px rgba(139,92,246,0.16);}}
+    #fab-bubble::after{content:'';position:absolute;bottom:-7px;right:18px;width:12px;height:12px;background:rgba(10,10,20,0.92);border-right:1px solid rgba(99,102,241,0.45);border-bottom:1px solid rgba(99,102,241,0.45);transform:rotate(45deg);border-radius:0 0 3px 0;}
+    .bubble-name{font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;background:linear-gradient(90deg,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:5px;}
+    #bubble-text{font-size:13.5px;line-height:1.5;color:#c4c9d4;min-height:22px;}
+    #bubble-cursor{display:inline-block;width:2px;height:13px;background:rgba(99,102,241,0.8);margin-left:2px;vertical-align:middle;border-radius:1px;animation:blink 0.75s step-end infinite;}
+    @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+    #ai-fab-btn{position:absolute;bottom:0;right:0;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(99,102,241,.5),0 0 0 1px rgba(99,102,241,.25);}
+    #ai-fab-dot{position:absolute;top:9px;right:9px;width:10px;height:10px;border-radius:50%;background:#00ff88;border:2px solid #0a0a0f;animation:ai-pulse 2s ease-in-out infinite;}
+    @keyframes ai-pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,255,136,.5);}50%{box-shadow:0 0 0 5px rgba(0,255,136,0);}}
+    .label{position:absolute;bottom:-36px;left:50%;transform:translateX(-50%);font-size:11px;color:#4b5563;white-space:nowrap;font-family:monospace;}
+  </style>
+</head>
+<body>
+  <div class="scene">
+    <div id="fab-bubble">
+      <div class="bubble-name">Lush AI</div>
+      <div id="bubble-text"><span id="bubble-cursor"></span></div>
+    </div>
+    <button id="ai-fab-btn">
+      <span id="ai-fab-dot"></span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+    <span class="label">desktop / mobile — bottom-right corner</span>
+  </div>
+  <script>
+  (function(){
+    var bubble=document.getElementById('fab-bubble');
+    var textEl=document.getElementById('bubble-text');
+    var cursor=document.getElementById('bubble-cursor');
+    var msgIndex=0;
+    var messages=["Hi, I'm Lush!","How can I help you?","Ask me anything.","Let's build something great."];
+    var TYPING_SPEED=52,WORD_PAUSE=110,HOLD=6000,GAP=3000;
+    function setText(str){textEl.textContent=str;textEl.appendChild(cursor);}
+    function showBubble(){bubble.style.transition='opacity 0.35s ease,transform 0.35s ease';bubble.style.opacity='1';bubble.style.transform='translateY(0) scale(1)';}
+    function hideBubble(cb){bubble.style.transition='opacity 0.4s ease,transform 0.4s ease';bubble.style.opacity='0';bubble.style.transform='translateY(6px) scale(0.97)';setTimeout(cb,420);}
+    function typeMessage(msg,onDone){
+      var i=0;setText('');
+      function step(){if(i<=msg.length){setText(msg.slice(0,i));var d=TYPING_SPEED;if(i>0&&msg[i-1]===' ')d+=WORD_PAUSE;i++;setTimeout(step,d);}else{onDone();}}
+      step();
+    }
+    function runCycle(){
+      showBubble();
+      typeMessage(messages[msgIndex],function(){
+        setTimeout(function(){
+          hideBubble(function(){
+            setText('');
+            msgIndex=(msgIndex+1)%messages.length;
+            setTimeout(runCycle,GAP);
+          });
+        },HOLD);
+      });
+    }
+    setTimeout(runCycle,1200);
+  })();
+  </script>
+</body>
+</html>
