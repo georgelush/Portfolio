@@ -55,6 +55,20 @@ def init_rag() -> None:
     logger.info(f"RAG ready — {len(chunks)} chunks indexed.")
 
 
+async def _to_english(query: str) -> str:
+    """Translate the query to English so the English-only embedder retrieves correctly."""
+    llm = ChatGroq(
+        model="llama-3.1-8b-instant",
+        temperature=0,
+        api_key=os.getenv("GROQ_API_KEY"),
+    )
+    resp = await llm.ainvoke([
+        SystemMessage(content="Translate the message to English. Reply with ONLY the English translation. If it is already English, return it unchanged."),
+        HumanMessage(content=query),
+    ])
+    return resp.content.strip()
+
+
 async def run_rag(
     query: str,
     on_progress: Optional[Callable[[str], Coroutine[Any, Any, None]]] = None,
@@ -66,7 +80,8 @@ async def run_rag(
     if on_progress:
         await on_progress("Searching for relevant information…")
 
-    q_vec = _embedder.encode([query], show_progress_bar=False)[0].tolist()
+    search_query = await _to_english(query)
+    q_vec = _embedder.encode([search_query], show_progress_bar=False)[0].tolist()
     results = _collection.query(query_embeddings=[q_vec], n_results=top_k)
     docs = results["documents"][0]
     context = "\n\n---\n\n".join(docs)
