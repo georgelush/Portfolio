@@ -10,7 +10,7 @@ George Rusu is an AI Engineer specializing in agentic automation, RAG systems, a
 
 CURRENT STATUS:
 
-George is open to selected contract roles, B2B consulting, and technical collaborations while preparing the launch of FLOWENTIC. His most recent role was AI Integration Engineer at stock.link from June 2026 to August 2026. He contributed to AI agent workflows for manufacturer operations using technologies including LangGraph and FastAPI, LLM-assisted decision layers, and Human-in-the-Loop approval patterns. This portfolio is George's personal account of his employment experience; it is not affiliated with, endorsed by, or published on behalf of stock.link.
+George is open to selected contract roles, B2B consulting, and technical collaborations while preparing the launch of FLOWENTIC. His most recent role was AI Integration Engineer at stock.link (also referred to as StockLink) from June 2026 to August 2026. Per his personal account of that role, he designed, configured, and integrated AI-driven solutions into core operational workflows to improve efficiency and scalability — including agentic pipelines with LangGraph and FastAPI, LLM-assisted decision layers, Human-in-the-Loop patterns, and tool integrations such as Slack, Trello, Twilio, and ElevenLabs. This portfolio is George's personal account of his employment experience; it is not affiliated with, endorsed by, or published on behalf of stock.link.
 
 FLOWENTIC is a B2B AI automation and software company George is preparing for launch, focused on reliable AI agents, RAG, document automation, and enterprise integrations. It is not positioned as a creative agency, automation studio, or marketing firm. FLOWENTIC S.R.L. incorporation is in progress; the company is not yet presented as operational, there is no public company registration or tax information, and its website is not public. George should not be described as the founder of an incorporated or active FLOWENTIC S.R.L. at this stage.
 
@@ -34,7 +34,7 @@ Stage 3 — Enterprise Automation and Cybersecurity (2022–2025): George joined
 
 Stage 4 — AI Agentic Engineering (2026): Beginning in early 2026 George executed a full transition from classical RPA to Agentic AI. He earned the DataCamp AI Engineer for Developers certification in March 2026. He built four production-grade technical systems in rapid sequence: Chapter I (Agentic AI Playground with n8n, LangGraph, Qdrant, Langfuse), Chapter II (AI On-Call voice agent with Twilio, LangGraph, n8n, Redis), Chapter III (an open-source Production RAG Service reference implementation), and Chapter IV (George AI Assistant, a multi-agent system with HITL calendar booking and SSE streaming).
 
-Stage 5 — stock.link (June 2026–August 2026): George worked as an AI Integration Engineer, contributing to agentic automation for manufacturer operations using LangGraph, FastAPI, LLM-assisted decision layers, and Human-in-the-Loop patterns. The role ended in August 2026. This portfolio is personal and is not affiliated with or endorsed by stock.link.
+Stage 5 — stock.link (June 2026–August 2026): George worked as an AI Integration Engineer, designing and integrating AI-driven solutions into operational workflows. The work involved LangGraph and FastAPI pipelines, LLM-assisted decision layers, Human-in-the-Loop patterns, and integrations with tools such as Slack, Trello, Twilio, and ElevenLabs. The role ended in August 2026. This portfolio is personal and is not affiliated with or endorsed by stock.link.
 
 
 OPERATIONS AND TEAM MANAGEMENT — BEFORE TECH:
@@ -48,7 +48,7 @@ TECHNICAL SKILLS:
 
 George's primary technical domain is Agentic AI. He works extensively with LangGraph, LangChain, multi-agent orchestration, Human-in-the-Loop workflows, autonomous workflow design, LangGraph StateGraph architecture, and agent routing logic. He designs systems where multiple specialized AI agents collaborate under an orchestrator that routes, delegates, and synthesizes results from different agents in real time.
 
-In the AI and machine learning space, George has hands-on production experience with RAG (Retrieval-Augmented Generation), vector databases including Qdrant and ChromaDB, embedding models including sentence-transformers and OpenAI embeddings, prompt engineering for LLM behavior shaping, large language models via Groq and OpenAI APIs, Langfuse for tracing and observability, hybrid search combining dense and sparse retrieval with RRF fusion, cross-encoder reranking for improved relevance, and Whisper for audio transcription as part of multimodal ingestion pipelines.
+In the AI and machine learning space, George has hands-on experience with RAG (Retrieval-Augmented Generation), vector databases including Qdrant and ChromaDB, embedding models including sentence-transformers and OpenAI embeddings, prompt engineering for LLM behavior shaping, and large language models via OpenAI, Claude (Anthropic), DeepSeek, and Groq APIs. He uses Langfuse for tracing and observability, hybrid search combining dense and sparse retrieval with RRF fusion, cross-encoder reranking for improved relevance, Whisper for audio transcription, ElevenLabs for voice synthesis integrations, and has practical experience with image generation APIs and multimodal pipelines.
 
 For backend development, George primarily uses FastAPI and Python. He builds REST APIs, implements SSE (Server-Sent Events) streaming for real-time agent activity communication, containerizes applications with Docker and Docker Compose, has CI/CD pipeline experience, and implements JWT authentication and RBAC access control for multi-tenant systems. He also integrates Prometheus metrics for production observability.
 
@@ -56,9 +56,9 @@ In automation, George has deep expertise in RPA tools including UiPath, n8n work
 
 For data and storage, George works with Qdrant, ChromaDB, Redis, Upstash Redis REST API, and Azure. He has experience with async ingest queues, dead-letter queues for error handling, namespace-scoped RBAC, and production observability.
 
-For integrations, George has built production connections using Twilio for voice calls and SMS, Gmail API with OAuth2 for email delivery, Google Calendar API for event creation and Google Meet link generation, Telegram Bot API with inline keyboards for Human-in-the-Loop approval flows, and FastMCP. Twilio is central to the AI On-Call project where it handles outbound voice call initiation, voice streaming, and real-time conversation with customers.
+For integrations, George has hands-on experience connecting AI systems to business tools. Public projects demonstrate Twilio for voice calls and SMS (AI On-Call), Gmail API with OAuth2 for email delivery, Google Calendar API for events and Google Meet links, Telegram Bot API with inline keyboards for HITL approval flows, and webhook orchestration via n8n. In professional AI integration work (including stock.link), he also worked with Slack, Trello, Twilio, and ElevenLabs as part of wiring AI into operational workflows. He has also used FastMCP-style tool patterns where relevant.
 
-His development toolset includes VS Code, GitHub, and Claude CLI for AI-assisted development. Earlier in his technical journey he also worked with C++, Unreal Engine 5, Blueprint scripting, JavaScript, Linux, Bash, and security tools including Bettercap, iptables, Fail2Ban, and Hydra.
+His development toolset includes VS Code, GitHub, Claude CLI, and multi-model experimentation across OpenAI, Claude, DeepSeek, and Groq. Earlier in his technical journey he also worked with C++, Unreal Engine 5, Blueprint scripting, JavaScript, Linux, Bash, and security tools including Bettercap, iptables, Fail2Ban, and Hydra.
 
 
 PROJECT 1 — AGENTIC AI PLAYGROUND (CHAPTER I):
