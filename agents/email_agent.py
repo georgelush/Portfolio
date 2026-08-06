@@ -128,7 +128,7 @@ async def run_email(
                 await on_telegram(f"Notifying George via Telegram…")
             await send_message(
                 f"📎 <b>CV sent</b> to <code>{visitor_email}</code>\n"
-                "Via: Lush AI"
+                "Via: George AI Assistant"
             )
             if on_telegram:
                 await on_telegram("George notified.")

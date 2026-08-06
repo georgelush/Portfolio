@@ -248,11 +248,11 @@ async def run_telegram(
     reason  = fields.get("reason", "—")
 
     tg_text = (
-        f"👤 <b>Contact Request — Lush AI</b>\n\n"
+        f"👤 <b>Contact Request — George AI Assistant</b>\n\n"
         f"Name: {name}\n"
         f"Contact: {contact}\n"
         f"Message: <i>{reason}</i>\n\n"
-        f"📍 Via: Lush AI"
+        f"📍 Via: George AI Assistant"
     )
 
     if on_progress:

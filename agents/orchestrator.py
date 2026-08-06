@@ -53,7 +53,7 @@ _ROUTING_MESSAGES = {
     "off_topic":    "This doesn't seem related to George…",
 }
 
-_ROUTING_PROMPT = """You are a routing agent for Lush AI, an AI assistant representing George Rusu.
+_ROUTING_PROMPT = """You are the routing layer for George AI Assistant, representing George Rusu.
 Classify the visitor's intent and respond with EXACTLY ONE agent name from this list:
 
   rag           — questions about George: skills, projects, experience, background, certifications
@@ -333,7 +333,7 @@ async def _off_topic_node(state: OrchestratorState) -> dict:
     lang = _detect_lang(state["user_message"])
     result = {
         'en': (
-            "I'm Lush AI, George's assistant — I can only help with:\n"
+            "I'm George AI Assistant — I can only help with:\n"
             "• Questions about George's skills, projects, and experience\n"
             "• Sending his CV to your inbox\n"
             "• Booking a call or meeting\n"
@@ -341,7 +341,7 @@ async def _off_topic_node(state: OrchestratorState) -> dict:
             "Try asking: \"What has George built?\" or \"Schedule a call.\""
         ),
         'ro': (
-            "Sunt Lush AI, asistentul lui George — pot ajuta cu:\n"
+            "Sunt George AI Assistant — pot ajuta cu:\n"
             "• Întrebări despre skills-urile, proiectele și experiența lui George\n"
             "• Trimiterea CV-ului în inbox-ul tău\n"
             "• Programarea unui apel sau meeting\n"

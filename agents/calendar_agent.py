@@ -99,7 +99,7 @@ async def _create_calendar_event(meeting: dict) -> Optional[str]:
 
         event_body = {
             "summary":     f"Meeting with {meeting['visitor_name']}: {meeting['meeting_topic']}",
-            "description": f"Scheduled via Lush AI\nVisitor: {meeting['visitor_email']}",
+            "description": f"Scheduled via George AI Assistant\nVisitor: {meeting['visitor_email']}",
             "start": {"dateTime": start_dt.isoformat(), "timeZone": "Europe/Bucharest"},
             "end":   {"dateTime": end_dt.isoformat(),   "timeZone": "Europe/Bucharest"},
             "attendees": [{"email": meeting["visitor_email"]}],

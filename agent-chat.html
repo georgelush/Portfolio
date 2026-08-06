@@ -1,27 +1,20 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lush AI — Rusu George</title>
+  <title>George AI Assistant — George Rusu</title>
+  <meta name="description" content="Ask about George Rusu's experience, technical projects, and availability." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/brand.css" />
+  <script src="js/site-config.js" defer></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
-    :root {
-      --c-orch:    #00ff88;
-      --c-rag:     #00aaff;
-      --c-email:   #ff6b35;
-      --c-cal:     #a855f7;
-      --c-cover:   #fbbf24;
-      --c-tg:      #22d3ee;
-    }
-    body { background:#0a0a0f; color:#e2e8f0; font-family:"Inter",sans-serif; }
-
     .mesh-bg {
-      background-color:#0a0a0f;
+      background-color:var(--bg);
       background-image:
         radial-gradient(ellipse 80% 50% at 10% 0%,  rgba(99,102,241,.14) 0%,transparent 55%),
         radial-gradient(ellipse 60% 40% at 90% 20%, rgba(0,255,136,.07)  0%,transparent 50%),
@@ -29,16 +22,10 @@
     }
     .glass {
       background:rgba(17,17,24,.88);
-      border:1px solid rgba(99,102,241,.18);
+      border:1px solid var(--glass-border);
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
     }
-    .grad-text {
-      background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#0ea5e9 100%);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-    }
-    .nav-link { color:#9ca3af; transition:color .2s; }
-    .nav-link:hover, .nav-link.active { color:#e2e8f0; }
 
     /* ── Agent node cards ─────────────────────────── */
     .agent-node {
@@ -297,8 +284,9 @@
         <a href="about.html"      class="nav-link font-mono text-xs tracking-widest uppercase">About</a>
       </div>
       <div class="nav-desktop-actions items-center gap-3">
-        <a href="https://www.linkedin.com/in/george-rusu-8661b5229/" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+        <a href="https://www.linkedin.com/in/rusugeorge/" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
         <a href="https://github.com/georgelush" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-4 h-4"></i></a>
+        <a data-contact-link class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="Contact George"><i data-lucide="mail" class="w-4 h-4"></i></a>
         <a href="images/RusuGeorgeCV.pdf" target="_blank" class="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-md border border-[#6366f1]/40 text-[#6366f1] hover:bg-[#6366f1]/10 transition-all"><i data-lucide="download" class="w-3 h-3"></i> CV</a>
       </div>
       <div class="nav-mobile-right flex items-center gap-2">
@@ -315,7 +303,7 @@
         <a href="archive.html"    class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">Archive</a>
         <a href="about.html"      class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">About</a>
         <div class="flex items-center gap-5 pt-4">
-          <a href="https://www.linkedin.com/in/george-rusu-8661b5229/" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+          <a href="https://www.linkedin.com/in/rusugeorge/" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
           <a href="https://github.com/georgelush" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-5 h-5"></i></a>
         </div>
       </div>
@@ -384,7 +372,7 @@
     <!-- Panel header -->
     <div style="padding:12px 14px 10px;border-bottom:1px solid rgba(99,102,241,.1);display:flex;align-items:center;gap:8px;flex-shrink:0;">
       <span style="width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:inline-block;animation:pulse-dot 2s ease-in-out infinite;box-shadow:0 0 6px rgba(99,102,241,.7);flex-shrink:0;"></span>
-      <span class="font-mono" style="font-size:11px;font-weight:700;color:#e2e8f0;">Lush AI</span>
+      <span class="font-mono" data-assistant-name style="font-size:11px;font-weight:700;color:#e2e8f0;">George AI Assistant</span>
       <span id="header-msg-count" class="font-mono" style="font-size:9px;color:#a78bfa;margin-left:auto;">20 / 20</span>
       <span class="font-mono" style="font-size:9px;color:#6b7280;">· LangGraph · Groq</span>
       <button id="iframe-close-btn" onclick="window.parent.postMessage('close-chat','*')" aria-label="Close" style="display:flex;margin-left:8px;width:28px;height:28px;border-radius:50%;border:none;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;cursor:pointer;flex-shrink:0;align-items:center;justify-content:center;filter:drop-shadow(0 0 6px rgba(99,102,241,.9)) drop-shadow(0 0 12px rgba(139,92,246,.5));transition:filter .2s,transform .2s;">
@@ -395,7 +383,7 @@
     <!-- Messages -->
     <div id="chat-messages" class="flex flex-col gap-3" style="flex:1;overflow-y:auto;padding:14px 14px 10px;">
       <div class="bubble-ai font-mono text-xs text-[#e2e8f0]">
-        Hey! I'm Lush AI, George's assistant. What can I help you with?
+        Hey! I'm George AI Assistant. Ask about my experience, technical projects, and availability.
       </div>
     </div>
 
@@ -470,6 +458,7 @@
   <script>
   (() => {
     // ── Config ──────────────────────────────────────────────────────────────
+    const contactEmail = () => window.PORTFOLIO_CONFIG?.contactEmail || '';
     const isLocal =
       location.hostname === 'localhost' ||
       location.hostname === '127.0.0.1' ||
@@ -874,7 +863,7 @@
              `style="flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .5rem;` +
                     `border-radius:8px;border:1px solid rgba(99,102,241,.3);color:#818cf8;text-decoration:none;" ` +
              `onmouseover="this.style.background='rgba(99,102,241,.1)'" onmouseout="this.style.background='none'">📄 Download CV</a>` +
-          `<a href="mailto:georgel1988@gmail.com" ` +
+          `<a href="mailto:${contactEmail()}" ` +
              `style="flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .5rem;` +
                     `border-radius:8px;border:1px solid rgba(99,102,241,.3);color:#818cf8;text-decoration:none;" ` +
              `onmouseover="this.style.background='rgba(99,102,241,.1)'" onmouseout="this.style.background='none'">✉ Email George</a>` +
@@ -909,10 +898,10 @@
         `<span style="color:#00ff88;font-weight:600;">✓ All done!</span><br>` +
         `<span style="color:#9ca3af;">Thanks for trying the full system! Reach out directly:</span>` +
         `<div style="display:flex;gap:8px;margin-top:6px;">` +
-          `<a href="mailto:georgel1988@gmail.com" ` +
+          `<a href="mailto:${contactEmail()}" ` +
              `style="flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .5rem;` +
                     `border-radius:8px;border:1px solid rgba(0,255,136,.25);color:#00ff88;text-decoration:none;" ` +
-             `onmouseover="this.style.background='rgba(0,255,136,.08)'" onmouseout="this.style.background='none'">✉ georgel1988@gmail.com</a>` +
+             `onmouseover="this.style.background='rgba(0,255,136,.08)'" onmouseout="this.style.background='none'">✉ Email George</a>` +
           `<a href="images/RusuGeorgeCV.pdf" target="_blank" ` +
              `style="flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .5rem;` +
                     `border-radius:8px;border:1px solid rgba(99,102,241,.3);color:#818cf8;text-decoration:none;" ` +

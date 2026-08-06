@@ -1,0 +1,82 @@
+/**
+ * George Rusu portfolio — shared brand tokens (2026)
+ * Assistant display name: "George AI Assistant" · HF technical slug remains "LushAI"
+ *
+ * Status semantics:
+ *   --status-shipped  emerald  → completed / shipped
+ *   --status-live     neon     → live systems only
+ *   --status-pilot    sky      → pilot / in validation
+ */
+
+:root {
+  /* Surfaces */
+  --bg:           #0a0a0f;
+  --bg-elevated:  #111118;
+  --border:       #1e1e2e;
+  --text:         #e2e8f0;
+  --text-muted:   #6b7280;
+  --text-soft:    #9ca3af;
+
+  /* Brand core */
+  --brand-indigo: #6366f1;
+  --brand-violet: #8b5cf6;
+  --brand-sky:    #0ea5e9;
+  --brand-grad:   linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #0ea5e9 100%);
+
+  /* Status */
+  --status-shipped: #34d399;
+  --status-live:    #00ff88;
+  --status-pilot:   #0ea5e9;
+
+  /* Agent graph (Chapter IV / George AI Assistant) */
+  --c-orch:  #00ff88;
+  --c-rag:   #00aaff;
+  --c-email: #ff6b35;
+  --c-cal:   #a855f7;
+  --c-cover: #fbbf24;
+  --c-tg:    #22d3ee;
+
+  /* Glass */
+  --glass-bg:     rgba(17, 17, 24, 0.85);
+  --glass-border: rgba(99, 102, 241, 0.18);
+}
+
+/* Shared primitives used across pages */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+}
+
+.grad-text {
+  background: var(--brand-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-link {
+  color: var(--text-soft);
+  transition: color 0.2s;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text);
+}
+
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.glass:hover {
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 0 28px 2px rgba(99, 102, 241, 0.14);
+}
+
+/* Semantic status helpers */
+.status-shipped { color: var(--status-shipped); }
+.status-live    { color: var(--status-live); }
+.status-pilot   { color: var(--status-pilot); }
