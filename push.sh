@@ -9,7 +9,7 @@ git push origin main
 echo "→ Syncing backend to Hugging Face..."
 git fetch hf --quiet
 
-git checkout -b _hf_tmp hf/main --quiet 2>/dev/null
+git checkout -b _hf_tmp hf/main --quiet 2>/dev/null || git checkout -B _hf_tmp hf/main --quiet
 
 # Copy only the files HF needs (no images)
 git checkout main -- \
@@ -19,6 +19,9 @@ git checkout main -- \
   requirements.txt \
   Dockerfile \
   agent-chat.html \
+  portfolio_config.py \
+  config/portfolio.json \
+  README.md \
   2>/dev/null || true
 
 git add -A
@@ -26,13 +29,13 @@ git add -A
 if git diff --cached --quiet; then
   echo "   HF already up to date."
 else
-  MSG=$(git log origin/main -1 --format="%s")
+  MSG=$(git log origin/main -1 --format="%s" 2>/dev/null || git log -1 --format="%s")
   git commit -m "hf-sync: $MSG" --quiet
   git push hf _hf_tmp:main --quiet
   echo "   HF updated."
 fi
 
-git checkout main --quiet
+git checkout main --quiet 2>/dev/null || git checkout codex/portfolio-refresh --quiet
 git branch -D _hf_tmp --quiet
 
 echo "✓ Done — both remotes updated."
