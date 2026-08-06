@@ -19,14 +19,21 @@
         node.textContent = config.assistantName;
       });
 
+      document.querySelectorAll('[data-assistant-description]').forEach((node) => {
+        node.textContent = config.assistantDescription;
+      });
+
       document.querySelectorAll('[data-flowentic-link]').forEach((link) => {
         if (config.flowenticSiteEnabled) {
           link.href = config.flowenticSiteUrl;
           link.hidden = false;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
           link.removeAttribute('aria-disabled');
         } else {
           link.hidden = true;
           link.removeAttribute('href');
+          link.removeAttribute('target');
           link.setAttribute('aria-disabled', 'true');
         }
       });

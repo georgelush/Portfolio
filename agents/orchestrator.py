@@ -13,6 +13,7 @@ from agents.email_agent import run_email
 from agents.job_match_agent import run_job_match
 from agents.rag_agent import run_rag
 from agents.telegram_agent import run_telegram
+from portfolio_config import ASSISTANT_NAME, CONTACT_EMAIL
 
 logger = logging.getLogger(__name__)
 
@@ -31,14 +32,14 @@ _BLOCKED_MESSAGES = {
         "George's CV was already sent this session — please check your inbox (and spam folder).\n\n"
         "If you didn't receive it, you can reach George directly:\n"
         "📄 Download CV: https://georgelush.github.io/Portfolio/images/RusuGeorgeCV.pdf\n"
-        "✉ Email: georgel1988@gmail.com\n"
+        f"✉ Email: {CONTACT_EMAIL}\n"
         "💼 LinkedIn: linkedin.com/in/rusugeorge\n"
         "📞 Phone: +40752383920"
     ),
     "calendar": (
         "A meeting request was already submitted this session — George will confirm via email shortly.\n\n"
         "If you haven't heard back, reach out directly:\n"
-        "✉ Email: georgel1988@gmail.com\n"
+        f"✉ Email: {CONTACT_EMAIL}\n"
         "💼 LinkedIn: linkedin.com/in/rusugeorge\n"
         "📞 Phone: +40752383920"
     ),
@@ -53,7 +54,7 @@ _ROUTING_MESSAGES = {
     "off_topic":    "This doesn't seem related to George…",
 }
 
-_ROUTING_PROMPT = """You are the routing layer for George AI Assistant, representing George Rusu.
+_ROUTING_PROMPT = f"""You are the routing layer for {ASSISTANT_NAME}, representing George Rusu.
 Classify the visitor's intent and respond with EXACTLY ONE agent name from this list:
 
   rag           — questions about George: skills, projects, experience, background, certifications
@@ -163,7 +164,7 @@ async def _routing_node(state: OrchestratorState) -> dict:
                     "George's CV was already sent this session — please check your inbox (and spam folder).\n\n"
                     "If you didn't receive it, you can reach George directly:\n"
                     "📄 Download CV: https://georgelush.github.io/Portfolio/images/RusuGeorgeCV.pdf\n"
-                    "✉ Email: georgel1988@gmail.com\n"
+                    f"✉ Email: {CONTACT_EMAIL}\n"
                     "💼 LinkedIn: linkedin.com/in/rusugeorge\n"
                     "📞 Phone: +40752383920"
                 ),
@@ -171,7 +172,7 @@ async def _routing_node(state: OrchestratorState) -> dict:
                     "CV-ul lui George a fost deja trimis în această sesiune — verifică inbox-ul (și spam).\n\n"
                     "Dacă nu l-ai primit, îl poți contacta direct:\n"
                     "📄 Descarcă CV: https://georgelush.github.io/Portfolio/images/RusuGeorgeCV.pdf\n"
-                    "✉ Email: georgel1988@gmail.com\n"
+                    f"✉ Email: {CONTACT_EMAIL}\n"
                     "💼 LinkedIn: linkedin.com/in/rusugeorge\n"
                     "📞 Telefon: +40752383920"
                 ),
@@ -180,14 +181,14 @@ async def _routing_node(state: OrchestratorState) -> dict:
                 'en': (
                     "A meeting request was already submitted this session — George will confirm via email shortly.\n\n"
                     "If you haven't heard back, reach out directly:\n"
-                    "✉ Email: georgel1988@gmail.com\n"
+                    f"✉ Email: {CONTACT_EMAIL}\n"
                     "💼 LinkedIn: linkedin.com/in/rusugeorge\n"
                     "📞 Phone: +40752383920"
                 ),
                 'ro': (
                     "O cerere de meeting a fost deja trimisă în această sesiune — George va confirma pe email în curând.\n\n"
                     "Dacă nu ai primit răspuns, contactează-l direct:\n"
-                    "✉ Email: georgel1988@gmail.com\n"
+                    f"✉ Email: {CONTACT_EMAIL}\n"
                     "💼 LinkedIn: linkedin.com/in/rusugeorge\n"
                     "📞 Telefon: +40752383920"
                 ),
@@ -333,7 +334,7 @@ async def _off_topic_node(state: OrchestratorState) -> dict:
     lang = _detect_lang(state["user_message"])
     result = {
         'en': (
-            "I'm George AI Assistant — I can only help with:\n"
+            f"I'm {ASSISTANT_NAME} — I can only help with:\n"
             "• Questions about George's skills, projects, and experience\n"
             "• Sending his CV to your inbox\n"
             "• Booking a call or meeting\n"
@@ -341,7 +342,7 @@ async def _off_topic_node(state: OrchestratorState) -> dict:
             "Try asking: \"What has George built?\" or \"Schedule a call.\""
         ),
         'ro': (
-            "Sunt George AI Assistant — pot ajuta cu:\n"
+            f"Sunt {ASSISTANT_NAME} — pot ajuta cu:\n"
             "• Întrebări despre skills-urile, proiectele și experiența lui George\n"
             "• Trimiterea CV-ului în inbox-ul tău\n"
             "• Programarea unui apel sau meeting\n"

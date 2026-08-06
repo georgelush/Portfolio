@@ -18,6 +18,7 @@ import httpx
 
 from agents.email_agent import _get_access_token, _gmail_credentials_ok
 from agents.telegram_agent import edit_message, send_message, send_message_with_buttons
+from portfolio_config import ASSISTANT_NAME, CONTACT_EMAIL
 
 logger = logging.getLogger(__name__)
 
@@ -99,7 +100,7 @@ async def _create_calendar_event(meeting: dict) -> Optional[str]:
 
         event_body = {
             "summary":     f"Meeting with {meeting['visitor_name']}: {meeting['meeting_topic']}",
-            "description": f"Scheduled via George AI Assistant\nVisitor: {meeting['visitor_email']}",
+            "description": f"Scheduled via {ASSISTANT_NAME}\nVisitor: {meeting['visitor_email']}",
             "start": {"dateTime": start_dt.isoformat(), "timeZone": "Europe/Bucharest"},
             "end":   {"dateTime": end_dt.isoformat(),   "timeZone": "Europe/Bucharest"},
             "attendees": [{"email": meeting["visitor_email"]}],
@@ -153,7 +154,7 @@ async def _send_confirmation_email(meeting: dict, meet_link: str) -> None:
     from email.mime.multipart import MIMEMultipart
     msg = MIMEMultipart()
     msg["To"]      = meeting["visitor_email"]
-    msg["From"]    = "George Rusu <georgel1988@gmail.com>"
+    msg["From"]    = f"George Rusu <{CONTACT_EMAIL}>"
     msg["Subject"] = f"Meeting Confirmed — {meeting['preferred_date']} at {meeting['preferred_time']}"
     msg.attach(MIMEText(body, "plain"))
 
@@ -182,12 +183,12 @@ async def _send_rejection_email(meeting: dict) -> None:
         "Thank you for your interest in meeting with George!\n\n"
         "The proposed time is unfortunately not available.\n"
         "George will reach out to you with an alternative time shortly.\n\n"
-        "Best regards,\nGeorge Rusu\ngeorgel1988@gmail.com"
+        f"Best regards,\nGeorge Rusu\n{CONTACT_EMAIL}"
     )
 
     msg = MIMEMultipart()
     msg["To"]      = meeting["visitor_email"]
-    msg["From"]    = "George Rusu <georgel1988@gmail.com>"
+    msg["From"]    = f"George Rusu <{CONTACT_EMAIL}>"
     msg["Subject"] = "Re: Meeting Request"
     msg.attach(MIMEText(body, "plain"))
 
@@ -313,7 +314,7 @@ _VALIDATION_LIMIT = 3
 
 _CONTACT_MSG = (
     "Too many incorrect attempts. Please reach out to George directly:\n\n"
-    "• Email: georgel1988@gmail.com\n"
+    f"• Email: {CONTACT_EMAIL}\n"
     "• LinkedIn: linkedin.com/in/rusugeorge\n"
     "• Phone: +40752383920"
 )
@@ -321,13 +322,13 @@ _CONTACT_MSG = (
 _CONTACT_MSG_BILINGUAL = {
     'en': (
         "Too many incorrect attempts. Please reach out to George directly:\n\n"
-        "• Email: georgel1988@gmail.com\n"
+        f"• Email: {CONTACT_EMAIL}\n"
         "• LinkedIn: linkedin.com/in/rusugeorge\n"
         "• Phone: +40752383920"
     ),
     'ro': (
         "Prea multe încercări greșite. Te rog contactează-l pe George direct:\n\n"
-        "• Email: georgel1988@gmail.com\n"
+        f"• Email: {CONTACT_EMAIL}\n"
         "• LinkedIn: linkedin.com/in/rusugeorge\n"
         "• Telefon: +40752383920"
     ),
@@ -611,13 +612,13 @@ async def run_calendar(
             'en': (
                 "I wasn't able to forward your meeting request right now. "
                 "Please reach out to George directly:\n\n"
-                "• Email: georgel1988@gmail.com\n"
+                f"• Email: {CONTACT_EMAIL}\n"
                 "• LinkedIn DM: linkedin.com/in/rusugeorge"
             ),
             'ro': (
                 "Nu am putut trimite cererea de meeting acum. "
                 "Te rog contactează-l pe George direct:\n\n"
-                "• Email: georgel1988@gmail.com\n"
+                f"• Email: {CONTACT_EMAIL}\n"
                 "• LinkedIn: linkedin.com/in/rusugeorge"
             ),
         }[lang]
@@ -631,13 +632,13 @@ async def run_calendar(
             'en': (
                 "Your details were sent to George via Telegram, but I couldn't save them to the system. "
                 "To be safe, please also reach out directly:\n\n"
-                "• Email: georgel1988@gmail.com\n"
+                f"• Email: {CONTACT_EMAIL}\n"
                 "• LinkedIn DM: linkedin.com/in/rusugeorge"
             ),
             'ro': (
                 "Detaliile au fost trimise lui George pe Telegram, dar nu le-am putut salva în sistem. "
                 "Ca măsură de siguranță, contactează-l și direct:\n\n"
-                "• Email: georgel1988@gmail.com\n"
+                f"• Email: {CONTACT_EMAIL}\n"
                 "• LinkedIn: linkedin.com/in/rusugeorge"
             ),
         }[lang]

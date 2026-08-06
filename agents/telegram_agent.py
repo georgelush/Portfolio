@@ -5,6 +5,8 @@ from typing import Any, Callable, Coroutine, Optional
 
 import httpx
 
+from portfolio_config import ASSISTANT_NAME, CONTACT_EMAIL
+
 logger = logging.getLogger(__name__)
 
 _BASE_URL    = "https://api.telegram.org/bot{token}"
@@ -53,7 +55,7 @@ _VALIDATION_MSGS = {
         "reason_short":     "Could you add a bit more detail? What are you looking for or offering?",
         "limit":            (
             "Too many invalid attempts. You can reach George directly:\n"
-            "✉ georgel1988@gmail.com\n"
+            f"✉ {CONTACT_EMAIL}\n"
             "💼 linkedin.com/in/rusugeorge\n"
             "📞 +40752383920"
         ),
@@ -64,7 +66,7 @@ _VALIDATION_MSGS = {
         "reason_short":     "Poți adăuga ceva mai mult detaliu? Ce cauți sau oferi?",
         "limit":            (
             "Prea multe încercări invalide. Îl poți contacta pe George direct:\n"
-            "✉ georgel1988@gmail.com\n"
+            f"✉ {CONTACT_EMAIL}\n"
             "💼 linkedin.com/in/rusugeorge\n"
             "📞 +40752383920"
         ),
@@ -75,22 +77,22 @@ _SUCCESS_MSG = {
     'en': lambda contact: (
         f"Done! George has been notified and will reach out to you at {contact} shortly.\n\n"
         "You can also contact him directly:\n"
-        "✉ georgel1988@gmail.com\n"
+        f"✉ {CONTACT_EMAIL}\n"
         "💼 linkedin.com/in/rusugeorge\n"
         "📞 +40752383920"
     ),
     'ro': lambda contact: (
         f"Gata! George a fost notificat și te va contacta la {contact} în curând.\n\n"
         "Îl poți contacta și direct:\n"
-        "✉ georgel1988@gmail.com\n"
+        f"✉ {CONTACT_EMAIL}\n"
         "💼 linkedin.com/in/rusugeorge\n"
         "📞 +40752383920"
     ),
 }
 
 _FAIL_MSG = {
-    'en': "Couldn't send the notification right now. You can reach George directly at georgel1988@gmail.com or +40752383920.",
-    'ro': "Nu s-a putut trimite notificarea. Îl poți contacta pe George direct la georgel1988@gmail.com sau +40752383920.",
+    'en': f"Couldn't send the notification right now. You can reach George directly at {CONTACT_EMAIL} or +40752383920.",
+    'ro': f"Nu s-a putut trimite notificarea. Îl poți contacta pe George direct la {CONTACT_EMAIL} sau +40752383920.",
 }
 
 # Used by orchestrator when __TELEGRAM_LIMIT__ is returned
@@ -248,11 +250,11 @@ async def run_telegram(
     reason  = fields.get("reason", "—")
 
     tg_text = (
-        f"👤 <b>Contact Request — George AI Assistant</b>\n\n"
+        f"👤 <b>Contact Request — {ASSISTANT_NAME}</b>\n\n"
         f"Name: {name}\n"
         f"Contact: {contact}\n"
         f"Message: <i>{reason}</i>\n\n"
-        f"📍 Via: George AI Assistant"
+        f"📍 Via: {ASSISTANT_NAME}"
     )
 
     if on_progress:

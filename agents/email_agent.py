@@ -13,6 +13,7 @@ from typing import Any, Callable, Coroutine, Optional
 import httpx
 
 from agents.telegram_agent import send_message
+from portfolio_config import ASSISTANT_NAME, CONTACT_EMAIL
 
 logger = logging.getLogger(__name__)
 
@@ -58,7 +59,7 @@ def _build_cv_email(to_addr: str) -> str:
     """Build a base64url-encoded raw RFC 2822 message with cv.pdf attached."""
     msg = MIMEMultipart()
     msg["To"]      = to_addr
-    msg["From"]    = "George Rusu <georgel1988@gmail.com>"
+    msg["From"]    = f"George Rusu <{CONTACT_EMAIL}>"
     msg["Subject"] = "George Rusu — CV"
 
     body = MIMEText(
@@ -66,7 +67,7 @@ def _build_cv_email(to_addr: str) -> str:
         "Please find George Rusu's CV attached.\n\n"
         "Feel free to reach out if you have any questions.\n\n"
         "Best regards,\nGeorge Rusu\n"
-        "georgel1988@gmail.com | linkedin.com/in/rusugeorge",
+        f"{CONTACT_EMAIL} | linkedin.com/in/rusugeorge",
         "plain",
     )
     msg.attach(body)
@@ -128,7 +129,7 @@ async def run_email(
                 await on_telegram(f"Notifying George via Telegram…")
             await send_message(
                 f"📎 <b>CV sent</b> to <code>{visitor_email}</code>\n"
-                "Via: George AI Assistant"
+                f"Via: {ASSISTANT_NAME}"
             )
             if on_telegram:
                 await on_telegram("George notified.")
@@ -146,6 +147,6 @@ async def run_email(
     return (
         "I wasn't able to send the email right now. Here are a few ways to get George's CV:\n\n"
         "• Download directly: https://georgelush.github.io/Portfolio/images/RusuGeorgeCV.pdf\n"
-        "• Email George: georgel1988@gmail.com\n"
+        f"• Email George: {CONTACT_EMAIL}\n"
         "• LinkedIn DM: linkedin.com/in/rusugeorge"
     )
