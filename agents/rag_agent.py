@@ -58,7 +58,7 @@ def init_rag() -> None:
 async def _to_english(query: str) -> str:
     """Translate the query to English so the English-only embedder retrieves correctly."""
     llm = ChatGroq(
-        model="llama-3.1-8b-instant",
+        model="openai/gpt-oss-20b",
         temperature=0,
         api_key=os.getenv("GROQ_API_KEY"),
     )
@@ -90,7 +90,7 @@ async def run_rag(
         await on_progress("Found what I need — writing your answer…")
 
     llm = ChatGroq(
-        model="llama-3.1-8b-instant",
+        model="openai/gpt-oss-20b",
         temperature=0.3,
         api_key=os.getenv("GROQ_API_KEY"),
     )
