@@ -80,8 +80,8 @@ Reply with ONLY the agent name in lowercase. No explanation. Default to "rag" if
 
 IMPORTANT: Use the conversation history to understand context. If the previous assistant message asked for name/email/date/time/topic for a meeting, route the current reply to "calendar". If the assistant was collecting contact info (name/email/phone/reason), route to "telegram". If the assistant was helping with CV/email, route to "email".
 
-{history_block}
-Current visitor message: {message}"""
+{{history_block}}
+Current visitor message: {{message}}"""
 
 
 # ── State ─────────────────────────────────────────────────────────────────────
