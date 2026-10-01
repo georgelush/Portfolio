@@ -62,7 +62,7 @@ Rules:
 | Do | Don't |
 |---|---|
 | "I build…" | "We deliver…" (that is the company) |
-| Numbers first: 320+, 3 countries, −85% | Adjectives: "passionate", "innovative" |
+| Numbers first: 300+, 4 countries, −85% | Adjectives: "passionate", "innovative" |
 | Short. Declarative. | Long explanations |
 | "Watch it work." | "Book a demo" |
 | Say what is a prototype and what is live | Imply client deployments that do not exist |
@@ -71,8 +71,8 @@ Rules:
 
 Portfolio, CV and LinkedIn carry the same numbers and dates. Source: the CV.
 
-- 320+ production workflows built and maintained at Atos (maintained and coordinated the maintenance team).
-- Teams in India, Germany and the United States.
+- 300+ production workflows built and maintained at Atos (maintained and coordinated the maintenance team).
+- Teams in India, Germany, Poland and the United States.
 - Up to 85% manual workload removed; up to 80% time and cost saved.
 - RPA Developer, Atos: May 2022 – Apr 2026. AI Engineer, Atos: Apr – Jun 2026.
 - AI Integration Engineer, B2B operations platform for manufacturers: Jun – Aug 2026 (employer not named).
