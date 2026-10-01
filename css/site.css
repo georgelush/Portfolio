@@ -15,6 +15,7 @@
   --em-ink: #c8ff2e;
   --em-bg: transparent;
   --grid: rgba(200, 255, 46, .05);
+  --tile-line: #c8ff2e;
   --display: "Archivo", "Arial Narrow", Arial, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
   --wrap: 1200px;
@@ -33,6 +34,7 @@
   --em-ink: #0a0a0a;
   --em-bg: #c8ff2e;
   --grid: rgba(10, 10, 10, .045);
+  --tile-line: #0a0a0a;
 }
 
 * { box-sizing: border-box; }
@@ -123,8 +125,7 @@ h1 { font-size: clamp(42px, 6.9vw, 92px); letter-spacing: -.05em; line-height: .
 /* Systems */
 .wall { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .tile { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; background: var(--panel); transition: border-color .2s, transform .2s; }
-.tile:hover { border-color: var(--line-2); transform: translateY(-3px); }
-.tile.hot { border-color: var(--lime); }
+.tile:hover, .tile:focus-within { border-color: var(--tile-line); transform: translateY(-3px); }
 .tile-body { padding: 24px 26px 26px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
 .tile-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .num { font: 500 12px/1 var(--mono); letter-spacing: .08em; color: var(--soft); }
@@ -142,7 +143,7 @@ h1 { font-size: clamp(42px, 6.9vw, 92px); letter-spacing: -.05em; line-height: .
 .playmark { position: absolute; left: 18px; bottom: 18px; display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 16px 0 14px; border-radius: 999px; background: var(--lime); color: #0a0a0a; font: 700 14px/1 var(--display); transition: transform .2s; }
 .shot:hover .playmark { transform: scale(1.06); }
 .tile.next { grid-column: 1 / -1; border-style: dashed; border-color: var(--line-2); background: transparent; }
-.tile.next:hover { transform: none; }
+.tile.next:hover, .tile.next:focus-within { border-color: var(--line-2); transform: none; }
 .tile.next .tile-body { display: grid; grid-template-columns: auto 1fr 1.1fr auto; gap: 28px; align-items: center; padding: 28px 30px; }
 .tile.next h3 { font-size: clamp(24px, 3vw, 40px); text-transform: uppercase; font-weight: 900; letter-spacing: -.04em; }
 .cursor { display: inline-block; width: .42em; height: .82em; margin-left: .12em; background: var(--lime); animation: blink 1.1s steps(2) infinite; vertical-align: -.04em; border-radius: 2px; }
