@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>George Rusu — brand sheet (Acid)</title>
+<meta name="robots" content="noindex" />
+<!-- Source of brand/george-rusu-brand.pdf. Print to PDF: A4, margins none, background graphics on. -->
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  @page { size: A4; margin: 0; }
+  :root { --bg: #08090a; --panel: #101214; --panel2: #15181b; --ink: #f4f4ee; --soft: #9ea3a8; --line: #23272b; --line2: #343a40; --lime: #c8ff2e; --mono: "JetBrains Mono", Consolas, monospace; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { margin: 0; }
+  body { font: 400 10pt/1.5 "Archivo", Arial, sans-serif; color: var(--ink); }
+  .page { width: 210mm; height: 297mm; padding: 15mm; background: var(--bg); position: relative; overflow: hidden; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .page::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(200, 255, 46, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(200, 255, 46, .05) 1px, transparent 1px); background-size: 12mm 12mm; -webkit-mask-image: radial-gradient(ellipse 90% 45% at 50% 0%, #000 25%, transparent 80%); mask-image: radial-gradient(ellipse 90% 45% at 50% 0%, #000 25%, transparent 80%); }
+  .page > * { position: relative; }
+  h1, h2, h3, p, ul { margin: 0; }
+  .tag { font: 500 7.5pt/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--soft); }
+  .tag b { color: var(--lime); font-weight: 500; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .mark { display: inline-grid; place-items: center; width: 11mm; height: 11mm; border-radius: 3.2mm; background: var(--lime); color: #0a0a0a; font: 900 17pt/1 "Archivo", sans-serif; }
+  .big { font: 900 50pt/.9 "Archivo", sans-serif; letter-spacing: -.045em; text-transform: uppercase; margin-top: 9mm; }
+  .big em { font-style: normal; color: var(--lime); }
+  .lede { color: var(--soft); font-size: 11.5pt; line-height: 1.45; max-width: 135mm; margin-top: 6mm; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 7mm; }
+  .panel { background: var(--panel); border: .6pt solid var(--line); border-radius: 5mm; padding: 6mm; }
+  .panel > .tag { display: block; margin-bottom: 4.5mm; }
+  .sw { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5mm; }
+  .sw div { height: 25mm; border-radius: 3.5mm; padding: 2.6mm; display: flex; flex-direction: column; justify-content: flex-end; font: 500 7pt/1.45 var(--mono); border: .6pt solid var(--line2); }
+  .sw b { font: 700 8.5pt/1.2 "Archivo", sans-serif; }
+  .sw2 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5mm; margin-top: 2.5mm; }
+  .sw2 div { height: 14mm; border-radius: 3mm; padding: 2mm 2.4mm; display: flex; flex-direction: column; justify-content: flex-end; font: 400 6.4pt/1.4 var(--mono); border: .6pt solid var(--line2); color: var(--soft); }
+  .type > b { display: block; font: 900 26pt/.92 "Archivo", sans-serif; letter-spacing: -.045em; text-transform: uppercase; }
+  .type > span:not(.tag) { display: block; margin-top: 3mm; font: 800 13pt/1.1 "Archivo", sans-serif; letter-spacing: -.02em; }
+  .type p { margin-top: 2mm; color: var(--soft); }
+  .type code { display: block; margin-top: 3.5mm; font: 500 9pt/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+  .type small { display: block; margin-top: 3mm; font: 400 7.4pt/1.5 var(--mono); color: var(--soft); }
+  ul.r { list-style: none; padding: 0; font-size: 9.6pt; }
+  ul.r li { display: grid; grid-template-columns: 8mm 1fr; padding: 2.2mm 0; border-top: .6pt solid var(--line); }
+  ul.r li:first-child { border-top: 0; padding-top: 0; }
+  ul.r b { font: 500 8pt/1.7 var(--mono); color: var(--lime); }
+  .btns { display: flex; gap: 2.5mm; flex-wrap: wrap; align-items: center; }
+  .btn { display: inline-flex; align-items: center; height: 10.5mm; padding: 0 5.5mm; border-radius: 99mm; border: .6pt solid var(--line2); background: var(--panel2); font: 700 9pt/1 "Archivo", sans-serif; }
+  .btn.s { background: var(--lime); border-color: var(--lime); color: #0a0a0a; }
+  .chip { font: 400 7.6pt/1 var(--mono); padding: 2mm 3mm; border-radius: 99mm; background: var(--panel2); border: .6pt solid var(--line); color: var(--soft); }
+  .state { font: 500 7pt/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 1.8mm 2.6mm; border-radius: 99mm; background: var(--lime); color: #0a0a0a; }
+  .foot { position: absolute; left: 15mm; right: 15mm; bottom: 8mm; display: flex; justify-content: space-between; font: 400 7pt/1 var(--mono); color: var(--soft); letter-spacing: .06em; text-transform: uppercase; }
+
+  /* Page 2 */
+  h2 { font: 900 26pt/.95 "Archivo", sans-serif; letter-spacing: -.04em; text-transform: uppercase; margin-top: 4mm; }
+  h2 em { font-style: normal; color: var(--lime); }
+  .logos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; margin-top: 6mm; }
+  .lg { height: 34mm; border-radius: 5mm; border: .6pt solid var(--line2); display: grid; place-items: center; position: relative; }
+  .lg small { position: absolute; left: 3mm; bottom: 2.6mm; font: 400 6.4pt/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+  .lg .m { display: grid; place-items: center; width: 16mm; height: 16mm; border-radius: 4.6mm; font: 900 25pt/1 "Archivo", sans-serif; }
+  .word { font: 900 13pt/1 "Archivo", sans-serif; letter-spacing: -.03em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 2.4mm; }
+  .word .m { width: 8.5mm; height: 8.5mm; border-radius: 2.5mm; font-size: 13pt; }
+  .brief { display: grid; grid-template-columns: 1.1fr .9fr; gap: 5mm; margin-top: 6mm; }
+  .brief h3 { font: 800 11pt/1.2 "Archivo", sans-serif; margin-bottom: 2.5mm; }
+  .brief p { color: var(--soft); font-size: 9.6pt; }
+  .brief p + p { margin-top: 2mm; }
+  .yn { display: grid; grid-template-columns: 1fr 1fr; gap: 0 5mm; font-size: 9.4pt; }
+  .yn div { padding: 2mm 0; border-top: .6pt solid var(--line); }
+  .yn div:nth-child(-n+2) { border-top: 0; padding-top: 0; font: 500 7.5pt/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--lime); padding-bottom: 3mm; }
+  .yn div:nth-child(2) { color: var(--soft); }
+  .yn .n { color: var(--soft); }
+  table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+  td { padding: 1.9mm 0; border-top: .6pt solid var(--line); vertical-align: top; }
+  tr:first-child td { border-top: 0; padding-top: 0; }
+  td:first-child { font: 400 7.6pt/1.7 var(--mono); color: var(--soft); width: 34mm; text-transform: uppercase; letter-spacing: .04em; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <div class="top"><span class="mark">G</span><span class="tag">Personal brand <b>/</b> „Acid" <b>/</b> v1 · Oct 2026</span></div>
+  <h1 class="big">George<br /><em>Rusu.</em></h1>
+  <p class="lede">Brand of the person, not of a company. An engineer who runs real operations: direct, technical, a little loud. Black ground, off-white type, one acid lime.</p>
+
+  <div class="grid">
+    <div class="panel">
+      <span class="tag"><b>01</b> / Colour</span>
+      <div class="sw">
+        <div style="background:#08090a"><b>Ground</b>#08090A<br />RGB 8 9 10</div>
+        <div style="background:#f4f4ee;color:#0a0a0a;border-color:#f4f4ee"><b>Ink</b>#F4F4EE<br />RGB 244 244 238</div>
+        <div style="background:#c8ff2e;color:#0a0a0a;border-color:#c8ff2e"><b>Acid lime</b>#C8FF2E<br />RGB 200 255 46</div>
+      </div>
+      <div class="sw2">
+        <div style="background:#101214">Panel<br />#101214</div>
+        <div style="background:#15181b">Panel 2<br />#15181B</div>
+        <div style="background:#23272b">Line<br />#23272B</div>
+        <div style="background:#0a0a0a;color:#c8ff2e">Text on lime<br />#0A0A0A</div>
+      </div>
+      <p style="margin-top:4mm;color:var(--soft);font-size:9pt">Secondary text: #9EA3A8. Lime is the only accent: one word, one button, one live state. Never body text.</p>
+    </div>
+    <div class="panel type">
+      <span class="tag"><b>02</b> / Type</span>
+      <b>Archivo 900</b>
+      <span>Archivo 800, subheads</span>
+      <p>Archivo 400 for everything read in sentences.</p>
+      <code>JetBrains Mono · 01 / label</code>
+      <small>Headlines: uppercase, tracking −0.045em, leading 0.9.<br />Labels: mono, uppercase, tracking +0.08em.<br />Both free on Google Fonts (Open Font License).</small>
+    </div>
+    <div class="panel">
+      <span class="tag"><b>03</b> / Shape</span>
+      <ul class="r">
+        <li><b>A</b>Panels and cards: 18 px radius, 1 px hairline border.</li>
+        <li><b>B</b>Buttons and chips: fully round.</li>
+        <li><b>C</b>Faint square grid behind large areas, fading out.</li>
+        <li><b>D</b>No gradients, no glow, no drop shadows on type.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <span class="tag"><b>04</b> / Components</span>
+      <div class="btns"><span class="btn s">▶ Watch the demos</span><span class="btn">Work with me</span></div>
+      <div class="btns" style="margin-top:3.5mm"><span class="chip">LangGraph</span><span class="chip">RAG</span><span class="chip">Voice</span><span class="state">Live</span></div>
+      <p style="margin-top:4.5mm;font:900 15pt/.95 'Archivo',sans-serif;letter-spacing:-.04em;text-transform:uppercase">Agents that <span style="color:var(--lime)">show up</span> on Monday.</p>
+    </div>
+  </div>
+  <div class="foot"><span>George Rusu · brand sheet</span><span>1 / 2</span></div>
+</section>
+
+<section class="page">
+  <div class="top"><span class="tag"><b>05</b> / Logo brief</span><span class="tag">For the designer</span></div>
+  <h2>What the logo <em>must do.</em></h2>
+
+  <div class="logos">
+    <div class="lg" style="background:#08090a"><span class="m" style="background:#c8ff2e;color:#0a0a0a">G</span><small style="color:#9ea3a8">Current · on black</small></div>
+    <div class="lg" style="background:#c8ff2e;border-color:#c8ff2e"><span class="m" style="background:#0a0a0a;color:#c8ff2e">G</span><small style="color:#0a0a0a">On lime</small></div>
+    <div class="lg" style="background:#ffffff;border-color:#fff"><span class="m" style="background:#0a0a0a;color:#c8ff2e">G</span><small style="color:#55595e">On white</small></div>
+    <div class="lg" style="background:#08090a"><span class="word"><span class="m" style="display:grid;place-items:center;background:#c8ff2e;color:#0a0a0a">G</span>George Rusu</span><small style="color:#9ea3a8">With the name</small></div>
+  </div>
+  <p style="margin-top:3.5mm;color:var(--soft);font-size:9pt">The current mark is a placeholder: the letter G in Archivo 900 on a rounded lime square. It is the starting point, not the answer.</p>
+
+  <div class="brief">
+    <div class="panel">
+      <span class="tag"><b>A</b> / The job</span>
+      <h3>A monogram for one engineer.</h3>
+      <p>It stands for George Rusu, AI and automation engineer. It appears as a browser icon, a profile avatar, the corner of a CV and the first frame of a demo video.</p>
+      <p>It should feel technical and confident: something a person who keeps systems running would put their name behind. Ideas worth exploring: the letter G or the initials GR; a hint of a running process (a cursor, a step, a signal) without drawing a robot, a brain or a circuit.</p>
+    </div>
+    <div class="panel">
+      <span class="tag"><b>B</b> / Deliverables</span>
+      <table>
+        <tr><td>Mark</td><td>Square, works at 16 px</td></tr>
+        <tr><td>Lockup</td><td>Mark + “George Rusu”</td></tr>
+        <tr><td>Versions</td><td>On black, on lime, on white, one colour</td></tr>
+        <tr><td>Files</td><td>SVG, PNG 512 and 1024, favicon 32</td></tr>
+        <tr><td>Clear space</td><td>Half the mark's width on every side</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:5mm">
+    <div class="yn">
+      <div>Do</div><div>Don't</div>
+      <div>Use only black, off-white and the acid lime</div><div class="n">Add a second colour, a gradient or a glow</div>
+      <div>Keep it legible at favicon size</div><div class="n">Fine lines or small text inside the mark</div>
+      <div>Rounded square or free-standing letterform</div><div class="n">Circles with orbiting dots, brains, robots, circuit traces</div>
+      <div>Stay clearly different from FLOWENTIC</div><div class="n">Warm paper, ochre, the letter “f”, soft serif shapes</div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:5mm">
+    <span class="tag"><b>C</b> / Where it lives</span>
+    <table>
+      <tr><td>Portfolio</td><td>georgelush.github.io/Portfolio — header and favicon</td></tr>
+      <tr><td>Profiles</td><td>LinkedIn and GitHub avatars or banners, YouTube channel</td></tr>
+      <tr><td>Documents</td><td>CV header, demo video intro and outro</td></tr>
+      <tr><td>Reference</td><td>Tokens and components: <span style="font-family:var(--mono);font-size:8pt">css/site.css</span> in the Portfolio repository</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span>George Rusu · brand sheet</span><span>2 / 2</span></div>
+</section>
+
+</body>
+</html>

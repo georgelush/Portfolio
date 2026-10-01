@@ -34,6 +34,10 @@ _MAX_SESSIONS = 500      # oldest sessions are dropped beyond this, so memory st
 # so one client must not be able to drain the quota or drive the email agent in a loop.
 _RATE_WINDOWS = ((300, 12), (86400, 60))   # (seconds, max messages): 12 per 5 minutes, 60 per day
 _hits: dict = defaultdict(deque)           # client ip → timestamps of recent messages
+# Backstop for the whole service. The per-visitor limit keys on an address taken from a header,
+# which a determined client can vary; this cap holds no matter how many addresses are used.
+_GLOBAL_PER_DAY = 600
+_all_hits: deque = deque()                 # timestamps of every accepted message in the last 24 hours
 
 
 def _client_ip(request: Request) -> str:
@@ -46,6 +50,10 @@ def _client_ip(request: Request) -> str:
 
 def _rate_limited(ip: str) -> bool:
     now = time.monotonic()
+    while _all_hits and now - _all_hits[0] > 86400:
+        _all_hits.popleft()
+    if len(_all_hits) >= _GLOBAL_PER_DAY:
+        return True
     hits = _hits[ip]
     longest = max(window for window, _ in _RATE_WINDOWS)
     while hits and now - hits[0] > longest:
@@ -54,6 +62,7 @@ def _rate_limited(ip: str) -> bool:
         if sum(1 for t in hits if now - t <= window) >= limit:
             return True
     hits.append(now)
+    _all_hits.append(now)
     if len(_hits) > 5000:   # forget idle visitors
         for key in [k for k, v in _hits.items() if not v or now - v[-1] > longest]:
             del _hits[key]
