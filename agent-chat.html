@@ -173,7 +173,8 @@
     .fade-in { animation:fadeIn .7s ease forwards; }
     #user-input { transition: opacity 0.4s ease; }
 
-    #iframe-close-btn:hover{filter:drop-shadow(0 0 10px rgba(200,255,46,1)) drop-shadow(0 0 20px rgba(200,255,46,.8))!important;transform:scale(1.1);}
+    #iframe-close-btn:hover{color:#c8ff2e!important;border-color:rgba(200,255,46,.5)!important;background:rgba(200,255,46,.08)!important;}
+    #iframe-close-btn:focus-visible{outline:2px solid #c8ff2e;outline-offset:2px;}
 
     /* ── Quick-action suggestion buttons ─────────── */
     #quick-actions { display:flex; flex-wrap:wrap; gap:5px; padding:6px 10px 4px; border-bottom:1px solid rgba(35,39,43,.35); }
@@ -376,7 +377,7 @@
       <span class="font-mono" data-assistant-name style="font-size:11px;font-weight:700;color:#f4f4ee;">George AI Assistant</span>
       <span id="header-msg-count" class="font-mono" style="font-size:9px;color:#c8ff2e;margin-left:auto;">20 / 20</span>
       <span class="font-mono" style="font-size:9px;color:#9ea3a8;">· LangGraph · Groq</span>
-      <button id="iframe-close-btn" onclick="window.parent.postMessage('close-chat','*')" aria-label="Close" style="display:flex;margin-left:8px;width:28px;height:28px;border-radius:50%;border:none;background:linear-gradient(135deg,#c8ff2e,#c8ff2e);color:#fff;cursor:pointer;flex-shrink:0;align-items:center;justify-content:center;filter:drop-shadow(0 0 6px rgba(200,255,46,.9)) drop-shadow(0 0 12px rgba(200,255,46,.5));transition:filter .2s,transform .2s;">
+      <button id="iframe-close-btn" onclick="window.parent.postMessage('close-chat','*')" aria-label="Close" style="display:flex;margin-left:8px;width:28px;height:28px;border-radius:50%;border:1px solid rgba(244,244,238,.16);background:transparent;color:#9ea3a8;cursor:pointer;flex-shrink:0;align-items:center;justify-content:center;transition:color .15s,border-color .15s,background .15s;">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
