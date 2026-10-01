@@ -1,6 +1,10 @@
 import asyncio
+import hmac
 import json
 import logging
+import os
+import time
+from collections import defaultdict, deque
 from contextlib import asynccontextmanager
 
 from dotenv import load_dotenv
@@ -24,6 +28,36 @@ _rag_ready = False
 _sessions:   dict = {}   # session_id → list of {role, content}
 _completed:  dict = {}   # session_id → set of completed actions ("email", "calendar")
 _MAX_HISTORY = 10
+_MAX_SESSIONS = 500      # oldest sessions are dropped beyond this, so memory stays bounded
+
+# Per-visitor rate limits for /chat. The endpoint is public and every message costs an LLM call,
+# so one client must not be able to drain the quota or drive the email agent in a loop.
+_RATE_WINDOWS = ((300, 12), (86400, 60))   # (seconds, max messages): 12 per 5 minutes, 60 per day
+_hits: dict = defaultdict(deque)           # client ip → timestamps of recent messages
+
+
+def _client_ip(request: Request) -> str:
+    """Visitor address. Hugging Face Spaces sits behind a proxy, so the first forwarded hop is the client."""
+    forwarded = request.headers.get("x-forwarded-for", "")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return request.client.host if request.client else "unknown"
+
+
+def _rate_limited(ip: str) -> bool:
+    now = time.monotonic()
+    hits = _hits[ip]
+    longest = max(window for window, _ in _RATE_WINDOWS)
+    while hits and now - hits[0] > longest:
+        hits.popleft()
+    for window, limit in _RATE_WINDOWS:
+        if sum(1 for t in hits if now - t <= window) >= limit:
+            return True
+    hits.append(now)
+    if len(_hits) > 5000:   # forget idle visitors
+        for key in [k for k, v in _hits.items() if not v or now - v[-1] > longest]:
+            del _hits[key]
+    return False
 
 
 @asynccontextmanager
@@ -79,6 +113,14 @@ async def ready():
 @app.post("/telegram/webhook")
 async def telegram_webhook(request: Request):
     """Receives Telegram callback_query (Approve / Reject buttons)."""
+    # When TELEGRAM_WEBHOOK_SECRET is set, only requests carrying the same secret are accepted.
+    # Telegram sends it in this header when the webhook is registered with `secret_token`.
+    expected = os.getenv("TELEGRAM_WEBHOOK_SECRET", "")
+    if expected:
+        received = request.headers.get("x-telegram-bot-api-secret-token", "")
+        if not hmac.compare_digest(received, expected):
+            return Response(status_code=403)
+
     body = await request.json()
     callback = body.get("callback_query")
     if not callback:
@@ -120,18 +162,28 @@ _MAX_MSG_CHARS = 7000
 
 
 @app.post("/chat")
-async def chat(body: ChatRequest):
+async def chat(body: ChatRequest, request: Request):
     if len(body.message) > _MAX_MSG_CHARS:
         return Response(
             status_code=400,
             content=f"Message too long — max {_MAX_MSG_CHARS} characters.",
         )
+    if _rate_limited(_client_ip(request)):
+        return Response(
+            status_code=429,
+            content="Too many messages. Please wait a few minutes, or write to george@flowentic.com.",
+            headers={"Retry-After": "300"},
+        )
 
     queue: asyncio.Queue = asyncio.Queue()
 
     # Maintain conversation history per session
-    sid = body.session_id
+    sid = body.session_id[:64]
     if sid not in _sessions:
+        while len(_sessions) >= _MAX_SESSIONS:
+            oldest = next(iter(_sessions))
+            _sessions.pop(oldest, None)
+            _completed.pop(oldest, None)
         _sessions[sid] = []
     history = _sessions[sid]
 

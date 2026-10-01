@@ -4,11 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>George AI Assistant — George Rusu</title>
-  <meta name="description" content="Ask about George Rusu's experience, technical projects, and availability." />
+  <meta name="description" content="Ask about George Rusu's experience and technical projects, request his CV or book a call." />
+  <meta name="theme-color" content="#08090a" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23c8ff2e'/%3E%3Ctext x='16' y='23' font-family='Arial Black,Arial,sans-serif' font-size='19' font-weight='900' text-anchor='middle' fill='%230a0a0a'%3EG%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/brand.css" />
   <script src="js/site-config.js" defer></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -16,12 +18,12 @@
     .mesh-bg {
       background-color:var(--bg);
       background-image:
-        radial-gradient(ellipse 80% 50% at 10% 0%,  rgba(99,102,241,.14) 0%,transparent 55%),
-        radial-gradient(ellipse 60% 40% at 90% 20%, rgba(0,255,136,.07)  0%,transparent 50%),
-        radial-gradient(ellipse 50% 40% at 50% 100%,rgba(139,92,246,.10) 0%,transparent 60%);
+        radial-gradient(ellipse 80% 50% at 10% 0%,  rgba(200,255,46,.14) 0%,transparent 55%),
+        radial-gradient(ellipse 60% 40% at 90% 20%, rgba(200,255,46,.07)  0%,transparent 50%),
+        radial-gradient(ellipse 50% 40% at 50% 100%,rgba(200,255,46,.10) 0%,transparent 60%);
     }
     .glass {
-      background:rgba(17,17,24,.88);
+      background:rgba(16,18,20,.88);
       border:1px solid var(--glass-border);
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
@@ -31,14 +33,14 @@
     .agent-node {
       border:1px solid rgba(255,255,255,.06);
       border-radius:14px;
-      background:rgba(17,17,24,.7);
+      background:rgba(16,18,20,.7);
       transition: border-color .3s, box-shadow .3s, opacity .3s, transform .3s;
       cursor:default;
       user-select:none;
     }
     .agent-node.dimmed { opacity:.35; }
 
-    .agent-node.active-orch  { border-color:var(--c-orch); box-shadow:0 0 0 1px rgba(0,255,136,.4), 0 0 28px rgba(0,255,136,.5), 0 0 60px rgba(0,255,136,.15);   transform:scale(1.02); }
+    .agent-node.active-orch  { border-color:var(--c-orch); box-shadow:0 0 0 1px rgba(200,255,46,.4), 0 0 28px rgba(200,255,46,.5), 0 0 60px rgba(200,255,46,.15);   transform:scale(1.02); }
     .agent-node.active-rag   { border-color:var(--c-rag);  box-shadow:0 0 0 1px rgba(0,170,255,.4), 0 0 28px rgba(0,170,255,.5), 0 0 60px rgba(0,170,255,.15);   transform:scale(1.02); }
     .agent-node.active-email { border-color:var(--c-email);box-shadow:0 0 0 1px rgba(255,107,53,.4), 0 0 28px rgba(255,107,53,.5), 0 0 60px rgba(255,107,53,.15); transform:scale(1.02); }
     .agent-node.active-cal   { border-color:var(--c-cal);  box-shadow:0 0 0 1px rgba(168,85,247,.4), 0 0 28px rgba(168,85,247,.5), 0 0 60px rgba(168,85,247,.15); transform:scale(1.02); }
@@ -47,7 +49,7 @@
 
     .status-dot {
       width:7px; height:7px; border-radius:50%;
-      background:#374151; flex-shrink:0;
+      background:#343a40; flex-shrink:0;
       transition:background .3s;
     }
     .agent-node.active-orch  .status-dot { background:var(--c-orch); animation:pulse-dot 1.2s ease-in-out infinite; }
@@ -89,16 +91,16 @@
 
     /* ── Chat bubbles ─────────────────────────────── */
     .bubble-user {
-      background:rgba(99,102,241,.15);
-      border:1px solid rgba(99,102,241,.25);
+      background:rgba(200,255,46,.15);
+      border:1px solid rgba(200,255,46,.25);
       border-radius:16px 16px 4px 16px;
       padding:.6rem 1rem;
       max-width:78%;
       align-self:flex-end;
     }
     .bubble-ai {
-      background:rgba(17,17,24,.9);
-      border:1px solid rgba(99,102,241,.12);
+      background:rgba(16,18,20,.9);
+      border:1px solid rgba(200,255,46,.12);
       border-radius:16px 16px 16px 4px;
       padding:.6rem 1rem;
       max-width:82%;
@@ -116,10 +118,10 @@
 
     /* ── Input ────────────────────────────────────── */
     #user-input {
-      background:rgba(17,17,24,.85);
-      border:1px solid rgba(99,102,241,.22);
+      background:rgba(16,18,20,.85);
+      border:1px solid rgba(200,255,46,.22);
       border-radius:10px;
-      color:#e2e8f0;
+      color:#f4f4ee;
       font-family:"JetBrains Mono",monospace;
       font-size:.8rem;
       padding:.65rem 1rem;
@@ -129,32 +131,32 @@
       width:100%;
     }
     #user-input:focus {
-      border-color:rgba(99,102,241,.5);
-      box-shadow:0 0 0 3px rgba(99,102,241,.08);
+      border-color:rgba(200,255,46,.5);
+      box-shadow:0 0 0 3px rgba(200,255,46,.08);
     }
     #send-btn {
-      background:rgba(99,102,241,.15);
-      border:1px solid rgba(99,102,241,.35);
+      background:rgba(200,255,46,.15);
+      border:1px solid rgba(200,255,46,.35);
       border-radius:10px;
-      color:#818cf8;
+      color:#c8ff2e;
       padding:.65rem 1.1rem;
       cursor:pointer;
       transition:all .2s;
       flex-shrink:0;
     }
     #send-btn:hover:not(:disabled) {
-      background:rgba(99,102,241,.28);
-      border-color:rgba(99,102,241,.6);
-      color:#e2e8f0;
+      background:rgba(200,255,46,.28);
+      border-color:rgba(200,255,46,.6);
+      color:#f4f4ee;
     }
     #send-btn:disabled { opacity:.4; cursor:not-allowed; }
 
     /* ── Suggestions ──────────────────────────────── */
     .suggestion {
-      background:rgba(17,17,24,.7);
-      border:1px solid rgba(99,102,241,.15);
+      background:rgba(16,18,20,.7);
+      border:1px solid rgba(200,255,46,.15);
       border-radius:8px;
-      color:#6b7280;
+      color:#9ea3a8;
       font-size:.7rem;
       padding:.35rem .75rem;
       cursor:pointer;
@@ -162,19 +164,19 @@
       transition:all .2s;
     }
     .suggestion:hover {
-      border-color:rgba(99,102,241,.4);
-      color:#e2e8f0;
-      background:rgba(99,102,241,.08);
+      border-color:rgba(200,255,46,.4);
+      color:#f4f4ee;
+      background:rgba(200,255,46,.08);
     }
 
     @keyframes fadeIn { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
     .fade-in { animation:fadeIn .7s ease forwards; }
     #user-input { transition: opacity 0.4s ease; }
 
-    #iframe-close-btn:hover{filter:drop-shadow(0 0 10px rgba(99,102,241,1)) drop-shadow(0 0 20px rgba(139,92,246,.8))!important;transform:scale(1.1);}
+    #iframe-close-btn:hover{filter:drop-shadow(0 0 10px rgba(200,255,46,1)) drop-shadow(0 0 20px rgba(200,255,46,.8))!important;transform:scale(1.1);}
 
     /* ── Quick-action suggestion buttons ─────────── */
-    #quick-actions { display:flex; flex-wrap:wrap; gap:5px; padding:6px 10px 4px; border-bottom:1px solid rgba(30,30,46,.35); }
+    #quick-actions { display:flex; flex-wrap:wrap; gap:5px; padding:6px 10px 4px; border-bottom:1px solid rgba(35,39,43,.35); }
     .qa-btn {
       display:inline-flex; align-items:center; gap:4px;
       font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:600;
@@ -193,17 +195,17 @@
       display:block; width:100%;
       background:rgba(168,85,247,.15);
       border:1px solid rgba(168,85,247,.35);
-      border-radius:10px; color:#c084fc;
+      border-radius:10px; color:#c8ff2e;
       font-family:'JetBrains Mono',monospace; font-size:.75rem;
       padding:.6rem 1rem; cursor:pointer;
       transition:all .2s; text-align:center; margin-top:.5rem;
     }
-    .budget-cta-btn:hover { background:rgba(168,85,247,.28); border-color:rgba(168,85,247,.6); color:#e2e8f0; }
+    .budget-cta-btn:hover { background:rgba(168,85,247,.28); border-color:rgba(168,85,247,.6); color:#f4f4ee; }
 
     /* ── Agent strip ──────────────────────────────── */
     #agent-strip {
       display:flex; align-items:center; justify-content:space-around;
-      padding:5px 10px; border-bottom:1px solid rgba(30,30,46,.4);
+      padding:5px 10px; border-bottom:1px solid rgba(35,39,43,.4);
       flex-shrink:0; gap:2px;
     }
     .sn {
@@ -229,8 +231,8 @@
       position: fixed;
       display: flex;
       flex-direction: column;
-      background: rgba(10,10,15,.97);
-      border: 1px solid rgba(99,102,241,.2);
+      background: rgba(8,9,10,.97);
+      border: 1px solid rgba(200,255,46,.2);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       overflow: visible;
@@ -244,7 +246,7 @@
         width: 390px;
         height: min(600px, calc(100vh - 88px));
         border-radius: 16px;
-        box-shadow: 0 12px 56px rgba(0,0,0,.55), 0 0 0 1px rgba(99,102,241,.12);
+        box-shadow: 0 12px 56px rgba(0,0,0,.55), 0 0 0 1px rgba(200,255,46,.12);
       }
     }
     /* mobile: full-screen below nav */
@@ -253,7 +255,7 @@
         top: 56px;
         left: 0; right: 0; bottom: 0;
         border: none;
-        border-top: 1px solid rgba(30,30,46,.6);
+        border-top: 1px solid rgba(35,39,43,.6);
         border-radius: 0;
       }
     }
@@ -261,7 +263,7 @@
     /* ── Scrollbar ────────────────────────────────── */
     ::-webkit-scrollbar { width:4px; }
     ::-webkit-scrollbar-track { background:transparent; }
-    ::-webkit-scrollbar-thumb { background:rgba(99,102,241,.3); border-radius:2px; }
+    ::-webkit-scrollbar-thumb { background:rgba(200,255,46,.3); border-radius:2px; }
     /* ── Responsive nav ─── */
     .nav-desktop-links,.nav-desktop-actions{display:none;}
     @media(min-width:768px){.nav-desktop-links,.nav-desktop-actions{display:flex;}.nav-mobile-right{display:none!important;}#nav-mobile{display:none!important;}}
@@ -275,36 +277,36 @@
 <body class="mesh-bg min-h-screen antialiased">
 
   <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-[#1e1e2e]/80 bg-[#0a0a0f]/80 backdrop-blur-md">
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-[#23272b]/80 bg-[#08090a]/80 backdrop-blur-md">
     <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-      <a href="index.html" class="font-mono text-sm font-bold grad-text tracking-tight">Rusu George</a>
+      <a href="index.html" class="font-mono text-sm font-bold grad-text tracking-tight">George Rusu</a>
       <div class="nav-desktop-links items-center gap-6">
         <a href="index.html"      class="nav-link font-mono text-xs tracking-widest uppercase">Home</a>
         <a href="archive.html"    class="nav-link font-mono text-xs tracking-widest uppercase">Archive</a>
-        <a href="about.html"      class="nav-link font-mono text-xs tracking-widest uppercase">About</a>
+        <a href="index.html#about" class="nav-link font-mono text-xs tracking-widest uppercase">Track record</a>
       </div>
       <div class="nav-desktop-actions items-center gap-3">
-        <a href="https://www.linkedin.com/in/rusugeorge/" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
-        <a href="https://github.com/georgelush" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-4 h-4"></i></a>
-        <a data-contact-link class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="Contact George"><i data-lucide="mail" class="w-4 h-4"></i></a>
-        <a href="images/RusuGeorgeCV.pdf" target="_blank" class="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-md border border-[#6366f1]/40 text-[#6366f1] hover:bg-[#6366f1]/10 transition-all"><i data-lucide="download" class="w-3 h-3"></i> CV</a>
+        <a href="https://www.linkedin.com/in/rusugeorge/" target="_blank" class="text-[#9ea3a8] hover:text-[#f4f4ee] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+        <a href="https://github.com/georgelush" target="_blank" class="text-[#9ea3a8] hover:text-[#f4f4ee] transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-4 h-4"></i></a>
+        <a data-contact-link class="text-[#9ea3a8] hover:text-[#f4f4ee] transition-colors" aria-label="Contact George"><i data-lucide="mail" class="w-4 h-4"></i></a>
+        <a href="images/RusuGeorgeCV.pdf" target="_blank" class="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-md border border-[#c8ff2e]/40 text-[#c8ff2e] hover:bg-[#c8ff2e]/10 transition-all"><i data-lucide="download" class="w-3 h-3"></i> CV</a>
       </div>
       <div class="nav-mobile-right flex items-center gap-2">
-        <a href="images/RusuGeorgeCV.pdf" target="_blank" class="flex items-center gap-1.5 text-xs font-mono px-2.5 py-1.5 rounded-md border border-[#6366f1]/40 text-[#6366f1] hover:bg-[#6366f1]/10 transition-all"><i data-lucide="download" class="w-3 h-3"></i> CV</a>
-        <button id="nav-toggle" aria-label="Toggle menu" class="p-2 text-[#9ca3af] hover:text-[#e2e8f0] transition-colors">
+        <a href="images/RusuGeorgeCV.pdf" target="_blank" class="flex items-center gap-1.5 text-xs font-mono px-2.5 py-1.5 rounded-md border border-[#c8ff2e]/40 text-[#c8ff2e] hover:bg-[#c8ff2e]/10 transition-all"><i data-lucide="download" class="w-3 h-3"></i> CV</a>
+        <button id="nav-toggle" aria-label="Toggle menu" class="p-2 text-[#9ca3af] hover:text-[#f4f4ee] transition-colors">
           <span id="nav-icon-open"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span>
           <span id="nav-icon-close" style="display:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
         </button>
       </div>
     </div>
-    <div id="nav-mobile" style="display:none;border-top:1px solid rgba(30,30,46,.6);background:rgba(10,10,15,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">
+    <div id="nav-mobile" style="display:none;border-top:1px solid rgba(35,39,43,.6);background:rgba(8,9,10,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">
       <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col">
-        <a href="index.html"      class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">Home</a>
-        <a href="archive.html"    class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">Archive</a>
-        <a href="about.html"      class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">About</a>
+        <a href="index.html"      class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#23272b]/40">Home</a>
+        <a href="archive.html"    class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#23272b]/40">Archive</a>
+        <a href="index.html#about"      class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#23272b]/40">About</a>
         <div class="flex items-center gap-5 pt-4">
-          <a href="https://www.linkedin.com/in/rusugeorge/" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-          <a href="https://github.com/georgelush" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-5 h-5"></i></a>
+          <a href="https://www.linkedin.com/in/rusugeorge/" target="_blank" class="text-[#9ea3a8] hover:text-[#f4f4ee] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+          <a href="https://github.com/georgelush" target="_blank" class="text-[#9ea3a8] hover:text-[#f4f4ee] transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-5 h-5"></i></a>
         </div>
       </div>
     </div>
@@ -347,21 +349,20 @@
   <!-- Desktop background content (hidden on mobile) -->
   <div id="desktop-bg" class="hidden md:block pt-28 px-10">
     <div class="max-w-lg">
-      <div class="inline-flex items-center gap-2 mb-5 px-3 py-1.5 rounded-full border border-[#00ff88]/20 bg-[#00ff88]/5 text-[#00ff88] text-xs font-mono">
-        <span style="width:6px;height:6px;border-radius:50%;background:#00ff88;display:inline-block;animation:pulse-dot 1.5s ease-in-out infinite;"></span>
+      <div class="inline-flex items-center gap-2 mb-5 px-3 py-1.5 rounded-full border border-[#c8ff2e]/20 bg-[#c8ff2e]/5 text-[#c8ff2e] text-xs font-mono">
+        <span style="width:6px;height:6px;border-radius:50%;background:#c8ff2e;display:inline-block;animation:pulse-dot 1.5s ease-in-out infinite;"></span>
         Live · Multi-Agent System
       </div>
-      <h1 class="font-mono text-4xl font-bold text-[#e2e8f0] mb-3">Lush <span class="grad-text">AI</span></h1>
-      <p class="text-[#6b7280] text-sm leading-relaxed mb-6 max-w-sm">
-        Ask anything about George, check if he fits your role, or book a call — a LangGraph orchestrator routes your request to the right specialist agent in real time.
+      <h1 class="font-mono text-4xl font-bold text-[#f4f4ee] mb-3">Lush <span class="grad-text">AI</span></h1>
+      <p class="text-[#9ea3a8] text-sm leading-relaxed mb-6 max-w-sm">
+        Ask anything about George, request his CV, or book a call — a LangGraph orchestrator routes your request to the right specialist agent in real time.
       </p>
       <div class="flex flex-col gap-2">
-        <div class="flex items-center gap-2 font-mono text-xs text-[#6b7280]"><span style="color:#00ff88;">⚡</span> Orchestrator — LangGraph · llama-3.1-8b</div>
-        <div class="flex items-center gap-2 font-mono text-xs text-[#6b7280]"><span style="color:#00aaff;">◈</span> RAG — ChromaDB · MiniLM</div>
-        <div class="flex items-center gap-2 font-mono text-xs text-[#6b7280]"><span style="color:#a855f7;">◈</span> Calendar — Google Meet · HITL approve</div>
-        <div class="flex items-center gap-2 font-mono text-xs text-[#6b7280]"><span style="color:#ff6b35;">◈</span> Email — Gmail API · OAuth2</div>
-        <div class="flex items-center gap-2 font-mono text-xs text-[#6b7280]"><span style="color:#fbbf24;">◈</span> Job Match — JD analysis · fit score</div>
-        <div class="flex items-center gap-2 font-mono text-xs text-[#6b7280]"><span style="color:#22d3ee;">◈</span> Telegram — direct message George</div>
+        <div class="flex items-center gap-2 font-mono text-xs text-[#9ea3a8]"><span style="color:#c8ff2e;">⚡</span> Orchestrator — LangGraph · llama-3.1-8b</div>
+        <div class="flex items-center gap-2 font-mono text-xs text-[#9ea3a8]"><span style="color:#00aaff;">◈</span> RAG — ChromaDB · MiniLM</div>
+        <div class="flex items-center gap-2 font-mono text-xs text-[#9ea3a8]"><span style="color:#a855f7;">◈</span> Calendar — Google Meet · HITL approve</div>
+        <div class="flex items-center gap-2 font-mono text-xs text-[#9ea3a8]"><span style="color:#ff6b35;">◈</span> Email — Gmail API · OAuth2</div>
+        <div class="flex items-center gap-2 font-mono text-xs text-[#9ea3a8]"><span style="color:#22d3ee;">◈</span> Telegram — direct message George</div>
       </div>
     </div>
   </div>
@@ -370,41 +371,40 @@
   <div id="chat-panel">
 
     <!-- Panel header -->
-    <div style="padding:12px 14px 10px;border-bottom:1px solid rgba(99,102,241,.1);display:flex;align-items:center;gap:8px;flex-shrink:0;">
-      <span style="width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:inline-block;animation:pulse-dot 2s ease-in-out infinite;box-shadow:0 0 6px rgba(99,102,241,.7);flex-shrink:0;"></span>
-      <span class="font-mono" data-assistant-name style="font-size:11px;font-weight:700;color:#e2e8f0;">George AI Assistant</span>
-      <span id="header-msg-count" class="font-mono" style="font-size:9px;color:#a78bfa;margin-left:auto;">20 / 20</span>
-      <span class="font-mono" style="font-size:9px;color:#6b7280;">· LangGraph · Groq</span>
-      <button id="iframe-close-btn" onclick="window.parent.postMessage('close-chat','*')" aria-label="Close" style="display:flex;margin-left:8px;width:28px;height:28px;border-radius:50%;border:none;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;cursor:pointer;flex-shrink:0;align-items:center;justify-content:center;filter:drop-shadow(0 0 6px rgba(99,102,241,.9)) drop-shadow(0 0 12px rgba(139,92,246,.5));transition:filter .2s,transform .2s;">
+    <div style="padding:12px 14px 10px;border-bottom:1px solid rgba(200,255,46,.1);display:flex;align-items:center;gap:8px;flex-shrink:0;">
+      <span style="width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,#c8ff2e,#c8ff2e);display:inline-block;animation:pulse-dot 2s ease-in-out infinite;box-shadow:0 0 6px rgba(200,255,46,.7);flex-shrink:0;"></span>
+      <span class="font-mono" data-assistant-name style="font-size:11px;font-weight:700;color:#f4f4ee;">George AI Assistant</span>
+      <span id="header-msg-count" class="font-mono" style="font-size:9px;color:#c8ff2e;margin-left:auto;">20 / 20</span>
+      <span class="font-mono" style="font-size:9px;color:#9ea3a8;">· LangGraph · Groq</span>
+      <button id="iframe-close-btn" onclick="window.parent.postMessage('close-chat','*')" aria-label="Close" style="display:flex;margin-left:8px;width:28px;height:28px;border-radius:50%;border:none;background:linear-gradient(135deg,#c8ff2e,#c8ff2e);color:#fff;cursor:pointer;flex-shrink:0;align-items:center;justify-content:center;filter:drop-shadow(0 0 6px rgba(200,255,46,.9)) drop-shadow(0 0 12px rgba(200,255,46,.5));transition:filter .2s,transform .2s;">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
 
     <!-- Messages -->
     <div id="chat-messages" class="flex flex-col gap-3" style="flex:1;overflow-y:auto;padding:14px 14px 10px;">
-      <div class="bubble-ai font-mono text-xs text-[#e2e8f0]">
+      <div class="bubble-ai font-mono text-xs text-[#f4f4ee]">
         Hey! I'm George AI Assistant. Ask about my experience, technical projects, and availability.
       </div>
     </div>
 
     <!-- Bottom bar -->
-    <div style="border-top:1px solid rgba(30,30,46,.6);">
+    <div style="border-top:1px solid rgba(35,39,43,.6);">
 
       <!-- Quick-action buttons (persistent) -->
       <div id="quick-actions">
         <button class="qa-btn" style="--qc:#00aaff" data-msg="Tell me about George"><span class="qa-dot"></span>About George</button>
         <button class="qa-btn" style="--qc:#a855f7" data-msg="I'd like to book a meeting with George"><span class="qa-dot"></span>Book a call</button>
         <button class="qa-btn" style="--qc:#ff6b35" data-msg="Can you send me George's CV?"><span class="qa-dot"></span>Get his CV</button>
-        <button class="qa-btn" style="--qc:#fbbf24" data-msg="I have a job description to analyze"><span class="qa-dot"></span>Score JD fit</button>
       </div>
 
       <!-- Agent status strip -->
       <div id="agent-strip">
-        <span id="sn-orch"     class="sn" style="--sc:#00ff88"><span class="sn-dot"></span>ORCH</span>
+        <span id="sn-orch"     class="sn" style="--sc:#c8ff2e"><span class="sn-dot"></span>ORCH</span>
         <span id="sn-rag"      class="sn" style="--sc:#00aaff"><span class="sn-dot"></span>Memory</span>
         <span id="sn-email"    class="sn" style="--sc:#ff6b35"><span class="sn-dot"></span>Email</span>
         <span id="sn-calendar" class="sn" style="--sc:#a855f7"><span class="sn-dot"></span>Calendar</span>
-        <span id="sn-job_match"class="sn" style="--sc:#fbbf24"><span class="sn-dot"></span>Analyzer</span>
+        <span id="sn-job_match"class="sn" style="--sc:#fbbf24" hidden><span class="sn-dot"></span>Analyzer</span>
         <span id="sn-telegram" class="sn" style="--sc:#22d3ee"><span class="sn-dot"></span>Notify</span>
       </div>
 
@@ -417,7 +417,7 @@
             placeholder="Ask me anything about George..."
             style="min-height:38px;max-height:110px;overflow-y:auto;"
           ></textarea>
-          <div id="char-counter" class="hidden font-mono text-right" style="font-size:9px;color:#6b7280;">0 / 7000</div>
+          <div id="char-counter" class="hidden font-mono text-right" style="font-size:9px;color:#9ea3a8;">0 / 7000</div>
         </div>
         <button id="send-btn" aria-label="Send">
           <i data-lucide="send" class="w-4 h-4"></i>
@@ -463,19 +463,29 @@
       location.hostname === 'localhost' ||
       location.hostname === '127.0.0.1' ||
       location.hostname === '';
-    const API_BASE = isLocal
-      ? 'http://localhost:7860'
-      : 'https://630x-lushai.hf.space';
+    // The live backend is the default. On a local preview, a backend running on this machine
+    // (port 7860) is preferred when it answers; otherwise the page falls back to the live one,
+    // so the chat also works when only the static site is being previewed.
+    const LIVE_API = 'https://630x-lushai.hf.space';
+    let API_BASE = LIVE_API;
+    if (isLocal) {
+      const probe = new AbortController();
+      const probeTimer = setTimeout(() => probe.abort(), 1200);
+      fetch('http://localhost:7860/health', { signal: probe.signal })
+        .then((r) => { if (r.ok) API_BASE = 'http://localhost:7860'; })
+        .catch(() => {})
+        .finally(() => clearTimeout(probeTimer));
+    }
 
     // Agent colour map
     const AGENT_COLOR = {
-      orchestrator: '#00ff88',
+      orchestrator: '#c8ff2e',
       rag:          '#00aaff',
       email:        '#ff6b35',
       calendar:     '#a855f7',
       job_match: '#fbbf24',
       telegram:     '#22d3ee',
-      off_topic:    '#6b7280',
+      off_topic:    '#9ea3a8',
     };
     const AGENT_CLASS = {
       orchestrator: 'active-orch',
@@ -613,7 +623,7 @@
         line.style.stroke = 'rgba(255,255,255,.06)';
         if (id === agentId) {
           line.classList.add('flowing');
-          line.style.stroke = AGENT_COLOR[agentId] || '#6366f1';
+          line.style.stroke = AGENT_COLOR[agentId] || '#c8ff2e';
         }
       });
     }
@@ -723,7 +733,7 @@
 
     // ── Event log ────────────────────────────────────────────────────────────
     function logEvent(type, agent, text) {
-      const color = AGENT_COLOR[agent] || '#6366f1';
+      const color = AGENT_COLOR[agent] || '#c8ff2e';
       const label = EVENT_LABEL[type] || type;
       const badge = agent && agent !== 'orchestrator'
         ? `<span style="color:${color};font-family:'JetBrains Mono',monospace;font-size:8px;opacity:.65;flex-shrink:0;margin-top:2px;">[${agent.toUpperCase()}]</span>`
@@ -751,13 +761,13 @@
     function addMessage(role, text) {
       const div = document.createElement('div');
       if (role === 'user') {
-        div.className = 'bubble-user font-mono text-xs text-[#e2e8f0]';
+        div.className = 'bubble-user font-mono text-xs text-[#f4f4ee]';
         div.textContent = text;
       } else if (role === 'error') {
         div.className = 'bubble-error font-mono text-xs text-red-400';
         div.textContent = '⚠ ' + text;
       } else {
-        div.className = 'bubble-ai font-mono text-xs text-[#e2e8f0]';
+        div.className = 'bubble-ai font-mono text-xs text-[#f4f4ee]';
         div.textContent = text;
       }
       chatMessages.appendChild(div);
@@ -769,7 +779,7 @@
     }
 
     function showAgentBubble(agent, statusText) {
-      const color = AGENT_COLOR[agent] || '#6366f1';
+      const color = AGENT_COLOR[agent] || '#c8ff2e';
       const label = AGENT_LABEL[agent] || agent;
       if (!agentBubble) {
         agentBubble = document.createElement('div');
@@ -832,7 +842,7 @@
       budgetFill.style.width = pct + '%';
 
       let color;
-      if (remaining >= 10)      color = '#00ff88';
+      if (remaining >= 10)      color = '#c8ff2e';
       else if (remaining >= 5)  color = '#fbbf24';
       else if (remaining >= 2)  color = '#ff6b35';
       else                      color = '#ef4444';
@@ -851,7 +861,7 @@
 
     function showBudgetExhausted() {
       const div = document.createElement('div');
-      div.className = 'bubble-ai font-mono text-xs text-[#e2e8f0]';
+      div.className = 'bubble-ai font-mono text-xs text-[#f4f4ee]';
       div.style.borderLeft = '2px solid #a855f7';
       div.style.paddingLeft = '10px';
       div.innerHTML =
@@ -861,12 +871,12 @@
         `<div style="display:flex;gap:8px;margin-top:6px;">` +
           `<a href="images/RusuGeorgeCV.pdf" target="_blank" ` +
              `style="flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .5rem;` +
-                    `border-radius:8px;border:1px solid rgba(99,102,241,.3);color:#818cf8;text-decoration:none;" ` +
-             `onmouseover="this.style.background='rgba(99,102,241,.1)'" onmouseout="this.style.background='none'">📄 Download CV</a>` +
+                    `border-radius:8px;border:1px solid rgba(200,255,46,.3);color:#c8ff2e;text-decoration:none;" ` +
+             `onmouseover="this.style.background='rgba(200,255,46,.1)'" onmouseout="this.style.background='none'">📄 Download CV</a>` +
           `<a href="mailto:${contactEmail()}" ` +
              `style="flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .5rem;` +
-                    `border-radius:8px;border:1px solid rgba(99,102,241,.3);color:#818cf8;text-decoration:none;" ` +
-             `onmouseover="this.style.background='rgba(99,102,241,.1)'" onmouseout="this.style.background='none'">✉ Email George</a>` +
+                    `border-radius:8px;border:1px solid rgba(200,255,46,.3);color:#c8ff2e;text-decoration:none;" ` +
+             `onmouseover="this.style.background='rgba(200,255,46,.1)'" onmouseout="this.style.background='none'">✉ Email George</a>` +
         `</div>`;
       chatMessages.appendChild(div);
       chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -891,21 +901,21 @@
 
     function showFinalBlock() {
       const div = document.createElement('div');
-      div.className = 'bubble-ai font-mono text-xs text-[#e2e8f0]';
-      div.style.borderLeft = '2px solid #00ff88';
+      div.className = 'bubble-ai font-mono text-xs text-[#f4f4ee]';
+      div.style.borderLeft = '2px solid #c8ff2e';
       div.style.paddingLeft = '10px';
       div.innerHTML =
-        `<span style="color:#00ff88;font-weight:600;">✓ All done!</span><br>` +
+        `<span style="color:#c8ff2e;font-weight:600;">✓ All done!</span><br>` +
         `<span style="color:#9ca3af;">Thanks for trying the full system! Reach out directly:</span>` +
         `<div style="display:flex;gap:8px;margin-top:6px;">` +
           `<a href="mailto:${contactEmail()}" ` +
              `style="flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .5rem;` +
-                    `border-radius:8px;border:1px solid rgba(0,255,136,.25);color:#00ff88;text-decoration:none;" ` +
-             `onmouseover="this.style.background='rgba(0,255,136,.08)'" onmouseout="this.style.background='none'">✉ Email George</a>` +
+                    `border-radius:8px;border:1px solid rgba(200,255,46,.25);color:#c8ff2e;text-decoration:none;" ` +
+             `onmouseover="this.style.background='rgba(200,255,46,.08)'" onmouseout="this.style.background='none'">✉ Email George</a>` +
           `<a href="images/RusuGeorgeCV.pdf" target="_blank" ` +
              `style="flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .5rem;` +
-                    `border-radius:8px;border:1px solid rgba(99,102,241,.3);color:#818cf8;text-decoration:none;" ` +
-             `onmouseover="this.style.background='rgba(99,102,241,.1)'" onmouseout="this.style.background='none'">📄 Download CV</a>` +
+                    `border-radius:8px;border:1px solid rgba(200,255,46,.3);color:#c8ff2e;text-decoration:none;" ` +
+             `onmouseover="this.style.background='rgba(200,255,46,.1)'" onmouseout="this.style.background='none'">📄 Download CV</a>` +
         `</div>`;
       chatMessages.appendChild(div);
       chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -1152,7 +1162,7 @@
         charCounter.classList.remove('hidden');
         charCounter.textContent = `${len} / ${MAX_CHARS}`;
         const overLimit = len > MAX_CHARS;
-        charCounter.style.color = overLimit ? '#ef4444' : len > MAX_CHARS * 0.85 ? '#f59e0b' : '#6b7280';
+        charCounter.style.color = overLimit ? '#ef4444' : len > MAX_CHARS * 0.85 ? '#f59e0b' : '#9ea3a8';
         sendBtn.disabled = overLimit;
         sendBtn.style.opacity = overLimit ? '0.35' : '';
       } else {
@@ -1164,7 +1174,7 @@
 
     // Clear log
     document.getElementById('clear-log').addEventListener('click', () => {
-      eventLog.innerHTML = '<p class="font-mono text-[10px] text-[#6b7280]/50 text-center mt-4">Events will appear here in real time…</p>';
+      eventLog.innerHTML = '<p class="font-mono text-[10px] text-[#9ea3a8]/50 text-center mt-4">Events will appear here in real time…</p>';
     });
 
     // ── Init ──────────────────────────────────────────────────────────────────
@@ -1173,10 +1183,8 @@
     // ── Rotating placeholder ──────────────────────────────────────────────────
     const _placeholders = [
       'Ask me anything about George...',
-      'Paste a JD or drop a job URL...',
       'Want George\'s CV? Just ask.',
       'Book a call with George...',
-      'Drop a LinkedIn job URL...',
       'Ask about George\'s projects...',
     ];
     let _phIdx = 0;

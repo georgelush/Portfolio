@@ -4,6 +4,8 @@ import logging
 import mimetypes
 import os
 import re
+import time
+from collections import deque
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -20,6 +22,9 @@ logger = logging.getLogger(__name__)
 _GMAIL_TOKEN_URL = "https://oauth2.googleapis.com/token"
 _GMAIL_SEND_URL  = "https://gmail.googleapis.com/gmail/v1/users/me/messages/send"
 _CV_PATH = Path(__file__).parent.parent / "images" / "RusuGeorgeCV.pdf"
+
+_CV_SENDS_PER_DAY = 30
+_cv_sends: deque = deque()   # timestamps of CV emails sent in the last 24 hours
 
 _EMAIL_RE = re.compile(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}")
 
@@ -90,6 +95,15 @@ async def send_cv(to_email: str) -> bool:
     """Send the CV to *to_email* via the Gmail API. Returns True on success."""
     if not _gmail_credentials_ok():
         return False
+    # Global daily cap: the recipient is whatever a visitor typed, so the mailbox must not
+    # become a way to send unlimited mail to third parties.
+    now = time.monotonic()
+    while _cv_sends and now - _cv_sends[0] > 86400:
+        _cv_sends.popleft()
+    if len(_cv_sends) >= _CV_SENDS_PER_DAY:
+        logger.warning("CV email not sent: daily cap of %d reached.", _CV_SENDS_PER_DAY)
+        return False
+    _cv_sends.append(now)
     access_token = await _get_access_token()
     raw = _build_cv_email(to_email)
     async with httpx.AsyncClient(timeout=20) as client:

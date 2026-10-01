@@ -1,869 +1,280 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>George Rusu — AI Engineer &amp; Agentic Automation</title>
-  <meta name="description" content="AI engineer building production-grade agentic systems, RAG platforms, voice AI, and enterprise automation. Currently preparing the launch of FLOWENTIC." />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="George Rusu — AI Engineer &amp; Agentic Automation" />
-  <meta property="og:description" content="AI engineer building production-grade agentic systems, RAG platforms, voice AI, and enterprise automation. Currently preparing the launch of FLOWENTIC." />
-  <meta property="og:image" content="https://georgelush.github.io/Portfolio/images/Preview.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="George Rusu — AI Engineer &amp; Agentic Automation" />
-  <meta name="twitter:description" content="AI engineer building production-grade agentic systems, RAG platforms, voice AI, and enterprise automation. Currently preparing the launch of FLOWENTIC." />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            mono: ['"JetBrains Mono"', 'monospace'],
-            sans: ['Inter', 'sans-serif'],
-          },
-        },
-      },
-    }
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/brand.css" />
-  <script src="js/site-config.js" defer></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <style>
-    .mesh-bg{background-color:var(--bg);background-image:radial-gradient(ellipse 80% 60% at 10% -10%,rgba(99,102,241,.18) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 90% 20%,rgba(14,165,233,.12) 0%,transparent 55%),radial-gradient(ellipse 50% 40% at 50% 100%,rgba(139,92,246,.12) 0%,transparent 60%);}
-    .hero-mesh{background-image:radial-gradient(ellipse 70% 50% at 20% 30%,rgba(99,102,241,.22) 0%,transparent 55%),radial-gradient(ellipse 50% 40% at 80% 60%,rgba(14,165,233,.14) 0%,transparent 50%);}
-    .stack-badge{background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.25);transition:all .2s;}
-    .stack-badge:hover{background:rgba(99,102,241,.18);border-color:rgba(99,102,241,.55);box-shadow:0 0 14px rgba(99,102,241,.25);}
-    .bento-sky{border-color:rgba(14,165,233,.25)!important;}
-    .bento-sky:hover{border-color:rgba(14,165,233,.5)!important;box-shadow:0 0 28px 2px rgba(14,165,233,.12);}
-    .bento-vio{border-color:rgba(139,92,246,.25)!important;}
-    .bento-vio:hover{border-color:rgba(139,92,246,.5)!important;box-shadow:0 0 28px 2px rgba(139,92,246,.14);}
-    .cursor::after{content:"|";animation:blink 1.1s step-end infinite;}
-    @keyframes blink{50%{opacity:0;}}
-    .geo-ring{border-radius:50%;border:1px solid rgba(99,102,241,.18);}
-    .geo-ring-sky{border-radius:50%;border:1px solid rgba(14,165,233,.14);}
-    @keyframes fadeIn{0%{opacity:0;transform:translateY(16px);}100%{opacity:1;transform:translateY(0);}}
-    @keyframes badge-glow{0%,100%{box-shadow:0 0 6px rgba(14,165,233,.2),0 0 0px rgba(14,165,233,0);}50%{box-shadow:0 0 18px rgba(14,165,233,.5),0 0 32px rgba(14,165,233,.15);}}
-    @keyframes live-glow{0%,100%{box-shadow:0 0 6px rgba(0,255,136,.2);}50%{box-shadow:0 0 18px rgba(0,255,136,.5),0 0 32px rgba(0,255,136,.15);}}
-    /* ── Cert Carousel ── */
-    .cert-carousel-wrap{display:none;}
-    @media(min-width:900px){.cert-carousel-wrap{display:flex;flex-direction:column;align-items:center;flex-shrink:0;gap:14px;}}
-    .cert-stage{position:relative;width:380px;height:256px;overflow:hidden;}
-    .cert-card{position:absolute;left:50%;top:50%;width:170px;height:204px;transform:translate(-50%,-50%) scale(1);opacity:1;z-index:3;border-radius:16px;transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .45s,z-index 0s .22s;cursor:pointer;}
-    .cert-card.cp-prev{transform:translate(calc(-50% - 140px),-50%) scale(0.68);opacity:0.28;z-index:2;pointer-events:none;transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .45s;}
-    .cert-card.cp-next{transform:translate(calc(-50% + 140px),-50%) scale(0.68);opacity:0.28;z-index:2;pointer-events:none;transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .45s;}
-    .cert-card.cp-hl{transform:translate(calc(-50% - 280px),-50%) scale(0.45);opacity:0;z-index:1;pointer-events:none;}
-    .cert-card.cp-hr{transform:translate(calc(-50% + 280px),-50%) scale(0.45);opacity:0;z-index:1;pointer-events:none;}
-    .cert-nav{display:flex;align-items:center;gap:14px;}
-    .cert-btn{background:rgba(17,17,24,.7);border:1px solid rgba(99,102,241,.2);border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all .2s;color:var(--text-muted);line-height:1;}
-    .cert-btn:hover{border-color:rgba(99,102,241,.5);color:var(--text);box-shadow:0 0 12px rgba(99,102,241,.2);}
-    .cert-dots{display:flex;gap:5px;}
-    .cert-dot{width:6px;height:6px;border-radius:50%;background:rgba(99,102,241,.2);transition:all .3s;cursor:pointer;}
-    .cert-dot.on{background:var(--brand-indigo);width:16px;border-radius:3px;}
-    /* ── Responsive nav ─── */
-    .nav-desktop-links,.nav-desktop-actions{display:none;}
-    @media(min-width:768px){.nav-desktop-links,.nav-desktop-actions{display:flex;}.nav-mobile-right{display:none!important;}#nav-mobile{display:none!important;}}
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>George Rusu — AI &amp; Automation Engineer</title>
+<meta name="description" content="AI and automation engineer, founder of FLOWENTIC. 320+ production workflows built and maintained at Atos, four open-source AI systems with recorded demos. Agents, RAG and voice systems that survive real work." />
+<link rel="canonical" href="https://georgelush.github.io/Portfolio/" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://georgelush.github.io/Portfolio/" />
+<meta property="og:title" content="George Rusu — AI &amp; Automation Engineer" />
+<meta property="og:description" content="Agents that show up on Monday. 320+ production workflows, four open-source AI systems with recorded demos." />
+<meta property="og:image" content="https://georgelush.github.io/Portfolio/images/preview.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#08090a" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23c8ff2e'/%3E%3Ctext x='16' y='23' font-family='Arial Black,Arial,sans-serif' font-size='19' font-weight='900' text-anchor='middle' fill='%230a0a0a'%3EG%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/site.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"George Rusu","jobTitle":"AI & Automation Engineer","email":"mailto:george@flowentic.com","worksFor":{"@type":"Organization","name":"FLOWENTIC","url":"https://flowentic.com"},"url":"https://georgelush.github.io/Portfolio/","image":"https://georgelush.github.io/Portfolio/images/george-rusu.jpg","sameAs":["https://github.com/georgelush","https://www.linkedin.com/in/rusugeorge/","https://www.youtube.com/@R-630X"]}
+</script>
+<script>
+  // Dark is the brand default; the toggle stores an explicit choice.
+  try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
 </head>
-<body class="mesh-bg min-h-screen antialiased">
+<body>
 
-  <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-[#1e1e2e]/80 bg-[#0a0a0f]/80 backdrop-blur-md">
-    <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-      <a href="index.html" class="font-mono text-sm font-bold grad-text tracking-tight">Rusu George</a>
-      <div class="nav-desktop-links items-center gap-6">
-        <a href="index.html"      class="nav-link active font-mono text-xs tracking-widest uppercase">Home</a>
-        <a href="archive.html"    class="nav-link font-mono text-xs tracking-widest uppercase">Archive</a>
-        <a href="about.html"      class="nav-link font-mono text-xs tracking-widest uppercase">About</a>
-        <a data-flowentic-link hidden aria-disabled="true" class="nav-link font-mono text-xs tracking-widest uppercase">FLOWENTIC</a>
-      </div>
-      <div class="nav-desktop-actions items-center gap-3">
-        <a href="https://www.linkedin.com/in/rusugeorge/" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
-        <a href="https://github.com/georgelush" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-4 h-4"></i></a>
-        <a data-contact-link class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="Contact George"><i data-lucide="mail" class="w-4 h-4"></i></a>
-        <a href="images/RusuGeorgeCV.pdf" target="_blank" class="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-md border border-[#6366f1]/40 text-[#6366f1] hover:bg-[#6366f1]/10 transition-all"><i data-lucide="download" class="w-3 h-3"></i> CV</a>
-      </div>
-      <div class="nav-mobile-right flex items-center gap-2">
-        <a href="images/RusuGeorgeCV.pdf" target="_blank" class="flex items-center gap-1.5 text-xs font-mono px-2.5 py-1.5 rounded-md border border-[#6366f1]/40 text-[#6366f1] hover:bg-[#6366f1]/10 transition-all"><i data-lucide="download" class="w-3 h-3"></i> CV</a>
-        <button id="nav-toggle" aria-label="Toggle menu" class="p-2 text-[#9ca3af] hover:text-[#e2e8f0] transition-colors">
-          <span id="nav-icon-open"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span>
-          <span id="nav-icon-close" style="display:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
-        </button>
-      </div>
-    </div>
-    <div id="nav-mobile" style="display:none;border-top:1px solid rgba(30,30,46,.6);background:rgba(10,10,15,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">
-      <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col">
-        <a href="index.html"      class="nav-link active font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">Home</a>
-        <a href="archive.html"    class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">Archive</a>
-        <a href="about.html"      class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">About</a>
-        <a data-flowentic-link hidden aria-disabled="true" class="nav-link font-mono text-sm tracking-widest uppercase py-3 border-b border-[#1e1e2e]/40">FLOWENTIC</a>
-        <div class="flex items-center gap-5 pt-4">
-          <a href="https://www.linkedin.com/in/rusugeorge/" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-          <a href="https://github.com/georgelush" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-5 h-5"></i></a>
-        </div>
-      </div>
-    </div>
-  </nav>
+<!-- Icons used by buttons below -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></symbol>
+  <symbol id="i-youtube" viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M2 5.5A2.5 2.5 0 0 1 4.5 3h15A2.5 2.5 0 0 1 22 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 18.5v-13zm2.6-.5 7.4 6.2L19.4 5H4.6zM20 6.9l-7.36 6.17a1 1 0 0 1-1.28 0L4 6.9v11.6c0 .28.22.5.5.5h15a.5.5 0 0 0 .5-.5V6.9z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-7.6l-4.7 3.5A1 1 0 0 1 6 20.7V18H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v11h4v2.7l3.7-2.7H20V5H4zm3 3h10v2H7V8zm0 3.5h7v2H7v-2z"/></symbol>
+</svg>
 
-  <!-- HERO -->
-  <section class="relative pt-36 pb-10 px-6 overflow-hidden hero-mesh">
-    <div class="absolute top-16 right-[-80px] w-[420px] h-[420px] geo-ring opacity-30 pointer-events-none"></div>
-    <div class="absolute top-32 right-[-40px] w-[280px] h-[280px] geo-ring-sky opacity-20 pointer-events-none"></div>
-    <div class="absolute bottom-0 left-[-60px] w-[300px] h-[300px] geo-ring opacity-15 pointer-events-none"></div>
-    <div class="absolute inset-0 pointer-events-none" style="background-image:radial-gradient(circle,rgba(99,102,241,.08) 1px,transparent 1px);background-size:36px 36px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black 40%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black 40%,transparent 100%);"></div>
-    <div class="relative max-w-6xl mx-auto flex items-center justify-between gap-10" style="animation:fadeIn 0.8s ease forwards;">
+<a class="skip" href="#main">Skip to content</a>
 
-      <!-- LEFT: text content -->
-      <div class="flex-1 min-w-0">
-        <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-[#0ea5e9]/25 bg-[#0ea5e9]/5 text-[#0ea5e9] text-xs font-mono" style="animation:badge-glow 2.5s ease-in-out infinite;">
-          <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
-          AI Engineer &middot; Agentic Automation
-        </div>
-        <h1 class="font-mono text-5xl md:text-7xl font-bold tracking-tight leading-tight mb-4">
-          Rusu<br /><span class="grad-text">George</span>
-        </h1>
-        <p class="font-mono text-[#6b7280] text-lg md:text-xl mb-3 max-w-xl">
-          Building reliable AI agents, RAG systems, and document automation for real business operations &mdash; while preparing the launch of <span class="grad-text">FLOWENTIC</span><span class="cursor"></span>
-        </p>
-        <p class="text-[#6b7280] text-sm max-w-lg mt-4 leading-relaxed">
-          Four years of enterprise automation followed by hands-on agentic AI engineering &mdash; LangGraph pipelines, multi-model LLM work (OpenAI, Claude, DeepSeek, Groq), and Human-in-the-Loop systems designed for real operations.
-        </p>
-        <p class="font-mono text-xs text-[#9ca3af] mt-4">Available for selected contract roles and B2B engagements</p>
-        <div class="flex gap-3 mt-8 flex-wrap">
-          <a href="archive.html" class="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#6366f1]/10 border border-[#6366f1]/35 text-[#e2e8f0] text-sm font-medium hover:bg-[#6366f1]/20 transition-all">
-            <i data-lucide="archive" class="w-4 h-4 text-[#6366f1]"></i> View Legacy Work
-          </a>
-          <a href="about.html" class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#1e1e2e] text-[#6b7280] text-sm font-medium hover:text-[#e2e8f0] transition-all">
-            <i data-lucide="user" class="w-4 h-4"></i> About Me
-          </a>
-        </div>
-      </div>
-
-      <!-- RIGHT: cert carousel (desktop only) -->
-      <div class="cert-carousel-wrap">
-        <div class="cert-stage" id="cert-stage">
-
-          <!-- Card 0: DataCamp (active) -->
-          <a class="cert-card" id="cc-0" href="https://www.datacamp.com/certificate/AIEDA0019097326736" target="_blank" rel="noopener" aria-label="DataCamp AI Engineer Certificate">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 260 310">
-              <defs>
-                <radialGradient id="dc-bg" cx="50%" cy="40%" r="70%"><stop offset="0%" stop-color="#0d1b2e"/><stop offset="100%" stop-color="#06101a"/></radialGradient>
-                <radialGradient id="dc-gl" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f97316" stop-opacity="0.28"/><stop offset="100%" stop-color="#f97316" stop-opacity="0"/></radialGradient>
-              </defs>
-              <rect width="260" height="310" rx="18" fill="url(#dc-bg)" stroke="rgba(249,115,22,0.25)" stroke-width="1.5"/>
-              <circle cx="130" cy="128" r="95" fill="url(#dc-gl)"/>
-              <circle cx="130" cy="128" r="94" fill="none" stroke="#f97316" stroke-width="1.1" opacity="0.14"/>
-              <circle cx="130" cy="128" r="80" fill="none" stroke="#f97316" stroke-width="1.4" opacity="0.28"/>
-              <circle cx="130" cy="128" r="66" fill="none" stroke="#f97316" stroke-width="1.8" opacity="0.50"/>
-              <circle cx="130" cy="128" r="52" fill="none" stroke="#f97316" stroke-width="2.4" opacity="0.72"/>
-              <circle cx="130" cy="128" r="40" fill="#f97316"/>
-              <path d="M130,107 L134.5,123.5 L151,128 L134.5,132.5 L130,149 L125.5,132.5 L109,128 L125.5,123.5 Z" fill="white"/>
-              <circle cx="148" cy="110" r="3.8" fill="white" opacity="0.75"/>
-              <circle cx="116" cy="148" r="2.8" fill="white" opacity="0.55"/>
-              <text x="130" y="196" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" font-weight="700" fill="#3bb58e" letter-spacing="0.5">&#x2713; Certified</text>
-              <line x1="60" y1="205" x2="200" y2="205" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-              <text x="130" y="230" text-anchor="middle" font-family="Inter,sans-serif" font-size="17" font-weight="700" fill="#ffffff">AI Engineer for</text>
-              <text x="130" y="254" text-anchor="middle" font-family="Inter,sans-serif" font-size="17" font-weight="700" fill="#ffffff">Developers</text>
-              <text x="130" y="284" text-anchor="middle" font-family="Inter,sans-serif" font-size="9.5" fill="rgba(255,255,255,0.28)" letter-spacing="1.4">DATACAMP · MAR 2026</text>
-            </svg>
-          </a>
-
-          <!-- Card 1: Production systems proof -->
-          <div class="cert-card cp-next" id="cc-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 260 310">
-              <defs>
-                <radialGradient id="cs1-bg" cx="50%" cy="40%" r="70%"><stop offset="0%" stop-color="#0d142e"/><stop offset="100%" stop-color="#06080f"/></radialGradient>
-                <radialGradient id="cs1-gl" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#6366f1" stop-opacity="0.26"/><stop offset="100%" stop-color="#6366f1" stop-opacity="0"/></radialGradient>
-              </defs>
-              <rect width="260" height="310" rx="18" fill="url(#cs1-bg)" stroke="rgba(99,102,241,0.28)" stroke-width="1.5"/>
-              <circle cx="130" cy="120" r="78" fill="url(#cs1-gl)"/>
-              <circle cx="130" cy="120" r="56" fill="none" stroke="rgba(99,102,241,0.35)" stroke-width="2"/>
-              <text x="130" y="138" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="54" fill="#818cf8" font-weight="700">4</text>
-              <text x="130" y="210" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#ffffff" letter-spacing="1">AI SYSTEMS</text>
-              <text x="130" y="236" text-anchor="middle" font-family="Inter,sans-serif" font-size="9.5" fill="rgba(255,255,255,0.30)" letter-spacing="1.6">BUILT &middot; 2026</text>
-            </svg>
-          </div>
-
-          <!-- Card 2: agentic systems focus -->
-          <div class="cert-card cp-hr" id="cc-2" aria-label="Agentic AI systems">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 260 310">
-              <defs>
-                <radialGradient id="cs2-bg" cx="50%" cy="40%" r="70%"><stop offset="0%" stop-color="#06160e"/><stop offset="100%" stop-color="#05100a"/></radialGradient>
-                <radialGradient id="cs2-gl" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#00ff88" stop-opacity="0.20"/><stop offset="100%" stop-color="#00ff88" stop-opacity="0"/></radialGradient>
-              </defs>
-              <rect width="260" height="310" rx="18" fill="url(#cs2-bg)" stroke="rgba(0,255,136,0.24)" stroke-width="1.5"/>
-              <circle cx="130" cy="118" r="78" fill="url(#cs2-gl)"/>
-              <circle cx="130" cy="118" r="50" fill="none" stroke="rgba(0,255,136,0.32)" stroke-width="2"/>
-              <path d="M112,119 L125,133 L149,104" fill="none" stroke="#00ff88" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-              <text x="130" y="208" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" font-weight="700" fill="#ffffff">Agentic AI</text>
-              <text x="130" y="231" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="rgba(0,255,136,0.72)" letter-spacing="0.4">Built for Operations</text>
-              <text x="130" y="256" text-anchor="middle" font-family="Inter,sans-serif" font-size="9.5" fill="rgba(255,255,255,0.28)" letter-spacing="1.4">LANGGRAPH · HITL</text>
-            </svg>
-          </div>
-
-        </div><!-- /cert-stage -->
-
-        <!-- nav -->
-        <div class="cert-nav">
-          <button class="cert-btn" id="cp-prev" aria-label="Previous">&#8249;</button>
-          <div class="cert-dots" id="cp-dots">
-            <div class="cert-dot on"></div>
-            <div class="cert-dot"></div>
-            <div class="cert-dot"></div>
-          </div>
-          <button class="cert-btn" id="cp-next" aria-label="Next">&#8250;</button>
-        </div>
-
-      </div><!-- /cert-carousel-wrap -->
-
-    </div>
-  </section>
-
-
-
-  <!-- BUILDING FLOWENTIC -->
-  <section class="py-16 px-6 border-y border-[#1e1e2e]/40" id="flowentic">
-    <div class="max-w-6xl mx-auto glass rounded-2xl p-6 md:p-10 relative overflow-hidden">
-      <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(14,165,233,.13) 0%,transparent 70%);"></div>
-      <div class="relative">
-        <p class="font-mono text-xs text-[#0ea5e9] tracking-widest uppercase mb-2">// next_chapter</p>
-        <h2 class="font-mono text-2xl md:text-3xl font-bold text-[#e2e8f0] mb-4">Building FLOWENTIC</h2>
-        <p class="text-[#9ca3af] text-sm leading-relaxed max-w-3xl">
-          I am currently preparing FLOWENTIC, a B2B AI automation and software company focused on reliable AI agents, RAG, document automation, and enterprise integrations.
-        </p>
-        <p class="text-[#6b7280] text-sm leading-relaxed max-w-3xl mt-3">
-          The company is being prepared for launch. Until the operational setup is complete, this portfolio remains the primary place to explore my technical work and discuss selected contract engagements.
-        </p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-7">
-          <div class="rounded-xl border border-[#6366f1]/20 bg-[#6366f1]/5 p-4">
-            <p class="font-mono text-sm text-[#e2e8f0]">AI agents for business operations</p>
-            <p class="text-xs text-[#6b7280] mt-2">Auditable multi-agent workflows with Human-in-the-Loop control points.</p>
-          </div>
-          <div class="rounded-xl border border-[#0ea5e9]/20 bg-[#0ea5e9]/5 p-4">
-            <p class="font-mono text-sm text-[#e2e8f0]">RAG and enterprise knowledge systems</p>
-            <p class="text-xs text-[#6b7280] mt-2">Hybrid retrieval, document ingestion, and knowledge pipelines for operational teams.</p>
-          </div>
-          <div class="rounded-xl border border-[#8b5cf6]/20 bg-[#8b5cf6]/5 p-4">
-            <p class="font-mono text-sm text-[#e2e8f0]">Document and workflow automation</p>
-            <p class="text-xs text-[#6b7280] mt-2">Connecting AI to approvals, tools, and real business process constraints.</p>
-          </div>
-        </div>
-        <!-- Activated when flowenticSiteEnabled is true in config/portfolio.json -->
-        <a data-flowentic-link hidden aria-disabled="true" class="inline-flex items-center gap-1.5 mt-6 font-mono text-xs text-[#0ea5e9] hover:text-[#38bdf8] transition-colors">Visit FLOWENTIC <i data-lucide="arrow-up-right" class="w-3 h-3"></i></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CURRENT PROJECTS BENTO GRID -->
-  <section class="py-20 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="mb-10">
-        <p class="font-mono text-xs text-[#6366f1] tracking-widest uppercase mb-2">// selected_projects</p>
-        <h2 class="font-mono text-2xl font-bold text-[#e2e8f0]">Production-Grade AI Systems Built</h2>
-        <p class="text-[#6b7280] text-sm mt-2 max-w-xl">Four technical systems and deployed demonstrations covering agentic orchestration, voice AI, RAG, and operational automation — personal/open-source work, not client production deployments.</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-        <!-- Main placeholder card -->
-        <div id="chapter-1" class="md:col-span-2 glass rounded-2xl p-5 md:p-8 relative overflow-hidden group">
-          <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(99,102,241,.12) 0%,transparent 70%);"></div>
-          <div class="relative">
-            <div class="flex items-center gap-2 mb-5">
-                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-              <span class="font-mono text-xs text-[#8b5cf6] tracking-widest uppercase">Chapter I &middot; Shipped</span>
-            </div>
-            <h3 class="font-mono text-xl font-bold text-[#e2e8f0] mb-1">Agentic AI Playground</h3>
-            <p class="font-mono text-xs text-[#6366f1] mb-4">LangGraph &times; Qdrant &times; Langfuse</p>
-            <p class="text-[#6b7280] text-sm leading-relaxed max-w-lg">
-              My working lab for agentic patterns — LangGraph orchestration, hybrid retrieval on Qdrant, and full
-              Langfuse observability. Four years of enterprise RPA at ATOS shape how I design these systems: for
-              operational constraints and failure modes, not only the happy path.
-            </p>
-            <!-- YouTube embed -->
-            <div class="mt-5 rounded-xl overflow-hidden border border-[#6366f1]/20" style="box-shadow:0 0 28px 2px rgba(99,102,241,.10);">
-              <div style="position:relative;padding-bottom:56.25%;height:0;">
-                <iframe
-                  src="https://www.youtube.com/embed/MZVc9J5lOKo?rel=0&modestbranding=1"
-                  title="Agentic AI Playground — n8n &amp; Curriculum Walkthrough"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  loading="lazy"
-                  style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:0.75rem;"
-                ></iframe>
-              </div>
-            </div>
-            <div class="flex flex-wrap gap-2 mt-4">
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#6366f1]/10 border border-[#6366f1]/25 text-[#6366f1]">n8n</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#8b5cf6]/10 border border-[#8b5cf6]/25 text-[#8b5cf6]">LangGraph</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#6366f1]/10 border border-[#6366f1]/25 text-[#6366f1]">LangChain</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#0ea5e9]/10 border border-[#0ea5e9]/25 text-[#0ea5e9]">FastAPI</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#0ea5e9]/10 border border-[#0ea5e9]/25 text-[#0ea5e9]">Gradio</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#6366f1]/10 border border-[#6366f1]/25 text-[#6366f1]">Qdrant</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#8b5cf6]/10 border border-[#8b5cf6]/25 text-[#8b5cf6]">Langfuse</span>
-            </div>
-            <div class="mt-6 pt-5 border-t border-[#1e1e2e]/80 flex flex-wrap items-center justify-between gap-y-2">
-              <div class="flex items-center gap-2 text-xs font-mono text-[#6b7280]">
-                <i data-lucide="clock" class="w-3.5 h-3.5 text-[#8b5cf6]"></i>
-                Started: March 2026
-                <span class="mx-2">&middot;</span>
-                <i data-lucide="package-check" class="w-3.5 h-3.5 text-emerald-400"></i>
-                Status: <span class="text-emerald-400 ml-1">Shipped</span>
-              </div>
-              <a href="https://github.com/georgelush/Agentic-AI-Playground" target="_blank" class="flex items-center gap-1.5 font-mono text-xs text-[#6366f1] hover:text-[#8b5cf6] transition-colors">
-                <i data-lucide="github" class="w-3.5 h-3.5"></i> View on GitHub
-                <i data-lucide="arrow-right" class="w-3 h-3"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Chapter Timeline side card -->
-        <div class="glass bento-sky rounded-2xl p-6 flex flex-col relative overflow-hidden md:row-span-5 order-first md:order-none">
-          <div class="absolute -bottom-10 -left-10 w-40 h-40 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(14,165,233,.10) 0%,transparent 70%);"></div>
-          <div class="relative flex flex-col h-full">
-
-            <!-- Header -->
-            <div class="flex items-center gap-2 mb-6">
-              <div class="w-8 h-8 rounded-lg bg-[#0ea5e9]/10 border border-[#0ea5e9]/25 flex items-center justify-center">
-                <i data-lucide="git-commit-vertical" class="w-4 h-4 text-[#0ea5e9]"></i>
-              </div>
-              <h4 class="font-mono text-xs font-bold text-[#e2e8f0] uppercase tracking-widest">Chapters</h4>
-            </div>
-
-            <!-- Timeline -->
-            <div class="flex flex-col gap-0 flex-1">
-
-              <!-- Chapter I -->
-              <div class="flex gap-3">
-                <div class="flex flex-col items-center">
-                  <div class="w-3 h-3 rounded-full bg-[#8b5cf6] border-2 border-[#8b5cf6] mt-0.5 flex-shrink-0"></div>
-                  <div class="w-px flex-1 bg-gradient-to-b from-[#8b5cf6]/50 to-[#0ea5e9]/30 mt-1"></div>
-                </div>
-                <div class="pb-6">
-                  <a href="#chapter-1" class="group/ch block">
-                  <p class="font-mono text-xs font-bold text-[#8b5cf6] mb-0.5 flex items-center gap-1">Chapter I <i data-lucide="arrow-down" class="w-2.5 h-2.5 opacity-0 group-hover/ch:opacity-100 transition-opacity"></i></p>
-                  <p class="font-mono text-xs text-[#e2e8f0] mb-2 group-hover/ch:text-[#8b5cf6]/80 transition-colors">Playground</p>
-                  </a>
-                  <div class="flex flex-wrap gap-1">
-                    <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-[#8b5cf6]/10 border border-[#8b5cf6]/20 text-[#8b5cf6]/80">LangGraph</span>
-                    <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-[#6366f1]/10 border border-[#6366f1]/20 text-[#6366f1]/80">n8n</span>
-                    <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-[#8b5cf6]/10 border border-[#8b5cf6]/20 text-[#8b5cf6]/80">Langfuse</span>
-                    <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-[#6366f1]/10 border border-[#6366f1]/20 text-[#6366f1]/80">Qdrant</span>
-                  </div>
-                  <span class="inline-flex items-center gap-1 mt-2 font-mono text-[10px] text-emerald-400/70"><i data-lucide="package-check" class="w-2.5 h-2.5"></i>Shipped</span>
-                </div>
-              </div>
-
-              <!-- Chapter II -->
-              <div class="flex gap-3">
-                <div class="flex flex-col items-center">
-                  <div class="w-3 h-3 rounded-full bg-[#0ea5e9] border-2 border-[#0ea5e9] mt-0.5 flex-shrink-0"></div>
-                  <div class="w-px flex-1 bg-gradient-to-b from-[#0ea5e9]/30 to-transparent mt-1"></div>
-                </div>
-                <div class="pb-6">
-                  <a href="#chapter-2" class="group/ch block">
-                  <p class="font-mono text-xs font-bold text-[#0ea5e9] mb-0.5 flex items-center gap-1">Chapter II <i data-lucide="arrow-down" class="w-2.5 h-2.5 opacity-0 group-hover/ch:opacity-100 transition-opacity"></i></p>
-                  <p class="font-mono text-xs text-[#e2e8f0] mb-2 group-hover/ch:text-[#0ea5e9]/80 transition-colors">AI On-Call</p>
-                  </a>
-                  <div class="flex flex-wrap gap-1">
-                    <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-[#0ea5e9]/10 border border-[#0ea5e9]/20 text-[#0ea5e9]/80">Twilio</span>
-                    <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-[#6366f1]/10 border border-[#6366f1]/20 text-[#6366f1]/80">ITSM</span>
-                    <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-[#8b5cf6]/10 border border-[#8b5cf6]/20 text-[#8b5cf6]/80">Redis</span>
-                  </div>
-                  <span class="inline-flex items-center gap-1 mt-2 font-mono text-[10px] text-[#0ea5e9]/70"><i data-lucide="flask-conical" class="w-2.5 h-2.5"></i>Pilot Case</span>
-                </div>
-              </div>
-
-              <!-- Chapter III -->
-              <div class="flex gap-3">
-                <div class="flex flex-col items-center">
-                  <div class="w-3 h-3 rounded-full bg-emerald-400 border-2 border-emerald-400 mt-0.5 flex-shrink-0"></div>
-                  <div class="w-px flex-1 bg-gradient-to-b from-emerald-400/30 to-transparent mt-1"></div>
-                </div>
-                <div class="pb-6">
-                  <a href="#chapter-3" class="group/ch block">
-                  <p class="font-mono text-xs font-bold text-emerald-400 mb-0.5 flex items-center gap-1">Chapter III <i data-lucide="arrow-down" class="w-2.5 h-2.5 opacity-0 group-hover/ch:opacity-100 transition-opacity"></i></p>
-                  <p class="font-mono text-xs text-[#e2e8f0] mb-2 group-hover/ch:text-emerald-400/80 transition-colors">RAG Service</p>
-                  </a>
-                  <div class="flex flex-wrap gap-1">
-                    <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400/80">Qdrant</span>
-                    <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-[#6366f1]/10 border border-[#6366f1]/20 text-[#6366f1]/80">FastAPI</span>
-                    <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-[#8b5cf6]/10 border border-[#8b5cf6]/20 text-[#8b5cf6]/80">Langfuse</span>
-                    <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400/80">Redis</span>
-                  </div>
-                  <span class="inline-flex items-center gap-1 mt-2 font-mono text-[10px] text-emerald-400/70"><i data-lucide="package-check" class="w-2.5 h-2.5"></i>Open source</span>
-                </div>
-              </div>
-
-              <!-- Chapter IV -->
-              <div class="flex gap-3">
-                <div class="flex flex-col items-center">
-                  <div class="w-3 h-3 rounded-full bg-[#00ff88] border-2 border-[#00ff88] mt-0.5 flex-shrink-0" style="animation:live-glow 2s ease-in-out infinite;"></div>
-                </div>
-                <div>
-                  <a href="#chapter-4" class="group/ch block">
-                  <p class="font-mono text-xs font-bold text-[#00ff88] mb-0.5 flex items-center gap-1">Chapter IV <i data-lucide="arrow-down" class="w-2.5 h-2.5 opacity-0 group-hover/ch:opacity-100 transition-opacity"></i></p>
-                  <p class="font-mono text-xs text-[#e2e8f0] mb-2 group-hover/ch:text-[#00ff88]/80 transition-colors">George AI Assistant · Orchestrator</p>
-                  </a>
-                  <div class="flex flex-wrap gap-1">
-                    <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-[#00ff88]/10 border border-[#00ff88]/20 text-[#00ff88]/80">LangGraph</span>
-                    <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-[#6366f1]/10 border border-[#6366f1]/20 text-[#6366f1]/80">Groq</span>
-                  </div>
-                  <span class="inline-flex items-center gap-1 mt-2 font-mono text-[10px] text-[#00ff88]/70"><i data-lucide="radio" class="w-2.5 h-2.5"></i>Live demo</span>
-                </div>
-              </div>
-
-              <!-- Chapter V -->
-              <div class="flex gap-3">
-                <div class="flex flex-col items-center">
-                  <div class="w-3 h-3 rounded-full border-2 border-dashed border-[#6b7280]/40 mt-0.5 flex-shrink-0"></div>
-                </div>
-                <div>
-                  <p class="font-mono text-xs font-bold text-[#6b7280]/50 mb-0.5">Chapter V</p>
-                  <p class="font-mono text-xs text-[#6b7280]/30 mb-1">???</p>
-                  <span class="font-mono text-[10px] text-[#6b7280]/30">Coming next…</span>
-                </div>
-              </div>
-
-            </div>
-
-            <p class="text-[10px] text-[#6b7280]/40 font-mono mt-auto pt-4">// always building</p>
-          </div>
-        </div>
-
-        <!-- Project 2: AI On-Call -->
-        <div id="chapter-2" class="md:col-span-2 glass rounded-2xl p-5 md:p-8 relative overflow-hidden group">
-          <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(14,165,233,.10) 0%,transparent 70%);"></div>
-          <div class="relative">
-            <div class="flex items-center gap-2 mb-5">
-              <span class="w-2 h-2 rounded-full bg-[#0ea5e9]" style="animation:pulse 4s cubic-bezier(.4,0,.6,1) infinite;"></span>
-              <span class="font-mono text-xs text-[#0ea5e9] tracking-widest uppercase">Chapter II &middot; Pilot Case</span>
-            </div>
-            <h3 class="font-mono text-xl font-bold text-[#e2e8f0] mb-1">AI On-Call &mdash; Voice Agent for IT Support</h3>
-            <p class="font-mono text-xs text-[#0ea5e9] mb-4">Twilio &times; LangGraph &times; ITSM</p>
-            <p class="text-[#6b7280] text-sm leading-relaxed max-w-lg">
-              Pilot-case outbound voice AI: when an ITSM ticket opens, the agent can call the customer, verify identity via a 6-digit code, collect a work note and ETA, then push results back through n8n into ITSM. Designed as a production-grade prototype, not presented as a live client deployment.
-            </p>
-            <!-- YouTube embed -->
-            <div class="mt-5 rounded-xl overflow-hidden border border-[#0ea5e9]/20" style="box-shadow:0 0 28px 2px rgba(14,165,233,.08);">
-              <div style="position:relative;padding-bottom:56.25%;height:0;">
-                <iframe
-                  src="https://www.youtube.com/embed/gthz0A8GmJU?rel=0&modestbranding=1"
-                  title="AI On-Call Voice Agent — Twilio + LangGraph + ITSM"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  loading="lazy"
-                  style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:0.75rem;"
-                ></iframe>
-              </div>
-            </div>
-            <div class="flex flex-wrap gap-2 mt-4">
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#0ea5e9]/10 border border-[#0ea5e9]/25 text-[#0ea5e9]">Twilio</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#8b5cf6]/10 border border-[#8b5cf6]/25 text-[#8b5cf6]">LangGraph</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#6366f1]/10 border border-[#6366f1]/25 text-[#6366f1]">n8n</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#0ea5e9]/10 border border-[#0ea5e9]/25 text-[#0ea5e9]">FastAPI</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#6366f1]/10 border border-[#6366f1]/25 text-[#6366f1]">ITSM</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#8b5cf6]/10 border border-[#8b5cf6]/25 text-[#8b5cf6]">Redis</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#6366f1]/10 border border-[#6366f1]/25 text-[#6366f1]">Langfuse</span>
-            </div>
-            <div class="mt-6 pt-5 border-t border-[#1e1e2e]/80 flex flex-wrap items-center justify-between gap-y-2">
-              <div class="flex items-center gap-2 text-xs font-mono text-[#6b7280]">
-                <i data-lucide="clock" class="w-3.5 h-3.5 text-[#0ea5e9]"></i>
-                Built: April 2026
-                <span class="mx-2">&middot;</span>
-                <i data-lucide="flask-conical" class="w-3.5 h-3.5 text-[#0ea5e9]"></i>
-                Status: <span class="text-[#0ea5e9] ml-1">Pilot Case</span>
-              </div>
-              <a href="https://github.com/georgelush/AI-ON-Call" target="_blank" class="flex items-center gap-1.5 font-mono text-xs text-[#0ea5e9] hover:text-[#38bdf8] transition-colors">
-                <i data-lucide="github" class="w-3.5 h-3.5"></i> View on GitHub
-                <i data-lucide="arrow-right" class="w-3 h-3"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Chapter III: RAG Service -->
-        <div id="chapter-3" class="md:col-span-2 glass rounded-2xl p-5 md:p-8 relative overflow-hidden group">
-          <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(16,185,129,.10) 0%,transparent 70%);"></div>
-          <div class="relative">
-            <div class="flex items-center gap-2 mb-5">
-              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-              <span class="font-mono text-xs text-emerald-400 tracking-widest uppercase">Chapter III &middot; Open Source</span>
-            </div>
-            <h3 class="font-mono text-xl font-bold text-[#e2e8f0] mb-1">Production RAG Service &mdash; Hybrid Search API</h3>
-            <p class="font-mono text-xs text-emerald-400/80 mb-4">FastAPI &times; Qdrant &times; Redis &times; Langfuse</p>
-            <p class="text-[#6b7280] text-sm leading-relaxed max-w-lg">
-              A production-grade, open-source RAG reference implementation — architecture built to production standards, not a claim of client production deployment. Hybrid dense+sparse search with RRF fusion, cross-encoder reranking, async ingest with a DLQ, streaming SSE answers, namespace-scoped RBAC, Prometheus metrics, and per-stage Langfuse tracing across 13 file formats, including audio via Whisper.
-            </p>
-            <!-- YouTube embed -->
-            <div class="mt-5 rounded-xl overflow-hidden border border-emerald-500/20" style="box-shadow:0 0 28px 2px rgba(16,185,129,.08);">
-              <div style="position:relative;padding-bottom:56.25%;height:0;">
-                <iframe
-                  src="https://www.youtube.com/embed/VAABFle3wOM?rel=0&modestbranding=1"
-                  title="Production RAG Service &mdash; Hybrid Search API"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  loading="lazy"
-                  style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:0.75rem;"
-                ></iframe>
-              </div>
-            </div>
-            <!-- 2026 RAG stack highlights -->
-            <div class="mt-4 p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/15">
-              <p class="font-mono text-[10px] text-emerald-400/60 uppercase tracking-widest mb-2">// 2026 rag stack</p>
-              <div class="grid grid-cols-2 gap-x-4 gap-y-1">
-                <span class="font-mono text-[11px] text-[#6b7280] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400/60 flex-shrink-0"></span>Hybrid Dense+Sparse (RRF)</span>
-                <span class="font-mono text-[11px] text-[#6b7280] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400/60 flex-shrink-0"></span>Cross-Encoder Reranking</span>
-                <span class="font-mono text-[11px] text-[#6b7280] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400/60 flex-shrink-0"></span>Async Queue + DLQ</span>
-                <span class="font-mono text-[11px] text-[#6b7280] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400/60 flex-shrink-0"></span>Streaming SSE Answers</span>
-                <span class="font-mono text-[11px] text-[#6b7280] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400/60 flex-shrink-0"></span>Namespace RBAC + JWT</span>
-                <span class="font-mono text-[11px] text-[#6b7280] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400/60 flex-shrink-0"></span>Prometheus + Langfuse</span>
-              </div>
-            </div>
-            <div class="flex flex-wrap gap-2 mt-4">
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400">Qdrant</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#6366f1]/10 border border-[#6366f1]/25 text-[#6366f1]">FastAPI</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400">Redis</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#8b5cf6]/10 border border-[#8b5cf6]/25 text-[#8b5cf6]">Langfuse</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#0ea5e9]/10 border border-[#0ea5e9]/25 text-[#0ea5e9]">OpenAI</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400">Hybrid Search</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#6366f1]/10 border border-[#6366f1]/25 text-[#6366f1]">Pydantic v2</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#8b5cf6]/10 border border-[#8b5cf6]/25 text-[#8b5cf6]">Docker</span>
-            </div>
-            <div class="mt-6 pt-5 border-t border-[#1e1e2e]/80 flex flex-wrap items-center justify-between gap-y-2">
-              <div class="flex items-center gap-2 text-xs font-mono text-[#6b7280]">
-                <i data-lucide="clock" class="w-3.5 h-3.5 text-emerald-400"></i>
-                Open source · April 2026
-                <span class="mx-2">&middot;</span>
-                <i data-lucide="package-check" class="w-3.5 h-3.5 text-emerald-400"></i>
-                Status: <span class="text-emerald-400 ml-1">Reference impl.</span>
-              </div>
-              <a href="https://github.com/georgelush/rag-system" target="_blank" class="flex items-center gap-1.5 font-mono text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
-                <i data-lucide="github" class="w-3.5 h-3.5"></i> View on GitHub
-                <i data-lucide="arrow-right" class="w-3 h-3"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Chapter IV: Agent Orchestrator -->
-        <div id="chapter-4" class="md:col-span-2 glass rounded-2xl p-5 md:p-8 relative overflow-hidden group" style="border-color:rgba(0,255,136,.18)!important;">
-          <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(0,255,136,.08) 0%,transparent 70%);"></div>
-          <div class="relative">
-            <div class="flex items-center gap-2 mb-5">
-              <span class="w-2 h-2 rounded-full bg-[#00ff88]" style="animation:live-glow 2s ease-in-out infinite;"></span>
-              <span class="font-mono text-xs text-[#00ff88] tracking-widest uppercase">Chapter IV &middot; Live demo</span>
-            </div>
-            <h3 class="font-mono text-xl font-bold text-[#e2e8f0] mb-1">George AI Assistant &mdash; Multi-Agent Orchestrator</h3>
-            <p class="font-mono text-xs text-[#00ff88]/70 mb-4">LangGraph &times; Groq &times; FastAPI &times; ChromaDB &times; SSE</p>
-            <p class="text-[#6b7280] text-sm leading-relaxed max-w-lg">
-              A live deployed demo on Hugging Face Spaces (not a client production system). A LangGraph orchestrator routes each visitor request
-              to the right specialist: RAG for questions about my background, Email to send the CV,
-              Calendar to book a Google Meet, Job Match to score JD fit, and Telegram for instant notifications.
-              Every routing decision streams live to the UI via SSE.
-            </p>
-            <div class="mt-4 p-3 rounded-lg" style="background:rgba(0,255,136,.04);border:1px solid rgba(0,255,136,.12);">
-              <p class="font-mono text-[10px] text-[#00ff88]/50 uppercase tracking-widest mb-2">// agents_active</p>
-              <div class="flex flex-wrap gap-x-4 gap-y-1">
-                <span class="font-mono text-[11px] text-[#6b7280] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#00aaff] flex-shrink-0"></span>RAG — knowledge Q&amp;A</span>
-                <span class="font-mono text-[11px] text-[#6b7280] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#ff6b35] flex-shrink-0"></span>Email — sends CV via Gmail</span>
-                <span class="font-mono text-[11px] text-[#6b7280] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#a855f7] flex-shrink-0"></span>Calendar — books Google Meet</span>
-                <span class="font-mono text-[11px] text-[#6b7280] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#fbbf24] flex-shrink-0"></span>Job Match — JD fit score</span>
-                <span class="font-mono text-[11px] text-[#6b7280] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#22d3ee] flex-shrink-0"></span>Telegram — notifications</span>
-              </div>
-            </div>
-            <!-- YouTube embed -->
-            <div class="mt-5 rounded-xl overflow-hidden border border-[#00ff88]/20" style="box-shadow:0 0 28px 2px rgba(0,255,136,.08);">
-              <div style="position:relative;padding-bottom:56.25%;height:0;">
-                <iframe
-                  src="https://www.youtube.com/embed/INTgjeF4V4k?rel=0&modestbranding=1"
-                  title="Agent Orchestrator &mdash; Multi-Agent AI System"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  loading="lazy"
-                  style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:0.75rem;"
-                ></iframe>
-              </div>
-            </div>
-            <div class="flex flex-wrap gap-2 mt-4">
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#00ff88]/8 border border-[#00ff88]/25 text-[#00ff88]">LangGraph</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#6366f1]/10 border border-[#6366f1]/25 text-[#6366f1]">FastAPI</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#0ea5e9]/10 border border-[#0ea5e9]/25 text-[#0ea5e9]">Groq</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#8b5cf6]/10 border border-[#8b5cf6]/25 text-[#8b5cf6]">ChromaDB</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#00ff88]/8 border border-[#00ff88]/25 text-[#00ff88]">SSE Streaming</span>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-[#6366f1]/10 border border-[#6366f1]/25 text-[#6366f1]">Docker · HF Spaces</span>
-            </div>
-            <div class="mt-6 pt-5 border-t border-[#1e1e2e]/80 flex flex-wrap items-center justify-between gap-y-2">
-              <div class="flex items-center gap-2 text-xs font-mono text-[#6b7280]">
-                <i data-lucide="clock" class="w-3.5 h-3.5 text-[#00ff88]"></i>
-                Started: May 2026
-                <span class="mx-2">&middot;</span>
-                <i data-lucide="radio" class="w-3.5 h-3.5 text-[#00ff88]"></i>
-                Status: <span class="text-[#00ff88] ml-1">Live demo</span>
-              </div>
-              <a href="#" onclick="document.getElementById('ai-fab-btn').click();return false;" class="flex items-center gap-1.5 font-mono text-xs text-[#00ff88] hover:text-white transition-colors">
-                <i data-lucide="bot" class="w-3.5 h-3.5"></i> Talk to the Agent
-                <i data-lucide="arrow-right" class="w-3 h-3"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3 small bottom cells -->
-        <a href="https://github.com/georgelush" target="_blank" class="glass bento-vio rounded-2xl p-5 flex flex-col gap-3 group/card">
-          <div class="w-9 h-9 rounded-lg bg-[#8b5cf6]/10 border border-[#8b5cf6]/25 flex items-center justify-center">
-            <svg class="w-4 h-4 text-[#8b5cf6]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.562 21.8 24 17.302 24 12 24 5.373 18.627 0 12 0z"/></svg>
-          </div>
-          <div>
-            <p class="font-mono text-xs font-bold text-[#e2e8f0] flex items-center gap-1.5">Open Source <i data-lucide="arrow-up-right" class="w-3 h-3 text-[#8b5cf6] opacity-0 group-hover/card:opacity-100 transition-opacity"></i></p>
-            <p class="text-xs text-[#6b7280] mt-1">All public projects — github.com/georgelush</p>
-          </div>
-        </a>
-
-        <a href="https://www.youtube.com/@R-630X/playlists" target="_blank" class="glass bento-sky rounded-2xl p-5 flex flex-col gap-3 group/card">
-          <div class="w-9 h-9 rounded-lg bg-[#0ea5e9]/10 border border-[#0ea5e9]/25 flex items-center justify-center">
-            <svg class="w-4 h-4 text-[#0ea5e9]" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
-          </div>
-          <div>
-            <p class="font-mono text-xs font-bold text-[#e2e8f0] flex items-center gap-1.5">YouTube <i data-lucide="arrow-up-right" class="w-3 h-3 text-[#0ea5e9] opacity-0 group-hover/card:opacity-100 transition-opacity"></i></p>
-            <p class="text-xs text-[#6b7280] mt-1">Project demos &amp; walkthroughs</p>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ARCHIVE TEASER -->
-  <section class="py-20 px-6 border-t border-[#1e1e2e]/60">
-    <div class="max-w-6xl mx-auto">
-      <div class="glass rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center gap-6 relative overflow-hidden">
-        <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(139,92,246,.10) 0%,transparent 70%);"></div>
-        <div class="w-14 h-14 flex-shrink-0 rounded-2xl bg-[#8b5cf6]/10 border border-[#8b5cf6]/25 flex items-center justify-center">
-          <i data-lucide="archive" class="w-6 h-6 text-[#8b5cf6]"></i>
-        </div>
-        <div class="flex-1 relative">
-          <h3 class="font-mono text-lg font-bold text-[#e2e8f0] mb-2">Technical Foundations &amp; Legacy Projects</h3>
-          <p class="text-[#6b7280] text-sm leading-relaxed max-w-2xl">
-            Cybersecurity labs, RPA automation, Unreal Engine 5 prototypes, and C++ systems &mdash;
-            the technical foundations behind the agentic systems I build today.
-          </p>
-        </div>
-        <a href="archive.html" class="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#8b5cf6]/10 border border-[#8b5cf6]/35 text-[#e2e8f0] text-sm font-medium hover:bg-[#8b5cf6]/20 transition-all">
-          <i data-lucide="arrow-right" class="w-4 h-4 text-[#8b5cf6]"></i> Explore Archive
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="border-t border-[#1e1e2e]/60 py-10 px-6">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="text-center md:text-left">
-        <p class="font-mono text-sm font-bold grad-text">Rusu George</p>
-        <p class="text-xs text-[#6b7280] mt-1 font-mono">AI Engineer &middot; Agentic Automation</p>
-      </div>
-      <div class="flex items-center gap-5">
-        <a href="https://www.linkedin.com/in/rusugeorge/" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
-        <a href="https://github.com/georgelush" target="_blank" class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="GitHub"><i data-lucide="github" class="w-4 h-4"></i></a>
-        <a data-contact-link class="text-[#6b7280] hover:text-[#e2e8f0] transition-colors" aria-label="Email George"><i data-lucide="mail" class="w-4 h-4"></i></a>
-      </div>
-      <p class="font-mono text-xs text-[#6b7280]/50">&copy; 2026 &middot; Never stop building.</p>
-    </div>
-  </footer>
-
-  <!-- Cert Carousel JS -->
-  <script>
-  (function(){
-    const cards = Array.from(document.querySelectorAll('.cert-card'));
-    const dots  = Array.from(document.querySelectorAll('#cp-dots .cert-dot'));
-    const total = cards.length;
-    let active  = 0;
-    const STATES = ['cp-prev','cp-next','cp-hl','cp-hr'];
-
-    function getClass(i){
-      if(i === active) return '';
-      const fwd = ((i - active) % total + total) % total;
-      const bwd = ((active - i) % total + total) % total;
-      if(fwd === 1) return 'cp-next';
-      if(bwd === 1) return 'cp-prev';
-      return fwd <= bwd ? 'cp-hr' : 'cp-hl';
-    }
-
-    function render(){
-      cards.forEach(function(c,i){
-        STATES.forEach(function(s){ c.classList.remove(s); });
-        var s = getClass(i);
-        if(s) c.classList.add(s);
-        c.style.pointerEvents = (i === active) ? '' : 'none';
-      });
-      dots.forEach(function(d,i){ d.classList.toggle('on', i === active); });
-    }
-
-    document.getElementById('cp-prev').addEventListener('click', function(){
-      active = (active - 1 + total) % total; render();
-    });
-    document.getElementById('cp-next').addEventListener('click', function(){
-      active = (active + 1) % total; render();
-    });
-    dots.forEach(function(d,i){ d.addEventListener('click', function(){ active = i; render(); }); });
-
-    // touch / swipe
-    var startX = 0;
-    var stage = document.getElementById('cert-stage');
-    if(stage){
-      stage.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
-      stage.addEventListener('touchend', function(e){
-        var dx = e.changedTouches[0].clientX - startX;
-        if(Math.abs(dx) > 40){ active = dx < 0 ? (active+1)%total : (active-1+total)%total; render(); }
-      }, {passive:true});
-    }
-
-    render();
-  })();
-  </script>
-  <script>lucide.createIcons();</script>
-  <script>
-  (function(){
-    var btn=document.getElementById('nav-toggle');
-    var menu=document.getElementById('nav-mobile');
-    var iconOpen=document.getElementById('nav-icon-open');
-    var iconClose=document.getElementById('nav-icon-close');
-    if(!btn||!menu)return;
-    btn.addEventListener('click',function(){
-      var open=menu.style.display==='block';
-      menu.style.display=open?'none':'block';
-      iconOpen.style.display=open?'':'none';
-      iconClose.style.display=open?'none':'';
-    });
-    menu.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click',function(){
-        menu.style.display='none';
-        iconOpen.style.display='';
-        iconClose.style.display='none';
-      });
-    });
-  })();
-  </script>
-
-  <!-- ── AI Chat FAB widget ─────────────────────────────────────────── -->
-  <style>
-    #ai-fab-btn{position:fixed;bottom:24px;right:24px;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);border:none;cursor:pointer;z-index:9000;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(99,102,241,.5),0 0 0 1px rgba(99,102,241,.25);transition:transform .2s,box-shadow .2s;}
-    #ai-fab-btn:hover{transform:scale(1.06);box-shadow:0 6px 32px rgba(99,102,241,.65),0 0 0 1px rgba(99,102,241,.4);}
-    #ai-fab-dot{position:absolute;top:9px;right:9px;width:10px;height:10px;border-radius:50%;background:#00ff88;border:2px solid #0a0a0f;animation:ai-pulse 2s ease-in-out infinite;pointer-events:none;}
-    @keyframes ai-pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,255,136,.5);}50%{box-shadow:0 0 0 5px rgba(0,255,136,0);}}
-    #ai-fab-icon-chat,#ai-fab-icon-close{pointer-events:none;}
-    #ai-fab-icon-close{display:none;}
-    #ai-fab-btn.is-open #ai-fab-icon-chat{display:none;}
-    #ai-fab-btn.is-open #ai-fab-icon-close{display:block;}
-    #ai-fab-btn.is-open #ai-fab-dot{display:none;}
-    #ai-chat-panel{position:fixed;z-index:8999;display:none;background:#0a0a0f;border:1px solid rgba(99,102,241,.2);box-shadow:0 16px 64px rgba(0,0,0,.65);overflow:hidden;}
-    #ai-chat-panel.open{display:block;}
-    @media(min-width:768px){#ai-chat-panel{bottom:88px;right:24px;width:500px;height:min(760px,calc(100vh - 88px));border-radius:16px;}}
-    #ai-fab-btn.is-open{display:none!important;}
-    @media(max-width:767px){#ai-chat-panel{top:0;left:0;right:0;bottom:0;border:none;border-radius:0;}#ai-fab-btn{bottom:16px;right:16px;}}
-    #ai-chat-panel iframe{width:100%;height:100%;border:none;display:block;}
-    /* ── chat bubble ── */
-    #ai-fab-bubble{position:fixed;bottom:88px;right:24px;max-width:210px;min-width:130px;background:rgba(10,10,20,0.92);border:1px solid rgba(99,102,241,0.45);border-radius:14px 14px 4px 14px;padding:10px 14px 10px 13px;backdrop-filter:blur(12px);box-shadow:0 0 0 1px rgba(99,102,241,0.1),0 8px 32px rgba(0,0,0,0.6);z-index:8998;opacity:0;transform:translateY(6px) scale(0.97);pointer-events:none;animation:fab-bubble-glow 3s ease-in-out infinite;}
-    @keyframes fab-bubble-glow{0%,100%{box-shadow:0 0 0 1px rgba(99,102,241,0.1),0 8px 32px rgba(0,0,0,0.6),0 0 14px rgba(99,102,241,0.05);}50%{box-shadow:0 0 0 1px rgba(99,102,241,0.28),0 8px 32px rgba(0,0,0,0.6),0 0 26px rgba(139,92,246,0.16);}}
-    #ai-fab-bubble::after{content:'';position:absolute;bottom:-7px;right:18px;width:12px;height:12px;background:rgba(10,10,20,0.92);border-right:1px solid rgba(99,102,241,0.45);border-bottom:1px solid rgba(99,102,241,0.45);transform:rotate(45deg);border-radius:0 0 3px 0;}
-    #ai-fab-bubble-name{font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;background:linear-gradient(90deg,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:5px;}
-    #ai-fab-bubble-text{font-size:13px;line-height:1.5;color:#c4c9d4;min-height:20px;font-family:'Inter','Segoe UI',sans-serif;}
-    #ai-fab-bubble-cursor{display:inline-block;width:2px;height:12px;background:rgba(99,102,241,0.8);margin-left:2px;vertical-align:middle;border-radius:1px;animation:fab-cur-blink 0.75s step-end infinite;}
-    @keyframes fab-cur-blink{0%,100%{opacity:1;}50%{opacity:0;}}
-    @media(max-width:767px){#ai-fab-bubble{bottom:82px;right:16px;max-width:190px;}}
-    #ai-fab-bubble.bubble-hidden{display:none;}
-  </style>
-  <div id="ai-fab-bubble">
-    <div id="ai-fab-bubble-name" data-assistant-name>George AI Assistant</div>
-    <div id="ai-fab-bubble-text"><span id="ai-fab-bubble-cursor"></span></div>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="index.html"><i>G</i><span>George Rusu</span></a>
+    <nav aria-label="Main">
+      <a class="hide-s" href="#work">Systems</a>
+      <a class="hide-s" href="#about">Track record</a>
+      <a class="hide-s" href="#rules">Method</a>
+      <a class="hide-s" href="archive.html">Archive</a>
+      <button class="toggle" id="theme" type="button" aria-label="Switch light or dark theme">◐</button>
+      <a class="btn small solid" href="#contact">Work with me</a>
+    </nav>
   </div>
-  <button id="ai-fab-btn" aria-label="Open George AI Assistant">
-    <span id="ai-fab-dot"></span>
-    <span id="ai-fab-icon-chat"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-    <span id="ai-fab-icon-close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
-  </button>
+</header>
 
-  <div id="ai-chat-panel">
-    <iframe id="ai-chat-iframe" src="" title="AI Assistant"></iframe>
+<main id="main">
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="tag"><span class="dot" aria-hidden="true"></span>AI &amp; Automation Engineer <b>/</b> Founder, FLOWENTIC <b>/</b> B2B</p>
+      <div class="hero-grid">
+        <div>
+          <h1><span>Agents that</span> <span><em>show up</em></span> <span>on Monday.</span></h1>
+          <p class="lede">Eight years running kitchens. Four years and <b>320+ production workflows</b> at a global enterprise. Now I build AI systems that survive real work: the dropped call, the wrong input, the step a human must approve.</p>
+          <div class="actions">
+            <a class="btn solid" href="#work">▶ Watch the demos</a>
+            <a class="btn" href="#contact">Work with me</a>
+          </div>
+        </div>
+        <div class="trace" role="img" aria-label="Illustration: an agent run with four steps, the last one waiting for human approval">
+          <div class="trace-top"><i></i><i></i><i></i><span>run · on-call agent · example</span></div>
+          <div class="tr"><time>00.00s</time><div>ticket opened · route<span class="bar-line" style="--x:0;--w:12%"></span></div><small>ok</small></div>
+          <div class="tr"><time>00.41s</time><div>call customer · verify code<span class="bar-line" style="--x:12%;--w:38%"></span></div><small>ok</small></div>
+          <div class="tr"><time>38.20s</time><div>collect note + ETA<span class="bar-line" style="--x:50%;--w:24%"></span></div><small>ok</small></div>
+          <div class="tr wait"><time>61.07s</time><div>write back to ticket<span class="bar-line" style="--x:74%;--w:26%"></span></div><small>needs approval</small></div>
+          <div class="trace-foot"><span>traced · retried 0</span><span>human in the loop</span></div>
+        </div>
+      </div>
+      <div class="stats" aria-label="Key facts">
+        <div class="stat"><b>320+</b><span>production workflows built and maintained at Atos</span></div>
+        <div class="stat"><b>3</b><span>countries served: India, Germany, US</span></div>
+        <div class="stat"><b>−85%</b><span>manual workload on automated processes</span></div>
+        <div class="stat"><b>4</b><span>open-source AI systems with demos</span></div>
+      </div>
+    </div>
+    <div class="ticker" aria-hidden="true"><div>
+      <span>LangGraph</span><span>Human in the loop</span><span>RAG</span><span>Voice agents</span><span>UiPath</span><span>n8n</span><span>FastAPI</span><span>Tracing</span><span>Postgres</span><span>Docker</span>
+      <span>LangGraph</span><span>Human in the loop</span><span>RAG</span><span>Voice agents</span><span>UiPath</span><span>n8n</span><span>FastAPI</span><span>Tracing</span><span>Postgres</span><span>Docker</span>
+    </div></div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="tag"><b>01</b> / Systems</p><h2>Watch it <em>work.</em></h2></div>
+        <p>Four AI systems, each with a recorded demo and public code. Personal work, built to production standards; not client deployments.</p>
+      </div>
+      <div class="wall">
+        <article class="tile hot">
+          <button class="shot" type="button" data-yt="gthz0A8GmJU" aria-label="Play demo: AI On-Call voice agent">
+            <img src="https://i.ytimg.com/vi/gthz0A8GmJU/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" /><span class="playmark" aria-hidden="true">▶ Play demo</span>
+          </button>
+          <div class="tile-body">
+            <div class="tile-top"><span class="num">01</span><span class="state">Working prototype</span></div>
+            <h3>AI On-Call</h3>
+            <p>A voice agent that phones the customer when a support ticket opens, verifies identity, collects a note and an ETA, and writes it back to the ticket.</p>
+            <div class="chips"><span>Twilio</span><span>LangGraph</span><span>n8n</span></div>
+            <div class="tile-actions"><a class="btn" href="https://github.com/georgelush/AI-ON-Call" target="_blank" rel="noopener"><svg><use href="#i-github"/></svg>Code</a></div>
+          </div>
+        </article>
+        <article class="tile">
+          <button class="shot" type="button" data-yt="VAABFle3wOM" aria-label="Play demo: RAG service">
+            <img src="https://i.ytimg.com/vi/VAABFle3wOM/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" /><span class="playmark" aria-hidden="true">▶ Play demo</span>
+          </button>
+          <div class="tile-body">
+            <div class="tile-top"><span class="num">02</span><span class="state">Open source</span></div>
+            <h3>RAG service, with tests</h3>
+            <p>Hybrid dense and sparse search, reranking, async ingestion with a dead-letter queue, streaming answers, per-namespace access control.</p>
+            <div class="chips"><span>FastAPI</span><span>Qdrant</span><span>Redis</span><span>Langfuse</span></div>
+            <div class="tile-actions"><a class="btn" href="https://github.com/georgelush/rag-system" target="_blank" rel="noopener"><svg><use href="#i-github"/></svg>Code</a></div>
+          </div>
+        </article>
+        <article class="tile">
+          <button class="shot" type="button" data-yt="INTgjeF4V4k" aria-label="Play demo: multi-agent site assistant">
+            <img src="https://i.ytimg.com/vi/INTgjeF4V4k/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" /><span class="playmark" aria-hidden="true">▶ Play demo</span>
+          </button>
+          <div class="tile-body">
+            <div class="tile-top"><span class="num">03</span><span class="state on">Live</span></div>
+            <h3>The assistant on this site</h3>
+            <p>An orchestrator routes each visitor request to a specialist agent: answers about my work, sends the CV, books a meeting. Every routing decision streams live.</p>
+            <div class="chips"><span>LangGraph</span><span>Groq</span><span>SSE</span></div>
+            <div class="tile-actions"><a class="btn" href="agent-chat.html" data-open-chat><svg><use href="#i-chat"/></svg>Try it live</a></div>
+          </div>
+        </article>
+        <article class="tile">
+          <button class="shot" type="button" data-yt="MZVc9J5lOKo" aria-label="Play demo: Agentic AI Playground">
+            <img src="https://i.ytimg.com/vi/MZVc9J5lOKo/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" /><span class="playmark" aria-hidden="true">▶ Play demo</span>
+          </button>
+          <div class="tile-body">
+            <div class="tile-top"><span class="num">04</span><span class="state">Open source</span></div>
+            <h3>Agentic AI Playground</h3>
+            <p>My working lab for agent patterns, with full tracing. Where ideas get tested before they are allowed near a real process.</p>
+            <div class="chips"><span>LangGraph</span><span>Qdrant</span><span>Langfuse</span></div>
+            <div class="tile-actions"><a class="btn" href="https://github.com/georgelush/Agentic-AI-Playground" target="_blank" rel="noopener"><svg><use href="#i-github"/></svg>Code</a></div>
+          </div>
+        </article>
+        <article class="tile next">
+          <div class="tile-body">
+            <span class="num">05 · queued</span>
+            <h3>To be continued<span class="cursor" aria-hidden="true"></span></h3>
+            <p>The next system lands here. I publish when it runs, not when it is announced.</p>
+            <a class="btn" href="https://www.linkedin.com/in/rusugeorge/" target="_blank" rel="noopener"><svg><use href="#i-linkedin"/></svg>Follow the build</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="about">
+        <figure class="portrait">
+          <img src="images/george-rusu.jpg" alt="George Rusu" width="800" height="800" loading="lazy" />
+          <figcaption><span>George Rusu</span><span>Mediaș, Romania · remote</span></figcaption>
+        </figure>
+        <div>
+          <p class="tag"><b>02</b> / Track record</p>
+          <h2>Chef first. <em>Engineer</em> since.</h2>
+          <p class="big">I ran kitchens and teams before I wrote code. That is why I care more about what happens at 7 pm on a Friday than about the architecture diagram.</p>
+          <ol class="path">
+            <li class="now"><span>Aug 2026 — now</span><div><b>Founder, FLOWENTIC</b>One operational workflow, delivered end to end, handed over to production.</div></li>
+            <li><span>Jun — Aug 2026</span><div><b>AI Integration Engineer</b>B2B operations platform for manufacturers. Agent pipelines, LLM decision layers and human-in-the-loop approvals inside live operations.</div></li>
+            <li><span>Apr — Jun 2026</span><div><b>AI Engineer, Atos</b>Moved from RPA to agent workflows, RAG and data processing, carrying enterprise standards into agent design.</div></li>
+            <li><span>2022 — 2026</span><div><b>RPA Developer, Atos</b>Built and maintained 320+ production workflows for teams in India, Germany and the US: on-call, ticket triage, spreadsheet processing, reusable templates. Coordinated the maintenance team. Up to 85% of manual workload removed; up to 80% time and cost saved.</div></li>
+            <li><span>2025 — 2026</span><div><b>Security, self-taught</b>Top 3% on TryHackMe in three months. It shapes how I handle agent permissions, secrets and failure modes.</div></li>
+            <li><span>2021 — 2022</span><div><b>C++ and game systems</b>200+ algorithm problems, Unreal Engine 5 prototypes.</div></li>
+            <li><span>2012 — 2020</span><div><b>Chef and team coordinator</b>Teams of up to 20 people, 100 to 300 covers a day, in Germany and Romania.</div></li>
+          </ol>
+          <div class="actions">
+            <a class="btn" href="images/RusuGeorgeCV.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+            <a class="btn" href="https://www.datacamp.com/certificate/AIEDA0019097326736" target="_blank" rel="noopener">AI Engineer certificate ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rules">
+    <div class="wrap">
+      <div class="head"><div><p class="tag"><b>03</b> / Method</p><h2>Three <em>rules.</em></h2></div></div>
+      <div class="three">
+        <div><span class="num">R1</span><h3>Designed for the bad day</h3><p>The happy path is the easy part. I design for the dropped network, the wrong input and the retry that arrives twice.</p></div>
+        <div><span class="num">R2</span><h3>A human approves what matters</h3><p>Where money, customers or safety are involved, a person decides. Every decision leaves a trace.</p></div>
+        <div><span class="num">R3</span><h3>Tests and traces, not demos</h3><p>If it cannot be tested, monitored and restored from backup, it is not finished.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="foundation">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="tag"><b>04</b> / Archive</p><h2>The <em>foundation.</em></h2></div>
+        <p>What I built before agents. Older, but it is where the discipline comes from.</p>
+      </div>
+      <div class="cards">
+        <article>
+          <button class="shot" type="button" data-yt="V7Vh5jd1HwI" aria-label="Play video: Attack and defense lab">
+            <img src="https://i.ytimg.com/vi/V7Vh5jd1HwI/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" /><span class="playmark" aria-hidden="true">▶ Play</span>
+          </button>
+          <p class="meta">2026 · Security</p>
+          <h3>Attack and defense lab</h3>
+          <p>Red team attacks, blue team defenses, Linux hardening.</p>
+        </article>
+        <article>
+          <button class="shot" type="button" data-yt="iU8HoxXL7j0" aria-label="Play video: Unleashed Power">
+            <img src="https://i.ytimg.com/vi/iU8HoxXL7j0/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" /><span class="playmark" aria-hidden="true">▶ Play</span>
+          </button>
+          <p class="meta">2022 · Unreal Engine 5</p>
+          <h3>Unleashed Power</h3>
+          <p>Action RPG prototype, C++ from scratch.</p>
+        </article>
+        <article>
+          <button class="shot" type="button" data-yt="4_8vwYEoizk" aria-label="Play video: Save Your Soul">
+            <img src="https://i.ytimg.com/vi/4_8vwYEoizk/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" /><span class="playmark" aria-hidden="true">▶ Play</span>
+          </button>
+          <p class="meta">2022 · Unreal Engine 5</p>
+          <h3>Save Your Soul</h3>
+          <p>Puzzle-exploration game with physics-based interaction.</p>
+        </article>
+      </div>
+      <div class="actions"><a class="btn" href="archive.html">Open the full archive →</a></div>
+    </div>
+  </section>
+
+  <section id="contact" class="cta">
+    <div class="wrap">
+      <div class="cta-box">
+        <p class="tag"><b>05</b> / Work with me</p>
+        <h2>Two ways to <em>work with me.</em></h2>
+        <div class="lanes">
+          <div class="lane dark">
+            <span class="num">01 · ON YOUR TEAM</span>
+            <h3>B2B contract</h3>
+            <p>An engineer embedded in your team for a defined period: agents, automation, integrations. I take a limited number of engagements, contracted and invoiced through FLOWENTIC S.R.L.</p>
+            <a class="btn" href="mailto:george@flowentic.com?subject=B2B%20contract"><svg><use href="#i-mail"/></svg>george@flowentic.com</a>
+          </div>
+          <div class="lane">
+            <span class="num">02 · BUILT FOR YOU</span>
+            <h3>One workflow, delivered</h3>
+            <p>You have an operation that gets stuck between systems. FLOWENTIC scopes it, builds it end to end and hands it over running.</p>
+            <a class="btn" href="https://flowentic.com" target="_blank" rel="noopener">Go to flowentic.com ↗</a>
+          </div>
+        </div>
+        <div class="socials">
+          <a class="btn" href="https://www.linkedin.com/in/rusugeorge/" target="_blank" rel="noopener"><svg><use href="#i-linkedin"/></svg>LinkedIn</a>
+          <a class="btn" href="https://github.com/georgelush" target="_blank" rel="noopener"><svg><use href="#i-github"/></svg>GitHub</a>
+          <a class="btn" href="https://www.youtube.com/@R-630X/playlists" target="_blank" rel="noopener"><svg><use href="#i-youtube"/></svg>YouTube</a>
+          <a class="btn" href="agent-chat.html" data-open-chat><svg><use href="#i-chat"/></svg>Book through my AI assistant</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 George Rusu · never stop building</span>
+    <span><a href="archive.html">archive</a> · <a href="https://flowentic.com" target="_blank" rel="noopener">flowentic.com</a></span>
   </div>
-  <script>
-  (function(){
-    var fab=document.getElementById('ai-fab-btn');
-    var panel=document.getElementById('ai-chat-panel');
-    var iframe=document.getElementById('ai-chat-iframe');
-    var loaded=false;
-    var _scrollY=0;
-    function _fabHide(){fab.style.setProperty('display','none','important');}
-    function _fabShow(){fab.style.removeProperty('display');}
-    function _lockScroll(){_scrollY=window.scrollY;document.body.style.cssText+='position:fixed;top:-'+_scrollY+'px;left:0;right:0;overflow:hidden;';}
-    function _unlockScroll(){document.body.style.position='';document.body.style.top='';document.body.style.left='';document.body.style.right='';document.body.style.overflow='';window.scrollTo(0,_scrollY);}
-    function _doClose(){panel.classList.remove('open');fab.classList.remove('is-open');_fabShow();if(window.innerWidth<=767)_unlockScroll();}
-    window.addEventListener('message',function(e){if(e.data==='close-chat')_doClose();});
-    fab.addEventListener('click',function(){
-      var open=panel.classList.contains('open');
-      if(open){_doClose();}
-      else{if(!loaded){iframe.src='agent-chat.html';loaded=true;}panel.classList.add('open');fab.classList.add('is-open');_fabHide();if(window.innerWidth<=767)_lockScroll();}
-    });
-  })();
-  (function(){
-    var bubble=document.getElementById('ai-fab-bubble');
-    var textEl=document.getElementById('ai-fab-bubble-text');
-    var cursor=document.getElementById('ai-fab-bubble-cursor');
-    var fab=document.getElementById('ai-fab-btn');
-    var panel=document.getElementById('ai-chat-panel');
-    var stopped=false;
-    var msgIndex=0;
-    var messages=["Hi — George AI Assistant.","Ask about projects & stack.","Contracts & B2B collab.","Want the CV? Just ask."];
-    var TYPING_SPEED=52,WORD_PAUSE=110,HOLD=6000,GAP=3000;
+</footer>
 
-    function setText(str){textEl.textContent=str;textEl.appendChild(cursor);}
-    function showBubble(){bubble.style.transition='opacity 0.35s ease,transform 0.35s ease';bubble.style.opacity='1';bubble.style.transform='translateY(0) scale(1)';}
-    function hideBubble(cb){bubble.style.transition='opacity 0.4s ease,transform 0.4s ease';bubble.style.opacity='0';bubble.style.transform='translateY(6px) scale(0.97)';setTimeout(cb,420);}
+<dialog id="player" aria-label="Video player">
+  <button class="close" type="button" aria-label="Close video">✕</button>
+  <div class="frame"></div>
+</dialog>
 
-    function typeMessage(msg,onDone){
-      var i=0;setText('');
-      function step(){
-        if(stopped)return;
-        if(i<=msg.length){setText(msg.slice(0,i));var d=TYPING_SPEED;if(i>0&&msg[i-1]===' ')d+=WORD_PAUSE;i++;setTimeout(step,d);}
-        else{onDone();}
-      }
-      step();
-    }
-
-    function runCycle(){
-      if(stopped)return;
-      if(panel.classList.contains('open'))return;
-      showBubble();
-      typeMessage(messages[msgIndex],function(){
-        if(stopped)return;
-        setTimeout(function(){
-          if(stopped)return;
-          hideBubble(function(){
-            if(stopped)return;
-            setText('');
-            msgIndex=(msgIndex+1)%messages.length;
-            setTimeout(runCycle,GAP);
-          });
-        },HOLD);
-      });
-    }
-
-    fab.addEventListener('click',function(){
-      stopped=true;
-      bubble.style.transition='opacity 0.25s ease';
-      bubble.style.opacity='0';
-    });
-
-    setTimeout(runCycle,1200);
-  })();
-  </script>
+<script src="js/site.js" defer></script>
 </body>
 </html>
