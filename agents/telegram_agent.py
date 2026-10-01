@@ -57,7 +57,6 @@ _VALIDATION_MSGS = {
             "Too many invalid attempts. You can reach George directly:\n"
             f"✉ {CONTACT_EMAIL}\n"
             "💼 linkedin.com/in/rusugeorge\n"
-            "📞 +40752383920"
         ),
     },
     'ro': {
@@ -68,7 +67,6 @@ _VALIDATION_MSGS = {
             "Prea multe încercări invalide. Îl poți contacta pe George direct:\n"
             f"✉ {CONTACT_EMAIL}\n"
             "💼 linkedin.com/in/rusugeorge\n"
-            "📞 +40752383920"
         ),
     },
 }
@@ -79,20 +77,18 @@ _SUCCESS_MSG = {
         "You can also contact him directly:\n"
         f"✉ {CONTACT_EMAIL}\n"
         "💼 linkedin.com/in/rusugeorge\n"
-        "📞 +40752383920"
     ),
     'ro': lambda contact: (
         f"Gata! George a fost notificat și te va contacta la {contact} în curând.\n\n"
         "Îl poți contacta și direct:\n"
         f"✉ {CONTACT_EMAIL}\n"
         "💼 linkedin.com/in/rusugeorge\n"
-        "📞 +40752383920"
     ),
 }
 
 _FAIL_MSG = {
-    'en': f"Couldn't send the notification right now. You can reach George directly at {CONTACT_EMAIL} or +40752383920.",
-    'ro': f"Nu s-a putut trimite notificarea. Îl poți contacta pe George direct la {CONTACT_EMAIL} sau +40752383920.",
+    'en': f"Couldn't send the notification right now. You can reach George directly at {CONTACT_EMAIL}.",
+    'ro': f"Nu s-a putut trimite notificarea. Îl poți contacta pe George direct la {CONTACT_EMAIL}.",
 }
 
 # Used by orchestrator when __TELEGRAM_LIMIT__ is returned

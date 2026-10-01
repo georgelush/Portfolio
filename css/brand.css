@@ -1,7 +1,7 @@
 /**
  * George Rusu portfolio — shared brand tokens (2026)
  * Assistant display name: "George AI Assistant" · HF technical slug remains "LushAI"
- * FLOWENTIC: B2B AI automation and software company (preparing for launch) — not an agency/studio
+ * Personal brand "Acid": black ground, off-white type, acid lime accent (see brand/BRAND.md)
  *
  * Status semantics:
  *   --status-shipped  emerald  → completed / open-source complete
@@ -11,26 +11,26 @@
 
 :root {
   /* Surfaces */
-  --bg:           #0a0a0f;
-  --bg-elevated:  #111118;
-  --border:       #1e1e2e;
-  --text:         #e2e8f0;
-  --text-muted:   #6b7280;
+  --bg:           #08090a;
+  --bg-elevated:  #101214;
+  --border:       #23272b;
+  --text:         #f4f4ee;
+  --text-muted:   #9ea3a8;
   --text-soft:    #9ca3af;
 
   /* Brand core */
-  --brand-indigo: #6366f1;
-  --brand-violet: #8b5cf6;
-  --brand-sky:    #0ea5e9;
-  --brand-grad:   linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #0ea5e9 100%);
+  --brand-indigo: #c8ff2e;
+  --brand-violet: #c8ff2e;
+  --brand-sky:    #c8ff2e;
+  --brand-grad:   linear-gradient(135deg, #c8ff2e 0%, #c8ff2e 100%);
 
   /* Status */
   --status-shipped: #34d399;
-  --status-live:    #00ff88;
+  --status-live:    #c8ff2e;
   --status-pilot:   #0ea5e9;
 
   /* Agent graph (Chapter IV / George AI Assistant) */
-  --c-orch:  #00ff88;
+  --c-orch:  #c8ff2e;
   --c-rag:   #00aaff;
   --c-email: #ff6b35;
   --c-cal:   #a855f7;
@@ -38,15 +38,15 @@
   --c-tg:    #22d3ee;
 
   /* Glass */
-  --glass-bg:     rgba(17, 17, 24, 0.85);
-  --glass-border: rgba(99, 102, 241, 0.18);
+  --glass-bg:     rgba(16,18,20, 0.85);
+  --glass-border: rgba(200,255,46, 0.18);
 }
 
 /* Shared primitives used across pages */
 body {
   background-color: var(--bg);
   color: var(--text);
-  font-family: "Inter", sans-serif;
+  font-family: "Archivo", sans-serif;
 }
 
 .grad-text {
@@ -73,8 +73,8 @@ body {
   transition: border-color 0.25s, box-shadow 0.25s;
 }
 .glass:hover {
-  border-color: rgba(99, 102, 241, 0.45);
-  box-shadow: 0 0 28px 2px rgba(99, 102, 241, 0.14);
+  border-color: rgba(200,255,46, 0.45);
+  box-shadow: 0 0 28px 2px rgba(200,255,46, 0.14);
 }
 
 /* Semantic status helpers */

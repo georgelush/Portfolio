@@ -316,7 +316,6 @@ _CONTACT_MSG = (
     "Too many incorrect attempts. Please reach out to George directly:\n\n"
     f"• Email: {CONTACT_EMAIL}\n"
     "• LinkedIn: linkedin.com/in/rusugeorge\n"
-    "• Phone: +40752383920"
 )
 
 _CONTACT_MSG_BILINGUAL = {
@@ -324,13 +323,11 @@ _CONTACT_MSG_BILINGUAL = {
         "Too many incorrect attempts. Please reach out to George directly:\n\n"
         f"• Email: {CONTACT_EMAIL}\n"
         "• LinkedIn: linkedin.com/in/rusugeorge\n"
-        "• Phone: +40752383920"
     ),
     'ro': (
         "Prea multe încercări greșite. Te rog contactează-l pe George direct:\n\n"
         f"• Email: {CONTACT_EMAIL}\n"
         "• LinkedIn: linkedin.com/in/rusugeorge\n"
-        "• Telefon: +40752383920"
     ),
 }
 

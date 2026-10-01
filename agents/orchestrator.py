@@ -34,14 +34,12 @@ _BLOCKED_MESSAGES = {
         "📄 Download CV: https://georgelush.github.io/Portfolio/images/RusuGeorgeCV.pdf\n"
         f"✉ Email: {CONTACT_EMAIL}\n"
         "💼 LinkedIn: linkedin.com/in/rusugeorge\n"
-        "📞 Phone: +40752383920"
     ),
     "calendar": (
         "A meeting request was already submitted this session — George will confirm via email shortly.\n\n"
         "If you haven't heard back, reach out directly:\n"
         f"✉ Email: {CONTACT_EMAIL}\n"
         "💼 LinkedIn: linkedin.com/in/rusugeorge\n"
-        "📞 Phone: +40752383920"
     ),
 }
 
@@ -166,7 +164,6 @@ async def _routing_node(state: OrchestratorState) -> dict:
                     "📄 Download CV: https://georgelush.github.io/Portfolio/images/RusuGeorgeCV.pdf\n"
                     f"✉ Email: {CONTACT_EMAIL}\n"
                     "💼 LinkedIn: linkedin.com/in/rusugeorge\n"
-                    "📞 Phone: +40752383920"
                 ),
                 'ro': (
                     "CV-ul lui George a fost deja trimis în această sesiune — verifică inbox-ul (și spam).\n\n"
@@ -174,7 +171,6 @@ async def _routing_node(state: OrchestratorState) -> dict:
                     "📄 Descarcă CV: https://georgelush.github.io/Portfolio/images/RusuGeorgeCV.pdf\n"
                     f"✉ Email: {CONTACT_EMAIL}\n"
                     "💼 LinkedIn: linkedin.com/in/rusugeorge\n"
-                    "📞 Telefon: +40752383920"
                 ),
             },
             "calendar": {
@@ -183,14 +179,12 @@ async def _routing_node(state: OrchestratorState) -> dict:
                     "If you haven't heard back, reach out directly:\n"
                     f"✉ Email: {CONTACT_EMAIL}\n"
                     "💼 LinkedIn: linkedin.com/in/rusugeorge\n"
-                    "📞 Phone: +40752383920"
                 ),
                 'ro': (
                     "O cerere de meeting a fost deja trimisă în această sesiune — George va confirma pe email în curând.\n\n"
                     "Dacă nu ai primit răspuns, contactează-l direct:\n"
                     f"✉ Email: {CONTACT_EMAIL}\n"
                     "💼 LinkedIn: linkedin.com/in/rusugeorge\n"
-                    "📞 Telefon: +40752383920"
                 ),
             },
         }

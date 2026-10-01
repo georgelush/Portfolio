@@ -1,10 +1,10 @@
 {
-  "contactEmail": "georgel1988@gmail.com",
-  "futureContactEmail": "gheorghe@flowentic.com",
+  "contactEmail": "george@flowentic.com",
+  "futureContactEmail": "george@flowentic.com",
   "assistantName": "George AI Assistant",
   "assistantDescription": "Ask about my experience, technical projects, and availability.",
-  "flowenticSiteEnabled": false,
+  "flowenticSiteEnabled": true,
   "flowenticSiteUrl": "https://flowentic.com",
   "seoTitle": "George Rusu — AI Engineer & Agentic Automation",
-  "seoDescription": "AI engineer building production-grade agentic systems, RAG platforms, voice AI, and enterprise automation. Currently preparing the launch of FLOWENTIC."
+  "seoDescription": "AI engineer building production-grade agentic systems, RAG platforms, voice AI, and enterprise automation. Founder of FLOWENTIC."
 }
