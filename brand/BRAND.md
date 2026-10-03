@@ -71,7 +71,7 @@ Rules:
 
 Portfolio, CV and LinkedIn carry the same numbers and dates. Source: the CV.
 
-- 300+ production workflows built and maintained at Atos (maintained and coordinated the maintenance team).
+- 300+ production workflows maintained with my team at Atos (the team built them; I maintained them and coordinated the maintenance team).
 - Teams in India, Germany, Poland and the United States.
 - Up to 85% manual workload removed; up to 80% time and cost saved.
 - RPA Developer, Atos: May 2022 – Apr 2026. AI Engineer, Atos: Apr – Jun 2026.

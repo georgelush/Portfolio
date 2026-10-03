@@ -91,7 +91,9 @@ section { padding: 104px 0; }
 h1 { font-size: clamp(42px, 6.9vw, 92px); letter-spacing: -.05em; line-height: .92; }
 .hero h1 span { display: block; white-space: nowrap; }
 .page-head h1 { font-size: clamp(48px, 9vw, 124px); }
+.pitch { margin-top: 20px; color: var(--ink); font-size: clamp(16px, 1.45vw, 19px); font-weight: 500; line-height: 1.4; max-width: 42ch; }
 .lede { margin-top: 28px; color: var(--soft); font-size: clamp(18px, 1.6vw, 21px); line-height: 1.5; max-width: 46ch; }
+.pitch + .lede { margin-top: 16px; }
 .lede b { color: var(--ink); font-weight: 600; }
 
 /* Run trace: the signature panel */
@@ -202,6 +204,7 @@ h1 { font-size: clamp(42px, 6.9vw, 92px); letter-spacing: -.05em; line-height: .
 .cta-box .tag b { color: #0a0a0a; }
 .cta h2 { font-size: clamp(40px, 7vw, 100px); margin-top: 18px; }
 .cta h2 em { color: #c8ff2e; background: #0a0a0a; padding: 0 .12em; }
+.cta-note { margin-top: 16px; font-size: 18px; font-weight: 600; max-width: 46ch; }
 .lanes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 44px; }
 .lane { border-radius: var(--r); padding: 28px; display: flex; flex-direction: column; gap: 12px; background: rgba(10, 10, 10, .08); border: 1px solid rgba(10, 10, 10, .22); }
 .lane.dark { background: #0a0a0a; color: #f4f4ee; border-color: #0a0a0a; }
