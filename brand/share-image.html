@@ -5,32 +5,66 @@
 <title>Share image — George Rusu</title>
 <meta name="robots" content="noindex" />
 <!-- Source of images/preview.png (1200 × 630), the image shown when the site is shared. -->
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
-  html, body { margin: 0; }
-  .b { width: 1200px; height: 630px; position: relative; overflow: hidden; background: #08090a; color: #f4f4ee; font-family: "Archivo", Arial, sans-serif; }
-  .b::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(200, 255, 46, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(200, 255, 46, .07) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse 80% 120% at 70% 40%, #000 20%, transparent 78%); mask-image: radial-gradient(ellipse 80% 120% at 70% 40%, #000 20%, transparent 78%); }
-  .in { position: absolute; left: 72px; right: 72px; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; }
-  .tag { font: 500 17px/1 "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: #9ea3a8; display: flex; align-items: center; gap: 12px; }
-  .tag i { width: 10px; height: 10px; border-radius: 50%; background: #c8ff2e; }
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #08090a; }
+  .b { width: 1200px; height: 630px; position: relative; overflow: hidden; background: #08090a; color: #f4f4ee; font-family: "Archivo", Arial, sans-serif; box-sizing: border-box; padding: 36px 44px 32px; display: flex; flex-direction: column; }
+  .b::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(200, 255, 46, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(200, 255, 46, .05) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 0%, #000 30%, transparent 78%); mask-image: radial-gradient(ellipse 85% 75% at 50% 0%, #000 30%, transparent 78%); pointer-events: none; }
+  .in { position: relative; display: flex; flex-direction: column; flex: 1; min-height: 0; justify-content: center; }
+  .tag { margin: 0; font: 500 13px/1 "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: #9ea3a8; display: flex; align-items: center; gap: 10px; }
+  .tag i { width: 8px; height: 8px; border-radius: 50%; background: #c8ff2e; }
   .tag b { color: #c8ff2e; font-weight: 500; }
-  h1 { margin: 20px 0 0; font: 900 104px/.9 "Archivo", sans-serif; letter-spacing: -.045em; text-transform: uppercase; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 28px; align-items: center; margin-top: 22px; }
+  h1 { margin: 0; font: 900 58px/.9 "Archivo", sans-serif; letter-spacing: -.05em; text-transform: uppercase; }
+  h1 span { display: block; white-space: nowrap; }
   h1 em { font-style: normal; color: #c8ff2e; }
-  .row { display: flex; gap: 12px; margin-top: 26px; }
-  .row span { font: 400 16px/1 "JetBrains Mono", monospace; padding: 11px 16px; border-radius: 999px; border: 1px solid #343a40; background: #101214; color: #f4f4ee; }
-  .row span b { color: #c8ff2e; font-weight: 500; }
+  .actions { display: flex; gap: 10px; margin-top: 22px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 18px; border: 1px solid #343a40; border-radius: 999px; font: 700 14px/1 "Archivo", sans-serif; background: #101214; color: #f4f4ee; }
+  .btn.solid { background: #c8ff2e; border-color: #c8ff2e; color: #0a0a0a; }
+  .trace { background: #101214; border: 1px solid #23272b; border-radius: 14px; overflow: hidden; font: 400 11px/1 "JetBrains Mono", monospace; }
+  .trace-top { display: flex; align-items: center; gap: 6px; padding: 10px 12px; border-bottom: 1px solid #23272b; color: #9ea3a8; }
+  .trace-top i { width: 8px; height: 8px; border-radius: 50%; background: #343a40; }
+  .trace-top span { margin-left: auto; }
+  .tr { display: grid; grid-template-columns: 50px 1fr auto; gap: 10px; align-items: center; padding: 10px 12px; border-bottom: 1px solid #23272b; }
+  .tr time { color: #9ea3a8; }
+  .tr .bar-line { display: block; height: 3px; margin-top: 7px; border-radius: 2px; background: #23272b; position: relative; overflow: hidden; }
+  .tr .bar-line::after { content: ""; position: absolute; inset: 0 auto 0 var(--x, 0); width: var(--w, 30%); border-radius: 2px; background: #f4f4ee; opacity: .55; }
+  .tr small { font-size: 10px; color: #9ea3a8; padding: 4px 7px; border: 1px solid #343a40; border-radius: 999px; }
+  .tr.wait .bar-line::after { background: #c8ff2e; opacity: 1; }
+  .tr.wait small { color: #0a0a0a; background: #c8ff2e; border-color: #c8ff2e; }
+  .trace-foot { display: flex; justify-content: space-between; padding: 10px 12px; color: #9ea3a8; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 22px; }
+  .stat { padding: 14px 16px; border: 1px solid #23272b; border-radius: 14px; background: #101214; }
+  .stat b { display: block; font-weight: 900; font-size: 28px; letter-spacing: -.045em; line-height: 1; }
+  .stat span { display: block; margin-top: 8px; font: 400 11px/1.4 "JetBrains Mono", monospace; color: #9ea3a8; }
 </style>
 </head>
 <body>
 <div class="b">
   <div class="in">
-    <p class="tag"><i></i>AI &amp; Automation Engineer <b>/</b> Founder, FLOWENTIC</p>
-    <h1>Agents that <em>show up</em> on Monday.</h1>
-    <div class="row">
-      <span><b>300+</b> production workflows</span>
-      <span>LangGraph · RAG · Voice</span>
-      <span>Human in the loop</span>
-      <span>B2B</span>
+    <p class="tag"><i></i>AI &amp; Automation Engineer <b>/</b> Founder, FLOWENTIC <b>/</b> B2B</p>
+    <div class="hero-grid">
+      <div>
+        <h1><span>Agents that</span> <span><em>show up</em></span> <span>on Monday.</span></h1>
+        <div class="actions">
+          <span class="btn solid">See the demos</span>
+          <span class="btn">Contact me</span>
+        </div>
+      </div>
+      <div class="trace">
+        <div class="trace-top"><i></i><i></i><i></i><span>run · on-call agent · example</span></div>
+        <div class="tr"><time>00.00s</time><div>ticket opened · route<span class="bar-line" style="--x:0;--w:12%"></span></div><small>ok</small></div>
+        <div class="tr"><time>00.41s</time><div>call customer · verify code<span class="bar-line" style="--x:12%;--w:38%"></span></div><small>ok</small></div>
+        <div class="tr"><time>38.20s</time><div>collect note + ETA<span class="bar-line" style="--x:50%;--w:24%"></span></div><small>ok</small></div>
+        <div class="tr wait"><time>61.07s</time><div>write back to ticket<span class="bar-line" style="--x:74%;--w:26%"></span></div><small>needs approval</small></div>
+        <div class="trace-foot"><span>traced · retried 0</span><span>human in the loop</span></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>300+</b><span>production workflows maintained with my team at Atos</span></div>
+      <div class="stat"><b>4</b><span>countries served: India, Germany, Poland, US</span></div>
+      <div class="stat"><b>−85%</b><span>manual workload on automated processes</span></div>
+      <div class="stat"><b>4</b><span>open-source AI systems with demos</span></div>
     </div>
   </div>
 </div>

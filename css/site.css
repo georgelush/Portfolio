@@ -91,10 +91,7 @@ section { padding: 104px 0; }
 h1 { font-size: clamp(42px, 6.9vw, 92px); letter-spacing: -.05em; line-height: .92; }
 .hero h1 span { display: block; white-space: nowrap; }
 .page-head h1 { font-size: clamp(48px, 9vw, 124px); }
-.pitch { margin-top: 20px; color: var(--ink); font-size: clamp(16px, 1.45vw, 19px); font-weight: 500; line-height: 1.4; max-width: 42ch; }
-.lede { margin-top: 28px; color: var(--soft); font-size: clamp(18px, 1.6vw, 21px); line-height: 1.5; max-width: 46ch; }
-.pitch + .lede { margin-top: 16px; }
-.lede b { color: var(--ink); font-weight: 600; }
+
 
 /* Run trace: the signature panel */
 .trace { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; font: 400 13px/1 var(--mono); box-shadow: 0 40px 90px -40px rgba(0, 0, 0, .8); }
